@@ -11,115 +11,115 @@ const fastEnterConfig: FastEnterConfig = {
   // 应用列表
   applications: [
     {
-      name: '工作台',
-      description: '系统概览与数据统计',
-      icon: 'ri:pie-chart-line',
-      iconColor: '#377dff',
+      name: '能力总览',
+      description: '查看全局模块、子功能和能力点统计',
+      icon: 'ri:dashboard-line',
+      iconColor: '#2f54eb',
       enabled: true,
       order: 1,
-      routeName: 'Console'
+      routeName: 'MetadataOverview'
     },
     {
-      name: '分析页',
-      description: '数据分析与可视化',
-      icon: 'ri:game-line',
-      iconColor: '#ff3b30',
+      name: '元模板管理',
+      description: '模板、目录、订阅和稽核能力管理',
+      icon: 'ri:file-list-3-line',
+      iconColor: '#1677ff',
       enabled: true,
       order: 2,
-      routeName: 'Analysis'
+      routeName: 'Section-template-management'
     },
     {
-      name: '礼花效果',
-      description: '动画特效展示',
-      icon: 'ri:loader-line',
-      iconColor: '#7A7FFF',
+      name: '采集任务',
+      description: '任务检索、创建、同步和调度',
+      icon: 'ri:task-line',
+      iconColor: '#13c2c2',
       enabled: true,
       order: 3,
-      routeName: 'Fireworks'
+      routeName: 'Section-collection-task-management'
     },
     {
-      name: '聊天',
-      description: '即时通讯功能',
-      icon: 'ri:user-line',
-      iconColor: '#13DEB9',
+      name: '基础管理',
+      description: '平台、业务域、分类、标签与目录管理',
+      icon: 'ri:database-2-line',
+      iconColor: '#52c41a',
       enabled: true,
       order: 4,
-      routeName: 'Chat'
+      routeName: 'Section-metadata-base-management'
+    },
+    {
+      name: '图谱实体构建',
+      description: '模型导入转换与 DDL 生成',
+      icon: 'ri:git-merge-line',
+      iconColor: '#722ed1',
+      enabled: true,
+      order: 5,
+      routeName: 'Section-graph-entity-build'
+    },
+    {
+      name: '质量概览',
+      description: '规则类型、任务状态和失效任务分析',
+      icon: 'ri:line-chart-line',
+      iconColor: '#fa8c16',
+      enabled: true,
+      order: 6,
+      routeName: 'Section-quality-overview'
+    },
+    {
+      name: '搜索服务',
+      description: '元数据分类检索与结果展示',
+      icon: 'ri:search-line',
+      iconColor: '#eb2f96',
+      enabled: true,
+      order: 7,
+      routeName: 'Section-metadata-search-service'
     },
     {
       name: '官方文档',
-      description: '使用指南与开发文档',
-      icon: 'ri:bill-line',
-      iconColor: '#ffb100',
-      enabled: true,
-      order: 5,
-      link: WEB_LINKS.DOCS
-    },
-    {
-      name: '技术支持',
-      description: '技术支持与问题反馈',
-      icon: 'ri:user-location-line',
-      iconColor: '#ff6b6b',
-      enabled: true,
-      order: 6,
-      link: WEB_LINKS.COMMUNITY
-    },
-    {
-      name: '更新日志',
-      description: '版本更新与变更记录',
-      icon: 'ri:gamepad-line',
-      iconColor: '#38C0FC',
-      enabled: true,
-      order: 7,
-      routeName: 'ChangeLog'
-    },
-    {
-      name: '哔哩哔哩',
-      description: '技术分享与交流',
-      icon: 'ri:bilibili-line',
-      iconColor: '#FB7299',
+      description: '查看项目通用说明文档',
+      icon: 'ri:book-open-line',
+      iconColor: '#faad14',
       enabled: true,
       order: 8,
-      link: WEB_LINKS.BILIBILI
+      link: WEB_LINKS.DOCS
     }
   ],
   // 快速链接
   quickLinks: [
     {
-      name: '登录',
+      name: '能力总览',
       enabled: true,
       order: 1,
-      routeName: 'Login'
+      routeName: 'MetadataOverview'
     },
     {
-      name: '注册',
+      name: '元数据注册',
       enabled: true,
       order: 2,
-      routeName: 'Register'
+      routeName: 'Section-metadata-register'
     },
     {
-      name: '忘记密码',
+      name: '标准管理',
       enabled: true,
       order: 3,
-      routeName: 'ForgetPassword'
+      routeName: 'Section-metadata-standard'
     },
     {
-      name: '定价',
+      name: '智能应用',
       enabled: true,
       order: 4,
-      routeName: 'Pricing'
+      routeName: 'Section-metadata-smart-application'
     },
     {
-      name: '个人中心',
+      name: '信息服务',
       enabled: true,
       order: 5,
-      routeName: 'UserCenter'
+      routeName: 'Section-metadata-info-service'
     },
     {
-      name: '留言管理',
+      name: '登录页',
       enabled: true,
       order: 6,
-      routeName: 'ArticleComment'
+      routeName: 'Login'
     }
   ]
 }

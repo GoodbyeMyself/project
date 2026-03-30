@@ -365,7 +365,9 @@ const actionKeywordMap: Record<string, string[]> = {
   detail: ['列表', '详情', '展示', '记录', '概览']
 }
 
-export function getSectionContext(sectionKey: string) {
+export function getSectionContext(
+  sectionKey: string
+): { module: MetadataModule; section: MetadataSection } | undefined {
   return sectionContextMap[sectionKey]
 }
 
