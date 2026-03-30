@@ -1,151 +1,97 @@
 <template>
-  <div class="page-content">
-    <ArtExcelImport @import-success="handleImportSuccess" @import-error="handleImportError">
-      <template #import-text> 上传 Excel </template>
-    </ArtExcelImport>
+  <div class="flex flex-col gap-4 pb-5">
+    <ElRow :gutter="20">
+      <ElCol :xs="24" :lg="8">
+        <ElCard>
+          <template #header><span class="font-medium">分区和索引同步</span></template>
+          <ElInput v-model="partitionKeyword" placeholder="数据查询" clearable />
+          <ElTable :data="filteredPartitionRows" border class="mt-4">
+            <ElTableColumn prop="name" label="分区/索引" min-width="180" />
+            <ElTableColumn prop="status" label="同步状态" width="120" />
+            <ElTableColumn prop="time" label="最近同步时间" min-width="160" />
+          </ElTable>
+        </ElCard>
+      </ElCol>
 
-    <ArtExcelExport
-      style="margin-left: 10px"
-      :data="tableData"
-      filename="用户数据-1"
-      sheetName="用户列表"
-      type="success"
-      :headers="headers"
-      auto-index
-      :columns="columnConfig"
-      @export-success="handleExportSuccess"
-      @export-error="handleExportError"
-      @export-progress="handleProgress"
-    >
-      导出 Excel
-    </ArtExcelExport>
+      <ElCol :xs="24" :lg="6">
+        <ElCard>
+          <template #header><span class="font-medium">数据恢复</span></template>
+          <ElForm label-width="80px">
+            <ElFormItem label="恢复点"><ElInput v-model="restoreForm.point" placeholder="请输入恢复点" /></ElFormItem>
+            <ElFormItem label="恢复说明"><ElInput v-model="restoreForm.remark" type="textarea" :rows="3" /></ElFormItem>
+          </ElForm>
+          <ElButton type="primary" @click="recoverData">数据恢复</ElButton>
+        </ElCard>
+      </ElCol>
 
-    <ElButton type="danger" @click="handleClear" v-ripple>清除数据</ElButton>
+      <ElCol :xs="24" :lg="10">
+        <ElCard>
+          <template #header>
+            <div class="flex-cb gap-3">
+              <div>
+                <span class="font-medium">数据备份</span>
+                <p class="m-0 mt-1 text-sm text-g-700">覆盖上传文件、编辑文件、删除文件、查询文件、移动文件、新建/修改/删除/查询文件夹、下载文件。</p>
+              </div>
+            </div>
+          </template>
 
-    <ArtTable :data="tableData" style="margin-top: 10px">
-      <ElTableColumn
-        v-for="key in Object.keys(headers)"
-        :key="key"
-        :prop="key"
-        :label="headers[key as keyof typeof headers]"
-      />
-    </ArtTable>
+          <ElSpace wrap>
+            <ElButton type="primary" @click="uploadFile">上传文件</ElButton>
+            <ElButton @click="editFile">编辑文件</ElButton>
+            <ElButton @click="moveFile">移动文件</ElButton>
+            <ElButton @click="newFolder">新建文件夹</ElButton>
+            <ElButton @click="editFolder">修改文件夹</ElButton>
+            <ElButton @click="queryFolder">查询文件夹</ElButton>
+            <ElButton @click="queryFile">查询文件</ElButton>
+            <ElButton @click="downloadFile">下载文件</ElButton>
+            <ElButton type="danger" @click="deleteFile">删除文件</ElButton>
+            <ElButton type="danger" @click="deleteFolder">删除文件夹</ElButton>
+          </ElSpace>
+
+          <ElDivider />
+
+          <ElTable :data="backupFiles" border>
+            <ElTableColumn prop="name" label="文件名称" min-width="180" />
+            <ElTableColumn prop="folder" label="所属文件夹" min-width="140" />
+            <ElTableColumn prop="updateTime" label="更新时间" min-width="160" />
+          </ElTable>
+        </ElCard>
+      </ElCol>
+    </ElRow>
   </div>
 </template>
 
 <script setup lang="ts">
   defineOptions({ name: 'WidgetsExcel' })
 
-  /**
-   * 表格数据类型定义
-   */
-  interface TableData {
-    name: string
-    age: number
-    city: string
-  }
+  const partitionKeyword = ref('')
+  const restoreForm = reactive({ point: '2026-03-30 00:00:00', remark: '恢复至凌晨全量备份点' })
 
-  /**
-   * 表格数据
-   */
-  const tableData = ref<TableData[]>([
-    { name: '李四', age: 20, city: '上海' },
-    { name: '张三', age: 25, city: '北京' },
-    { name: '王五', age: 30, city: '广州' },
-    { name: '赵六', age: 35, city: '深圳' },
-    { name: '孙七', age: 28, city: '杭州' },
-    { name: '周八', age: 32, city: '成都' },
-    { name: '吴九', age: 27, city: '武汉' },
-    { name: '郑十', age: 40, city: '南京' },
-    { name: '刘一', age: 22, city: '重庆' },
-    { name: '陈二', age: 33, city: '西安' }
+  const partitionRows = ref([
+    { name: 'ods_device_event_p202603', status: '已同步', time: '2026-03-30 02:10' },
+    { name: 'idx_alarm_rule_name', status: '待同步', time: '2026-03-29 23:20' }
   ])
 
-  /**
-   * 表头映射配置
-   * 用于 Excel 导入导出时的字段映射
-   */
-  const headers = {
-    name: '姓名',
-    age: '年龄',
-    city: '城市'
-  }
+  const backupFiles = ref([
+    { name: 'daily-backup-01.zip', folder: '日备份目录', updateTime: '2026-03-30 01:00' },
+    { name: 'device-archive.xlsx', folder: '归档目录', updateTime: '2026-03-29 20:30' }
+  ])
 
-  /**
-   * 列配置
-   * 用于 Excel 导出时的列宽和格式化
-   */
-  const columnConfig = {
-    name: {
-      title: '姓名',
-      width: 20,
-      formatter: (value: unknown) => (value ? String(value) : '未知')
-    },
-    age: {
-      title: '年龄',
-      width: 10,
-      formatter: (value: unknown) => (value ? `${value}岁` : '0岁')
-    },
-    city: {
-      title: '城市',
-      width: 12,
-      formatter: (value: unknown) => (value ? `${value}市` : '未知')
-    }
-  }
+  const filteredPartitionRows = computed(() => {
+    const keyword = partitionKeyword.value.trim()
+    if (!keyword) return partitionRows.value
+    return partitionRows.value.filter((item) => item.name.includes(keyword))
+  })
 
-  /**
-   * 处理 Excel 导入成功
-   * 将导入的数据转换为表格数据格式
-   * @param data 导入的原始数据
-   */
-  const handleImportSuccess = (data: Array<Record<string, unknown>>) => {
-    const formattedData: TableData[] = data.map((item) => ({
-      name: String(item['姓名'] || ''),
-      age: Number(item['年龄']) || 0,
-      city: String(item['城市'] || '')
-    }))
-    tableData.value = formattedData
-    ElMessage.success(`成功导入 ${formattedData.length} 条数据`)
-  }
-
-  /**
-   * 处理 Excel 导入错误
-   * @param error 错误对象
-   */
-  const handleImportError = (error: Error) => {
-    console.error('导入失败:', error)
-    ElMessage.error(`导入失败: ${error.message}`)
-  }
-
-  /**
-   * 处理 Excel 导出成功
-   */
-  const handleExportSuccess = () => {
-    console.log('导出成功')
-    ElMessage.success('Excel 导出成功')
-  }
-
-  /**
-   * 处理 Excel 导出错误
-   * @param error 错误对象
-   */
-  const handleExportError = (error: Error) => {
-    ElMessage.error(`导出失败: ${error.message}`)
-  }
-
-  /**
-   * 处理导出进度
-   * @param progress 导出进度百分比
-   */
-  const handleProgress = (progress: number) => {
-    console.log('导出进度:', progress)
-  }
-
-  /**
-   * 清空表格数据
-   */
-  const handleClear = () => {
-    tableData.value = []
-    ElMessage.info('已清空数据')
-  }
+  const recoverData = () => ElMessage.success(`已执行数据恢复：${restoreForm.point}`)
+  const uploadFile = () => ElMessage.success('已执行上传文件')
+  const editFile = () => ElMessage.success('已执行编辑文件')
+  const deleteFile = () => ElMessage.success('已执行删除文件')
+  const queryFile = () => ElMessage.info('已执行查询文件')
+  const moveFile = () => ElMessage.success('已执行移动文件')
+  const newFolder = () => ElMessage.success('已执行新建文件夹')
+  const editFolder = () => ElMessage.success('已执行修改文件夹')
+  const deleteFolder = () => ElMessage.success('已执行删除文件夹')
+  const queryFolder = () => ElMessage.info('已执行查询文件夹')
+  const downloadFile = () => ElMessage.success('已执行下载文件')
 </script>

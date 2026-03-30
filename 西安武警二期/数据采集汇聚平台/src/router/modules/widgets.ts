@@ -6,7 +6,8 @@ export const widgetsRoutes: AppRouteRecord = {
   component: '/index/index',
   meta: {
     title: '数据留存管理',
-    icon: 'ri:archive-stack-line'
+    icon: 'ri:archive-drawer-line',
+    roles: ['R_SUPER', 'R_ADMIN']
   },
   children: [
     {
@@ -14,14 +15,24 @@ export const widgetsRoutes: AppRouteRecord = {
       name: 'Excel',
       component: '/widgets/excel',
       meta: {
-        title: '分区和索引同步',
+        title: '留存管理中心',
         icon: 'ri:database-line',
         keepAlive: true
       }
     },
     {
-      path: 'video',
-      name: 'Video',
+      path: 'partition-index-sync',
+      name: 'PartitionIndexSync',
+      component: '/widgets/excel',
+      meta: {
+        title: '分区和索引同步',
+        icon: 'ri:git-pull-request-line',
+        keepAlive: true
+      }
+    },
+    {
+      path: 'data-recovery',
+      name: 'DataRecovery',
       component: '/widgets/video',
       meta: {
         title: '数据恢复',
@@ -30,8 +41,8 @@ export const widgetsRoutes: AppRouteRecord = {
       }
     },
     {
-      path: 'wang-editor',
-      name: 'WangEditor',
+      path: 'data-backup',
+      name: 'DataBackup',
       component: '/widgets/wang-editor',
       meta: {
         title: '数据备份',

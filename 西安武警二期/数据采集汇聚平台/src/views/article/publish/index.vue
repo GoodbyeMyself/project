@@ -1,339 +1,164 @@
-<!-- 文章发布页面 -->
 <template>
-  <div>
-    <div>
-      <div class="max-w-250 mx-auto my-5">
-        <!-- 文章标题、类型 -->
-        <ElRow :gutter="10">
-          <ElCol :span="18">
-            <ElInput
-              v-model.trim="articleName"
-              placeholder="请输入文章标题（最多100个字符）"
-              maxlength="100"
-            />
-          </ElCol>
-          <ElCol :span="6">
-            <ElSelect v-model="articleType" placeholder="请选择文章类型" filterable>
-              <ElOption
-                v-for="item in articleTypes"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </ElSelect>
-          </ElCol>
-        </ElRow>
-
-        <!-- 富文本编辑器 -->
-        <ArtWangEditor class="mt-2.5" v-model="editorHtml" />
-
-        <div class="p-5 mt-5 art-card-xs">
-          <h2 class="mb-5 text-xl font-medium">发布设置</h2>
-          <!-- 图片上传 -->
-          <ElForm>
-            <ElFormItem label="封面">
-              <div class="mt-2.5">
-                <ElUpload
-                  :action="uploadImageUrl"
-                  :headers="uploadHeaders"
-                  :show-file-list="false"
-                  :on-success="onSuccess"
-                  :on-error="onError"
-                  :before-upload="beforeUpload"
-                >
-                  <div
-                    v-if="!cover"
-                    class="flex-cc flex-col w-65 h-40 border border-dashed border-[#d9d9d9] rounded-md"
-                  >
-                    <ElIcon class="!text-xl !text-g-600"><Plus /></ElIcon>
-                    <div class="mt-2 text-sm text-g-600">点击上传封面</div>
-                  </div>
-                  <img v-else :src="cover" class="block w-65 h-40 object-cover" />
-                </ElUpload>
-                <div class="mt-2 text-xs text-g-700">建议尺寸 16:9，jpg/png 格式</div>
+  <div class="flex flex-col gap-4 pb-5">
+    <ElRow :gutter="20">
+      <ElCol :xs="24" :xl="14">
+        <ElCard>
+          <template #header>
+            <div class="flex-cb gap-3">
+              <div>
+                <h3 class="m-0 text-base font-medium">告警组管理</h3>
+                <p class="m-0 mt-1 text-sm text-g-700">提供创建、修改、删除、查询告警组及告警组用户配置能力。</p>
               </div>
-            </ElFormItem>
-            <ElFormItem label="可见">
-              <ElSwitch v-model="visible" />
-            </ElFormItem>
-          </ElForm>
+              <ElButton type="primary" @click="addAlarmGroup">创建告警组</ElButton>
+            </div>
+          </template>
 
-          <div class="flex justify-end">
-            <ElButton type="primary" @click="submit" class="w-25">
-              {{ pageMode === PageModeEnum.Edit ? '保存' : '发布' }}
-            </ElButton>
+          <ArtTable :data="alarmGroups" :columns="groupColumns" :show-table-header="false">
+            <template #operation="{ row }">
+              <ElSpace wrap>
+                <ElButton link type="primary" @click="configGroupUsers(row)">告警组用户配置</ElButton>
+                <ElButton link type="primary" @click="editAlarmGroup(row)">修改告警组</ElButton>
+                <ElPopconfirm title="确认删除该告警组吗？" @confirm="deleteAlarmGroup(row.id)">
+                  <template #reference><ElButton link type="danger">删除告警组</ElButton></template>
+                </ElPopconfirm>
+              </ElSpace>
+            </template>
+          </ArtTable>
+        </ElCard>
+      </ElCol>
+
+      <ElCol :xs="24" :xl="10">
+        <ElCard>
+          <template #header><span class="font-medium">消息通知处理管理</span></template>
+          <ArtTable :data="messages" :columns="messageColumns" :show-table-header="false">
+            <template #status="{ row }">
+              <ElTag :type="row.read ? 'success' : 'warning'" effect="light">{{ row.read ? '已读' : '未读' }}</ElTag>
+            </template>
+            <template #operation="{ row }">
+              <ElSpace wrap>
+                <ElButton link type="primary" @click="queryMessage(row)">查询消息</ElButton>
+                <ElButton link type="primary" @click="markRead(row)">消息标记已读</ElButton>
+                <ElPopconfirm title="确认删除该消息吗？" @confirm="deleteMessage(row.id)">
+                  <template #reference><ElButton link type="danger">删除消息</ElButton></template>
+                </ElPopconfirm>
+              </ElSpace>
+            </template>
+          </ArtTable>
+        </ElCard>
+      </ElCol>
+    </ElRow>
+
+    <ElCard>
+      <template #header>
+        <div class="flex-cb gap-3">
+          <div>
+            <h3 class="m-0 text-base font-medium">告警规则管理</h3>
+            <p class="m-0 mt-1 text-sm text-g-700">支持新增、修改、删除、查询、一键巡检、查询告警报告、下载告警报告。</p>
           </div>
+          <ElSpace wrap>
+            <ElButton type="primary" @click="addRule">新增告警规则</ElButton>
+            <ElButton @click="inspectRules">一键巡检告警规则</ElButton>
+          </ElSpace>
         </div>
-      </div>
-    </div>
+      </template>
 
-    <!-- <div class="box-border w-70 p-5 border border-[#e3e3e3] rounded-lg">
-        <div v-for="(item, index) in outlineList" :key="index">
-          <p :class="['h-7.5 text-xs leading-7.5 c-p', item.level === 3 && 'pl-2.5']">{{ item.text }}</p>
-        </div>
-      </div> -->
+      <ArtTable :data="rules" :columns="ruleColumns" :show-table-header="false">
+        <template #status="{ row }">
+          <ElTag :type="row.enabled ? 'success' : 'info'" effect="light">{{ row.enabled ? '启用' : '停用' }}</ElTag>
+        </template>
+        <template #operation="{ row }">
+          <ElSpace wrap>
+            <ElButton link type="primary" @click="editRule(row)">修改告警规则</ElButton>
+            <ElButton link type="primary" @click="queryReport(row)">查询告警报告</ElButton>
+            <ElButton link type="primary" @click="downloadReport(row)">下载告警报告</ElButton>
+            <ElPopconfirm title="确认删除该告警规则吗？" @confirm="deleteRule(row.id)">
+              <template #reference><ElButton link type="danger">删除告警规则</ElButton></template>
+            </ElPopconfirm>
+          </ElSpace>
+        </template>
+      </ArtTable>
+    </ElCard>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { Plus } from '@element-plus/icons-vue'
-  import { ApiStatus } from '@/utils/http/status'
-  import { useUserStore } from '@/store/modules/user'
-  import EmojiText from '@/utils/ui/emojo'
-  import { PageModeEnum } from '@/enums/formEnum'
-  import axios from 'axios'
-  import { useCommon } from '@/hooks/core/useCommon'
+  import type { ColumnOption } from '@/types'
 
-  defineOptions({ name: 'ArticlePublish' })
+  defineOptions({ name: 'AlarmNotificationCenter' })
 
-  interface ArticleType {
-    id: number
-    name: string
+  const alarmGroups = ref([
+    { id: 1, name: '一级值班告警组', users: '张三、李四', scene: '边境巡检' },
+    { id: 2, name: '平台运维告警组', users: '王五、赵六', scene: '系统故障' }
+  ])
+
+  const messages = ref([
+    { id: 1, title: '设备离线告警', source: '巡检系统', read: false },
+    { id: 2, title: '规则命中通知', source: '告警引擎', read: true }
+  ])
+
+  const rules = ref([
+    { id: 1, name: '设备离线超时规则', level: '严重', enabled: true },
+    { id: 2, name: '采集波动预警规则', level: '一般', enabled: true }
+  ])
+
+  const groupColumns: ColumnOption[] = [
+    { prop: 'name', label: '告警组名称', minWidth: 180 },
+    { prop: 'users', label: '组内用户', minWidth: 160 },
+    { prop: 'scene', label: '适用场景', minWidth: 160 },
+    { prop: 'operation', label: '操作', minWidth: 220, useSlot: true }
+  ]
+
+  const messageColumns: ColumnOption[] = [
+    { prop: 'title', label: '消息标题', minWidth: 180 },
+    { prop: 'source', label: '消息来源', minWidth: 140 },
+    { prop: 'status', label: '阅读状态', width: 100, useSlot: true },
+    { prop: 'operation', label: '操作', minWidth: 220, useSlot: true }
+  ]
+
+  const ruleColumns: ColumnOption[] = [
+    { prop: 'name', label: '规则名称', minWidth: 220 },
+    { prop: 'level', label: '告警级别', width: 120 },
+    { prop: 'status', label: '启停状态', width: 100, useSlot: true },
+    { prop: 'operation', label: '操作', minWidth: 320, useSlot: true, fixed: 'right' }
+  ]
+
+  const addAlarmGroup = () => {
+    alarmGroups.value.unshift({ id: Date.now(), name: '新建告警组', users: '待配置', scene: '待指定' })
+    ElMessage.success('已创建告警组')
+  }
+  const editAlarmGroup = (row: { name: string }) => {
+    row.name = `${row.name}-已修改`
+    ElMessage.success('已修改告警组')
+  }
+  const deleteAlarmGroup = (id: number) => {
+    alarmGroups.value = alarmGroups.value.filter((item) => item.id !== id)
+    ElMessage.success('已删除告警组')
+  }
+  const configGroupUsers = (row: { name: string }) => ElMessage.info(`告警组用户配置：${row.name}`)
+
+  const queryMessage = (row: { title: string }) => ElMessage.info(`查询消息：${row.title}`)
+  const markRead = (row: { read: boolean }) => {
+    row.read = true
+    ElMessage.success('消息已标记已读')
+  }
+  const deleteMessage = (id: number) => {
+    messages.value = messages.value.filter((item) => item.id !== id)
+    ElMessage.success('已删除消息')
   }
 
-  interface UploadResponse {
-    data: {
-      url: string
-    }
+  const addRule = () => {
+    rules.value.unshift({ id: Date.now(), name: '新建告警规则', level: '一般', enabled: true })
+    ElMessage.success('已新增告警规则')
   }
-
-  interface ArticleDetailResponse {
-    code: number
-    data: {
-      title: string
-      blog_class: string
-      html_content: string
-    }
+  const editRule = (row: { name: string }) => {
+    row.name = `${row.name}-已修改`
+    ElMessage.success('已修改告警规则')
   }
-
-  const MAX_IMAGE_SIZE = 2 // MB
-  const EMPTY_EDITOR_CONTENT = '<p><br></p>'
-
-  const route = useRoute()
-  const userStore = useUserStore()
-  const { accessToken } = userStore
-
-  const uploadImageUrl = `${import.meta.env.VITE_API_URL}/api/common/upload`
-  const uploadHeaders = { Authorization: accessToken }
-
-  const pageMode = ref<PageModeEnum>(PageModeEnum.Add)
-  const articleName = ref('')
-  const articleType = ref<number>()
-  const articleTypes = ref<ArticleType[]>([])
-  const editorHtml = ref('')
-  const createDate = ref('')
-  const cover = ref('')
-  const visible = ref(true)
-
-  /**
-   * 初始化页面模式（新增或编辑）
-   */
-  const initPageMode = () => {
-    const { id } = route.query
-    pageMode.value = id ? PageModeEnum.Edit : PageModeEnum.Add
-
-    if (pageMode.value === PageModeEnum.Edit) {
-      getArticleDetail()
-    } else {
-      createDate.value = formatDate(useNow().value)
-    }
+  const deleteRule = (id: number) => {
+    rules.value = rules.value.filter((item) => item.id !== id)
+    ElMessage.success('已删除告警规则')
   }
-
-  /**
-   * 获取文章分类列表
-   */
-  const getArticleTypes = async () => {
-    try {
-      const { data } = await axios.get('https://www.qiniu.lingchen.kim/classify.json')
-      if (data.code === 200) {
-        articleTypes.value = data.data
-      }
-    } catch (error) {
-      console.error('获取文章分类失败:', error)
-      ElMessage.error('获取文章分类失败')
-    }
-
-    // TODO: 替换为真实 API 调用
-    // const res = await ArticleService.getArticleTypes({})
-    // if (res.code === ApiStatus.success) {
-    //   articleTypes.value = res.data
-    // }
-  }
-
-  /**
-   * 获取文章详情（编辑模式）
-   */
-  const getArticleDetail = async () => {
-    try {
-      const { data } = await axios.get<ArticleDetailResponse>(
-        'https://www.qiniu.lingchen.kim/blog_list.json'
-      )
-
-      if (data.code === ApiStatus.success) {
-        const { title, blog_class, html_content } = data.data
-        articleName.value = title
-        articleType.value = Number(blog_class)
-        editorHtml.value = html_content
-      }
-    } catch (error) {
-      console.error('获取文章详情失败:', error)
-      ElMessage.error('获取文章详情失败')
-    }
-  }
-
-  /**
-   * 格式化日期为 YYYY-MM-DD 格式
-   */
-  const formatDate = (date: string | Date): string => {
-    return useDateFormat(date, 'YYYY-MM-DD').value
-  }
-
-  /**
-   * 验证文章表单数据
-   */
-  const validateArticle = (): boolean => {
-    if (!articleName.value.trim()) {
-      ElMessage.error('请输入文章标题')
-      return false
-    }
-
-    if (!articleType.value) {
-      ElMessage.error('请选择文章类型')
-      return false
-    }
-
-    if (!editorHtml.value || editorHtml.value === EMPTY_EDITOR_CONTENT) {
-      ElMessage.error('请输入文章内容')
-      return false
-    }
-
-    if (!cover.value) {
-      ElMessage.error('请上传封面图片')
-      return false
-    }
-
-    return true
-  }
-
-  /**
-   * 清理代码块中的多余空格
-   */
-  const cleanCodeContent = (content: string): string => {
-    return content.replace(/(\s*)<\/code>/g, '</code>')
-  }
-
-  /**
-   * 新增文章
-   */
-  const addArticle = async () => {
-    if (!validateArticle()) return
-
-    try {
-      const cleanedContent = cleanCodeContent(editorHtml.value)
-
-      // TODO: 替换为真实 API 调用
-      // const params = {
-      //   title: articleName.value,
-      //   type: articleType.value,
-      //   content: cleanedContent,
-      //   cover: cover.value,
-      //   visible: visible.value
-      // }
-      // const res = await ArticleService.addArticle(params)
-      // if (res.code === ApiStatus.success) {
-      //   ElMessage.success('文章发布成功')
-      //   router.push({ name: 'ArticleList' })
-      // }
-
-      console.log('新增文章:', { cleanedContent })
-    } catch (error) {
-      console.error('发布文章失败:', error)
-      ElMessage.error('发布文章失败')
-    }
-  }
-
-  /**
-   * 编辑文章
-   */
-  const editArticle = async () => {
-    if (!validateArticle()) return
-
-    try {
-      const cleanedContent = cleanCodeContent(editorHtml.value)
-
-      // TODO: 替换为真实 API 调用
-      // const params = {
-      //   id: route.query.id,
-      //   title: articleName.value,
-      //   type: articleType.value,
-      //   content: cleanedContent,
-      //   cover: cover.value,
-      //   visible: visible.value
-      // }
-      // const res = await ArticleService.editArticle(params)
-      // if (res.code === ApiStatus.success) {
-      //   ElMessage.success('文章保存成功')
-      //   router.push({ name: 'ArticleList' })
-      // }
-
-      console.log('编辑文章:', { cleanedContent })
-    } catch (error) {
-      console.error('保存文章失败:', error)
-      ElMessage.error('保存文章失败')
-    }
-  }
-
-  /**
-   * 提交表单（新增或编辑）
-   */
-  const submit = () => {
-    if (pageMode.value === PageModeEnum.Edit) {
-      editArticle()
-    } else {
-      addArticle()
-    }
-  }
-
-  /**
-   * 图片上传成功回调
-   */
-  const onSuccess = (response: UploadResponse) => {
-    cover.value = response.data.url
-    ElMessage.success(`图片上传成功 ${EmojiText[200]}`)
-  }
-
-  /**
-   * 图片上传失败回调
-   */
-  const onError = () => {
-    ElMessage.error(`图片上传失败 ${EmojiText[500]}`)
-  }
-
-  /**
-   * 上传前的文件校验
-   */
-  const beforeUpload = (file: File): boolean => {
-    const isImage = file.type.startsWith('image/')
-    const isLt2M = file.size / 1024 / 1024 < MAX_IMAGE_SIZE
-
-    if (!isImage) {
-      ElMessage.error('只能上传图片文件')
-      return false
-    }
-
-    if (!isLt2M) {
-      ElMessage.error(`图片大小不能超过 ${MAX_IMAGE_SIZE}MB`)
-      return false
-    }
-
-    return true
-  }
-
-  const { scrollToTop } = useCommon()
-
-  onMounted(() => {
-    scrollToTop()
-    getArticleTypes()
-    initPageMode()
-  })
+  const inspectRules = () => ElMessage.success('已执行一键巡检告警规则')
+  const queryReport = (row: { name: string }) => ElMessage.info(`查询告警报告：${row.name}`)
+  const downloadReport = (row: { name: string }) => ElMessage.success(`开始下载告警报告：${row.name}`)
 </script>

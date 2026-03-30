@@ -1,259 +1,378 @@
-<!-- 用户管理页面 -->
-<!-- art-full-height 自动计算出页面剩余高度 -->
-<!-- art-table-card 一个符合系统样式的 class，同时自动撑满剩余高度 -->
-<!-- 更多 useTable 使用示例请移步至 功能示例 下面的高级表格示例或者查看官方文档 -->
-<!-- useTable 文档：https://www.artd.pro/docs/zh/guide/hooks/use-table.html -->
 <template>
-  <div class="user-page art-full-height">
-    <!-- 搜索栏 -->
-    <UserSearch v-model="searchForm" @search="handleSearch" @reset="resetSearchParams"></UserSearch>
-
-    <ElCard class="art-table-card">
-      <!-- 表格头部 -->
-      <ArtTableHeader v-model:columns="columnChecks" :loading="loading" @refresh="refreshData">
-        <template #left>
+  <div class="flex flex-col gap-4 pb-5">
+    <ElCard>
+      <template #header>
+        <div class="flex-cb gap-3">
+          <div>
+            <h3 class="m-0 text-base font-medium">通知内容定制</h3>
+            <p class="m-0 mt-1 text-sm text-g-700">
+              提供数据资源与资源目录的新增、修改、删除、查询、详情等能力。
+            </p>
+          </div>
           <ElSpace wrap>
-            <ElButton @click="showDialog('add')" v-ripple>新增用户</ElButton>
+            <ElInput v-model="resourceKeyword" placeholder="查询数据资源 / 目录" clearable class="max-w-64" />
+            <ElButton type="primary" @click="openResourceDialog('add')">新增数据资源</ElButton>
+            <ElButton @click="openCatalogDialog('add')">新增资源目录</ElButton>
           </ElSpace>
-        </template>
-      </ArtTableHeader>
+        </div>
+      </template>
 
-      <!-- 表格 -->
-      <ArtTable
-        :loading="loading"
-        :data="data"
-        :columns="columns"
-        :pagination="pagination"
-        @selection-change="handleSelectionChange"
-        @pagination:size-change="handleSizeChange"
-        @pagination:current-change="handleCurrentChange"
-      >
-      </ArtTable>
+      <ElTabs v-model="activeTab">
+        <ElTabPane label="数据资源管理" name="resource">
+          <ArtTable :data="filteredResources" :columns="resourceColumns" :show-table-header="false">
+            <template #status="{ row }">
+              <ElTag :type="row.status === '启用' ? 'success' : 'info'" effect="light">{{ row.status }}</ElTag>
+            </template>
 
-      <!-- 用户弹窗 -->
-      <UserDialog
-        v-model:visible="dialogVisible"
-        :type="dialogType"
-        :user-data="currentUserData"
-        @submit="handleDialogSubmit"
-      />
+            <template #operation="{ row }">
+              <ElSpace wrap>
+                <ElButton link type="primary" @click="viewResourceDetail(row)">数据资源详情</ElButton>
+                <ElButton link type="primary" @click="openResourceDialog('edit', row)">修改数据资源</ElButton>
+                <ElPopconfirm title="确认删除该数据资源吗？" @confirm="deleteResource(row.id)">
+                  <template #reference>
+                    <ElButton link type="danger">删除数据资源</ElButton>
+                  </template>
+                </ElPopconfirm>
+              </ElSpace>
+            </template>
+          </ArtTable>
+        </ElTabPane>
+
+        <ElTabPane label="资源目录管理" name="catalog">
+          <ArtTable :data="filteredCatalogs" :columns="catalogColumns" :show-table-header="false">
+            <template #status="{ row }">
+              <ElTag :type="row.status === '启用' ? 'success' : 'warning'" effect="light">{{ row.status }}</ElTag>
+            </template>
+
+            <template #operation="{ row }">
+              <ElSpace wrap>
+                <ElButton link type="primary" @click="openCatalogDialog('edit', row)">修改资源目录</ElButton>
+                <ElPopconfirm title="确认删除该资源目录吗？" @confirm="deleteCatalog(row.id)">
+                  <template #reference>
+                    <ElButton link type="danger">删除资源目录</ElButton>
+                  </template>
+                </ElPopconfirm>
+              </ElSpace>
+            </template>
+          </ArtTable>
+        </ElTabPane>
+      </ElTabs>
     </ElCard>
+
+    <ElDialog v-model="resourceDialogVisible" :title="resourceDialogTitle" width="560px">
+      <ElForm :model="resourceForm" label-width="90px">
+        <ElFormItem label="资源名称">
+          <ElInput v-model="resourceForm.name" placeholder="请输入资源名称" />
+        </ElFormItem>
+        <ElFormItem label="资源编码">
+          <ElInput v-model="resourceForm.code" placeholder="请输入资源编码" />
+        </ElFormItem>
+        <ElFormItem label="所属目录">
+          <ElSelect v-model="resourceForm.catalog" placeholder="请选择目录">
+            <ElOption v-for="item in catalogs" :key="item.id" :label="item.name" :value="item.name" />
+          </ElSelect>
+        </ElFormItem>
+        <ElFormItem label="资源说明">
+          <ElInput v-model="resourceForm.description" type="textarea" :rows="3" />
+        </ElFormItem>
+      </ElForm>
+      <template #footer>
+        <ElButton @click="resourceDialogVisible = false">取消</ElButton>
+        <ElButton type="primary" @click="submitResource">保存</ElButton>
+      </template>
+    </ElDialog>
+
+    <ElDialog v-model="catalogDialogVisible" :title="catalogDialogTitle" width="520px">
+      <ElForm :model="catalogForm" label-width="90px">
+        <ElFormItem label="目录名称">
+          <ElInput v-model="catalogForm.name" placeholder="请输入目录名称" />
+        </ElFormItem>
+        <ElFormItem label="目录编码">
+          <ElInput v-model="catalogForm.code" placeholder="请输入目录编码" />
+        </ElFormItem>
+        <ElFormItem label="目录说明">
+          <ElInput v-model="catalogForm.description" type="textarea" :rows="3" />
+        </ElFormItem>
+      </ElForm>
+      <template #footer>
+        <ElButton @click="catalogDialogVisible = false">取消</ElButton>
+        <ElButton type="primary" @click="submitCatalog">保存</ElButton>
+      </template>
+    </ElDialog>
+
+    <ElDialog v-model="detailDialogVisible" title="数据资源详情" width="520px">
+      <ElDescriptions v-if="currentResource" :column="1" border>
+        <ElDescriptionsItem label="资源名称">{{ currentResource.name }}</ElDescriptionsItem>
+        <ElDescriptionsItem label="资源编码">{{ currentResource.code }}</ElDescriptionsItem>
+        <ElDescriptionsItem label="所属目录">{{ currentResource.catalog }}</ElDescriptionsItem>
+        <ElDescriptionsItem label="更新时间">{{ currentResource.updateTime }}</ElDescriptionsItem>
+        <ElDescriptionsItem label="资源说明">{{ currentResource.description }}</ElDescriptionsItem>
+      </ElDescriptions>
+    </ElDialog>
   </div>
 </template>
 
 <script setup lang="ts">
-  import ArtButtonTable from '@/components/core/forms/art-button-table/index.vue'
-  import { ACCOUNT_TABLE_DATA } from '@/mock/temp/formData'
-  import { useTable } from '@/hooks/core/useTable'
-  import { fetchGetUserList } from '@/api/system-manage'
-  import UserSearch from './modules/user-search.vue'
-  import UserDialog from './modules/user-dialog.vue'
-  import { ElTag, ElMessageBox, ElImage } from 'element-plus'
-  import { DialogType } from '@/types'
+  import type { ColumnOption } from '@/types'
 
-  defineOptions({ name: 'User' })
+  defineOptions({ name: 'NotificationContentCustomization' })
 
-  type UserListItem = Api.SystemManage.UserListItem
-
-  // 弹窗相关
-  const dialogType = ref<DialogType>('add')
-  const dialogVisible = ref(false)
-  const currentUserData = ref<Partial<UserListItem>>({})
-
-  // 选中行
-  const selectedRows = ref<UserListItem[]>([])
-
-  // 搜索表单
-  const searchForm = ref({
-    userName: undefined,
-    userGender: undefined,
-    userPhone: undefined,
-    userEmail: undefined,
-    status: '1'
-  })
-
-  // 用户状态配置
-  const USER_STATUS_CONFIG = {
-    '1': { type: 'success' as const, text: '在线' },
-    '2': { type: 'info' as const, text: '离线' },
-    '3': { type: 'warning' as const, text: '异常' },
-    '4': { type: 'danger' as const, text: '注销' }
-  } as const
-
-  /**
-   * 获取用户状态配置
-   */
-  const getUserStatusConfig = (status: string) => {
-    return (
-      USER_STATUS_CONFIG[status as keyof typeof USER_STATUS_CONFIG] || {
-        type: 'info' as const,
-        text: '未知'
-      }
-    )
+  interface DataResource {
+    id: number
+    name: string
+    code: string
+    catalog: string
+    status: string
+    updateTime: string
+    description: string
   }
 
-  const {
-    columns,
-    columnChecks,
-    data,
-    loading,
-    pagination,
-    getData,
-    replaceSearchParams,
-    resetSearchParams,
-    handleSizeChange,
-    handleCurrentChange,
-    refreshData
-  } = useTable({
-    // 核心配置
-    core: {
-      apiFn: fetchGetUserList,
-      apiParams: {
-        current: 1,
-        size: 20,
-        ...searchForm.value
-      },
-      // 自定义分页字段映射，未设置时将使用全局配置 tableConfig.ts 中的 paginationKey
-      // paginationKey: {
-      //   current: 'pageNum',
-      //   size: 'pageSize'
-      // },
-      columnsFactory: () => [
-        { type: 'selection' }, // 勾选列
-        { type: 'index', width: 60, label: '序号' }, // 序号
-        {
-          prop: 'userInfo',
-          label: '用户名',
-          width: 280,
-          // visible: false, // 默认是否显示列
-          formatter: (row) => {
-            return h('div', { class: 'user flex-c' }, [
-              h(ElImage, {
-                class: 'size-9.5 rounded-md',
-                src: row.avatar,
-                previewSrcList: [row.avatar],
-                // 图片预览是否插入至 body 元素上，用于解决表格内部图片预览样式异常
-                previewTeleported: true
-              }),
-              h('div', { class: 'ml-2' }, [
-                h('p', { class: 'user-name' }, row.userName),
-                h('p', { class: 'email' }, row.userEmail)
-              ])
-            ])
-          }
-        },
-        {
-          prop: 'userGender',
-          label: '性别',
-          sortable: true,
-          formatter: (row) => row.userGender
-        },
-        { prop: 'userPhone', label: '手机号' },
-        {
-          prop: 'status',
-          label: '状态',
-          formatter: (row) => {
-            const statusConfig = getUserStatusConfig(row.status)
-            return h(ElTag, { type: statusConfig.type }, () => statusConfig.text)
-          }
-        },
-        {
-          prop: 'createTime',
-          label: '创建日期',
-          sortable: true
-        },
-        {
-          prop: 'operation',
-          label: '操作',
-          width: 120,
-          fixed: 'right', // 固定列
-          formatter: (row) =>
-            h('div', [
-              h(ArtButtonTable, {
-                type: 'edit',
-                onClick: () => showDialog('edit', row)
-              }),
-              h(ArtButtonTable, {
-                type: 'delete',
-                onClick: () => deleteUser(row)
-              })
-            ])
-        }
-      ]
+  interface ResourceCatalog {
+    id: number
+    name: string
+    code: string
+    status: string
+    updateTime: string
+    description: string
+  }
+
+  const activeTab = ref('resource')
+  const resourceKeyword = ref('')
+  const resourceDialogVisible = ref(false)
+  const catalogDialogVisible = ref(false)
+  const detailDialogVisible = ref(false)
+  const resourceMode = ref<'add' | 'edit'>('add')
+  const catalogMode = ref<'add' | 'edit'>('add')
+  const editingResourceId = ref<number | null>(null)
+  const editingCatalogId = ref<number | null>(null)
+  const currentResource = ref<DataResource | null>(null)
+
+  const resources = ref<DataResource[]>([
+    {
+      id: 1,
+      name: '重点目标画像数据',
+      code: 'RES_001',
+      catalog: '情报资源目录',
+      status: '启用',
+      updateTime: '2026-03-30 10:20',
+      description: '用于通知模板中引用重点目标画像数据资源。'
     },
-    // 数据处理
-    transform: {
-      // 数据转换器 - 替换头像
-      dataTransformer: (records) => {
-        // 类型守卫检查
-        if (!Array.isArray(records)) {
-          console.warn('数据转换器: 期望数组类型，实际收到:', typeof records)
-          return []
-        }
-
-        // 使用本地头像替换接口返回的头像
-        return records.map((item, index: number) => {
-          return {
-            ...item,
-            avatar: ACCOUNT_TABLE_DATA[index % ACCOUNT_TABLE_DATA.length].avatar
-          }
-        })
-      }
+    {
+      id: 2,
+      name: '边境卡口采集数据',
+      code: 'RES_002',
+      catalog: '边防资源目录',
+      status: '启用',
+      updateTime: '2026-03-29 16:00',
+      description: '用于卡口通知与任务下发的数据引用。'
+    },
+    {
+      id: 3,
+      name: '历史告警归档数据',
+      code: 'RES_003',
+      catalog: '告警资源目录',
+      status: '停用',
+      updateTime: '2026-03-28 09:45',
+      description: '用于历史记录比对的归档数据。'
     }
+  ])
+
+  const catalogs = ref<ResourceCatalog[]>([
+    {
+      id: 1,
+      name: '情报资源目录',
+      code: 'CAT_001',
+      status: '启用',
+      updateTime: '2026-03-30 09:00',
+      description: '情报采集类资源目录。'
+    },
+    {
+      id: 2,
+      name: '边防资源目录',
+      code: 'CAT_002',
+      status: '启用',
+      updateTime: '2026-03-29 09:30',
+      description: '边境卡口类资源目录。'
+    },
+    {
+      id: 3,
+      name: '告警资源目录',
+      code: 'CAT_003',
+      status: '维护中',
+      updateTime: '2026-03-27 11:10',
+      description: '告警与处置记录目录。'
+    }
+  ])
+
+  const resourceForm = reactive({
+    name: '',
+    code: '',
+    catalog: '',
+    description: ''
   })
 
-  /**
-   * 搜索处理
-   * @param params 参数
-   */
-  const handleSearch = (params: Api.SystemManage.UserSearchParams) => {
-    replaceSearchParams(params)
-    getData()
-  }
+  const catalogForm = reactive({
+    name: '',
+    code: '',
+    description: ''
+  })
 
-  /**
-   * 显示用户弹窗
-   */
-  const showDialog = (type: DialogType, row?: UserListItem): void => {
-    console.log('打开弹窗:', { type, row })
-    dialogType.value = type
-    currentUserData.value = row || {}
-    nextTick(() => {
-      dialogVisible.value = true
-    })
-  }
+  const resourceColumns: ColumnOption[] = [
+    { prop: 'name', label: '资源名称', minWidth: 180 },
+    { prop: 'code', label: '资源编码', width: 140 },
+    { prop: 'catalog', label: '所属目录', minWidth: 160 },
+    { prop: 'status', label: '状态', width: 100, useSlot: true },
+    { prop: 'updateTime', label: '更新时间', width: 180 },
+    { prop: 'operation', label: '操作', minWidth: 240, useSlot: true, fixed: 'right' }
+  ]
 
-  /**
-   * 删除用户
-   */
-  const deleteUser = (row: UserListItem): void => {
-    console.log('删除用户:', row)
-    ElMessageBox.confirm(`确定要注销该用户吗？`, '注销用户', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'error'
-    }).then(() => {
-      ElMessage.success('注销成功')
-    })
-  }
+  const catalogColumns: ColumnOption[] = [
+    { prop: 'name', label: '目录名称', minWidth: 180 },
+    { prop: 'code', label: '目录编码', width: 140 },
+    { prop: 'status', label: '状态', width: 100, useSlot: true },
+    { prop: 'updateTime', label: '更新时间', width: 180 },
+    { prop: 'description', label: '目录说明', minWidth: 220 },
+    { prop: 'operation', label: '操作', minWidth: 180, useSlot: true, fixed: 'right' }
+  ]
 
-  /**
-   * 处理弹窗提交事件
-   */
-  const handleDialogSubmit = async () => {
-    try {
-      dialogVisible.value = false
-      currentUserData.value = {}
-    } catch (error) {
-      console.error('提交失败:', error)
+  const filteredResources = computed(() => {
+    const keyword = resourceKeyword.value.trim()
+    if (!keyword) {
+      return resources.value
     }
+
+    return resources.value.filter(
+      (item) =>
+        item.name.includes(keyword) || item.code.includes(keyword) || item.catalog.includes(keyword)
+    )
+  })
+
+  const filteredCatalogs = computed(() => {
+    const keyword = resourceKeyword.value.trim()
+    if (!keyword) {
+      return catalogs.value
+    }
+
+    return catalogs.value.filter((item) => item.name.includes(keyword) || item.code.includes(keyword))
+  })
+
+  const resourceDialogTitle = computed(() =>
+    resourceMode.value === 'add' ? '新增数据资源' : '修改数据资源'
+  )
+  const catalogDialogTitle = computed(() =>
+    catalogMode.value === 'add' ? '新增资源目录' : '修改资源目录'
+  )
+
+  const resetResourceForm = () => {
+    resourceForm.name = ''
+    resourceForm.code = ''
+    resourceForm.catalog = ''
+    resourceForm.description = ''
   }
 
-  /**
-   * 处理表格行选择变化
-   */
-  const handleSelectionChange = (selection: UserListItem[]): void => {
-    selectedRows.value = selection
-    console.log('选中行数据:', selectedRows.value)
+  const resetCatalogForm = () => {
+    catalogForm.name = ''
+    catalogForm.code = ''
+    catalogForm.description = ''
+  }
+
+  const openResourceDialog = (mode: 'add' | 'edit', row?: DataResource) => {
+    resourceMode.value = mode
+    resourceDialogVisible.value = true
+
+    if (row) {
+      editingResourceId.value = row.id
+      resourceForm.name = row.name
+      resourceForm.code = row.code
+      resourceForm.catalog = row.catalog
+      resourceForm.description = row.description
+      return
+    }
+
+    editingResourceId.value = null
+    resetResourceForm()
+  }
+
+  const openCatalogDialog = (mode: 'add' | 'edit', row?: ResourceCatalog) => {
+    catalogMode.value = mode
+    catalogDialogVisible.value = true
+
+    if (row) {
+      editingCatalogId.value = row.id
+      catalogForm.name = row.name
+      catalogForm.code = row.code
+      catalogForm.description = row.description
+      return
+    }
+
+    editingCatalogId.value = null
+    resetCatalogForm()
+  }
+
+  const submitResource = () => {
+    if (resourceMode.value === 'add') {
+      resources.value.unshift({
+        id: Date.now(),
+        name: resourceForm.name,
+        code: resourceForm.code,
+        catalog: resourceForm.catalog,
+        status: '启用',
+        updateTime: '2026-03-30 15:00',
+        description: resourceForm.description
+      })
+      ElMessage.success('已新增数据资源')
+    } else {
+      const target = resources.value.find((item) => item.id === editingResourceId.value)
+      if (target) {
+        target.name = resourceForm.name
+        target.code = resourceForm.code
+        target.catalog = resourceForm.catalog
+        target.description = resourceForm.description
+        target.updateTime = '2026-03-30 15:00'
+      }
+      ElMessage.success('已修改数据资源')
+    }
+
+    resourceDialogVisible.value = false
+  }
+
+  const submitCatalog = () => {
+    if (catalogMode.value === 'add') {
+      catalogs.value.unshift({
+        id: Date.now(),
+        name: catalogForm.name,
+        code: catalogForm.code,
+        status: '启用',
+        updateTime: '2026-03-30 15:00',
+        description: catalogForm.description
+      })
+      ElMessage.success('已新增资源目录')
+    } else {
+      const target = catalogs.value.find((item) => item.id === editingCatalogId.value)
+      if (target) {
+        target.name = catalogForm.name
+        target.code = catalogForm.code
+        target.description = catalogForm.description
+        target.updateTime = '2026-03-30 15:00'
+      }
+      ElMessage.success('已修改资源目录')
+    }
+
+    catalogDialogVisible.value = false
+  }
+
+  const deleteResource = (id: number) => {
+    resources.value = resources.value.filter((item) => item.id !== id)
+    ElMessage.success('已删除数据资源')
+  }
+
+  const deleteCatalog = (id: number) => {
+    catalogs.value = catalogs.value.filter((item) => item.id !== id)
+    ElMessage.success('已删除资源目录')
+  }
+
+  const viewResourceDetail = (row: DataResource) => {
+    currentResource.value = row
+    detailDialogVisible.value = true
   }
 </script>

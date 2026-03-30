@@ -1,132 +1,62 @@
 import { AppRouteRecord } from '@/types/router'
 
 export const examplesRoutes: AppRouteRecord = {
-  path: '/examples',
-  name: 'Examples',
+  path: '/data-processing-analysis',
+  name: 'DataProcessingAnalysis',
   component: '/index/index',
   meta: {
-    title: 'menus.examples.title',
-    icon: 'ri:sparkling-line'
+    title: '数据处理与分析',
+    icon: 'ri:git-merge-line',
+    roles: ['R_SUPER', 'R_ADMIN']
   },
   children: [
     {
-      path: 'permission',
-      name: 'Permission',
-      component: '',
+      path: 'center',
+      name: 'DataProcessingAnalysisCenter',
+      component: '/result/fail',
       meta: {
-        title: 'menus.examples.permission.title',
-        icon: 'ri:fingerprint-line'
-      },
-      children: [
-        {
-          path: 'switch-role',
-          name: 'PermissionSwitchRole',
-          component: '/examples/permission/switch-role',
-          meta: {
-            title: 'menus.examples.permission.switchRole',
-            icon: 'ri:contacts-line',
-            keepAlive: true
-          }
-        },
-        {
-          path: 'button-auth',
-          name: 'PermissionButtonAuth',
-          component: '/examples/permission/button-auth',
-          meta: {
-            title: 'menus.examples.permission.buttonAuth',
-            icon: 'ri:mouse-line',
-            keepAlive: true,
-            authList: [
-              { title: '新增', authMark: 'add' },
-              { title: '编辑', authMark: 'edit' },
-              { title: '删除', authMark: 'delete' },
-              { title: '导出', authMark: 'export' },
-              { title: '查看', authMark: 'view' },
-              { title: '发布', authMark: 'publish' },
-              { title: '配置', authMark: 'config' },
-              { title: '管理', authMark: 'manage' }
-            ]
-          }
-        },
-        {
-          path: 'page-visibility',
-          name: 'PermissionPageVisibility',
-          component: '/examples/permission/page-visibility',
-          meta: {
-            title: 'menus.examples.permission.pageVisibility',
-            icon: 'ri:user-3-line',
-            keepAlive: true,
-            roles: ['R_SUPER']
-          }
-        }
-      ]
-    },
-    {
-      path: 'tabs',
-      name: 'Tabs',
-      component: '/examples/tabs',
-      meta: {
-        title: 'menus.examples.tabs',
-        icon: 'ri:price-tag-line'
-      }
-    },
-    {
-      path: 'tables/basic',
-      name: 'TablesBasic',
-      component: '/examples/tables/basic',
-      meta: {
-        title: 'menus.examples.tablesBasic',
-        icon: 'ri:layout-grid-line',
+        title: '处理与分析中心',
+        icon: 'ri:flow-chart',
         keepAlive: true
       }
     },
     {
-      path: 'tables',
-      name: 'Tables',
-      component: '/examples/tables',
+      path: 'standardization',
+      name: 'DataStandardizationManage',
+      component: '/article/detail',
       meta: {
-        title: 'menus.examples.tables',
-        icon: 'ri:table-3',
+        title: '标准化处理',
+        icon: 'ri:book-open-line',
         keepAlive: true
       }
     },
     {
-      path: 'forms',
-      name: 'Forms',
-      component: '/examples/forms',
+      path: 'abnormal-processing',
+      name: 'AbnormalDataProcess',
+      component: '/article/comment',
       meta: {
-        title: 'menus.examples.forms',
-        icon: 'ri:table-view',
+        title: '异常数据处理',
+        icon: 'ri:filter-3-line',
         keepAlive: true
       }
     },
     {
-      path: 'form/search-bar',
-      name: 'SearchBar',
+      path: 'dispatch-manage',
+      name: 'DataProcessDispatchManage',
       component: '/examples/forms/search-bar',
       meta: {
-        title: 'menus.examples.searchBar',
-        icon: 'ri:table-line',
+        title: '处理调度管理',
+        icon: 'ri:time-line',
         keepAlive: true
       }
     },
     {
-      path: 'tables/tree',
-      name: 'TablesTree',
+      path: 'monitor-log',
+      name: 'DataProcessMonitorLog',
       component: '/examples/tables/tree',
       meta: {
-        title: 'menus.examples.tablesTree',
-        icon: 'ri:layout-2-line',
-        keepAlive: true
-      }
-    },
-    {
-      path: 'socket-chat',
-      name: 'SocketChat',
-      component: '/examples/socket-chat',
-      meta: {
-        title: 'menus.examples.socketChat',
-        icon: 'ri:shake-hands-line',
+        title: '监控日志',
+        icon: 'ri:file-list-2-line',
         keepAlive: true
       }
     }

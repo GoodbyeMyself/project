@@ -1,132 +1,154 @@
-<!-- 留言管理页面 -->
 <template>
-  <div>
-    <h1 class="text-4xl font-medium mt-5">留言墙</h1>
-    <p class="mt-3.5 text-g-600">每一份留言都记录了您的想法，也为我们提供了珍贵的回忆</p>
-
-    <ul
-      class="mt-10 grid grid-cols-5 gap-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 mb-5"
-    >
-      <li
-        class="relative p-4 c-p aspect-16/12 duration-300 hover:-translate-y-1.5"
-        :style="{ background: item.color }"
-        v-for="item in commentsWithColors"
-        :key="item.id"
-        @click="openDrawer(item)"
-      >
-        <p class="text-g-600 text-sm">{{ item.date }}</p>
-        <p class="mt-4 text-sm text-gray-800">{{ item.content }}</p>
-        <div class="absolute bottom-4 left-0 px-4 flex-cb w-full">
-          <div class="flex-c">
-            <div class="flex-c mr-5 text-xs text-g-600">
-              <ArtSvgIcon icon="ri:heart-line" class="mr-1 text-base" />
-              <span>{{ item.collection }}</span>
-            </div>
-            <div class="flex-c mr-5 text-xs text-g-600">
-              <ArtSvgIcon icon="ri:message-3-line" class="mr-1 text-base" />
-              <span>{{ item.comment }}</span>
-            </div>
-          </div>
-          <div>
-            <span class="text-sm text-gray-700">{{ item.userName }}</span>
-          </div>
-        </div>
-      </li>
-    </ul>
-
-    <ElDrawer
-      lDrawer
-      v-model="showDrawer"
-      :lock-scroll="false"
-      :size="360"
-      modal-class="comment-modal"
-    >
+  <div class="flex flex-col gap-4 pb-5">
+    <ElCard>
       <template #header>
-        <h4>详情</h4>
-      </template>
-      <template #default>
-        <div class="drawer-default">
-          <div class="relative p-4 aspect-16/12" :style="{ background: clickItem.color }">
-            <p class="text-g-500 text-sm">{{ clickItem.date }}</p>
-            <p class="mt-4 text-sm text-gray-800">{{ clickItem.content }}</p>
-            <div class="absolute bottom-4 left-0 px-4 flex-cb w-full">
-              <div class="flex-c">
-                <div class="flex-c mr-5 text-xs text-g-600">
-                  <ArtSvgIcon icon="ri:heart-line" class="mr-1 text-base" />
-                  <span>{{ clickItem.collection }}</span>
-                </div>
-                <div class="flex-c mr-5 text-xs text-g-600">
-                  <ArtSvgIcon icon="ri:message-3-line" class="mr-1 text-base" />
-                  <span>{{ clickItem.comment }}</span>
-                </div>
-              </div>
-              <span class="text-sm text-gray-700">{{ clickItem.userName }}</span>
-            </div>
+        <div class="flex-cb gap-3">
+          <div>
+            <h3 class="m-0 text-base font-medium">{{ pageConfig.title }}</h3>
+            <p class="m-0 mt-1 text-sm text-g-700">{{ pageConfig.description }}</p>
           </div>
-
-          <!-- 评论组件 -->
-          <CommentWidget />
+          <ElTag :type="pageConfig.tagType">{{ pageConfig.tagText }}</ElTag>
         </div>
       </template>
-    </ElDrawer>
+
+      <ElTable :data="pageConfig.tableData" border>
+        <ElTableColumn v-for="column in pageConfig.columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :min-width="column.minWidth" />
+      </ElTable>
+    </ElCard>
+
+    <ElCard>
+      <template #header><span class="font-medium">{{ pageConfig.statsTitle }}</span></template>
+      <ElRow :gutter="20">
+        <ElCol :xs="24" :md="8" v-for="item in pageConfig.stats" :key="item.label">
+          <div class="stat-box">
+            <div class="text-lg font-semibold">{{ item.value }}</div>
+            <div class="mt-1 text-sm text-g-700">{{ item.label }}</div>
+          </div>
+        </ElCol>
+      </ElRow>
+    </ElCard>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { commentList } from '@/mock/temp/commentList'
+  import { useRoute } from 'vue-router'
 
-  defineOptions({ name: 'ArticleComment' })
+  defineOptions({ name: 'ArticleCommentBusinessPage' })
 
-  interface CommentItem {
-    id: number
-    date: string
-    content: string
-    collection: number
-    comment: number
-    userName: string
-    color?: string
+  type TagType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+
+  interface TableColumn {
+    prop: string
+    label: string
+    width?: number
+    minWidth?: number
   }
 
-  const COLOR_LIST = ['#D8F8FF', '#FDDFD9', '#FCE6F0', '#D3F8F0', '#FFEABC', '#F5E1FF', '#E1E6FE']
+  interface StatItem {
+    label: string
+    value: string
+  }
 
-  const showDrawer = ref(false)
-  const clickItem = ref<CommentItem>({
-    id: 1,
-    date: '2024-9-3',
-    content: '加油！学好Node 自己写个小Demo',
-    collection: 5,
-    comment: 8,
-    userName: '匿名',
-    color: COLOR_LIST[0]
-  })
+  interface PageConfig {
+    title: string
+    description: string
+    tagText: string
+    tagType: TagType
+    statsTitle: string
+    columns: TableColumn[]
+    tableData: Record<string, string>[]
+    stats: StatItem[]
+  }
 
-  /**
-   * 为评论列表分配随机颜色
-   */
-  const commentsWithColors = computed(() => {
-    let lastColorIndex = -1
+  const route = useRoute()
 
-    return commentList.map((item) => {
-      let newIndex: number
-
-      do {
-        newIndex = Math.floor(Math.random() * COLOR_LIST.length)
-      } while (newIndex === lastColorIndex && COLOR_LIST.length > 1)
-
-      lastColorIndex = newIndex
-
+  const pageConfig = computed<PageConfig>(() => {
+    if (route.name === 'AbnormalDataProcess') {
       return {
-        ...item,
-        color: COLOR_LIST[newIndex]
+        title: '异常数据处理',
+        description: '集中查看异常数据类型、处理策略、影响范围与修复建议。',
+        tagText: '待处理 4 条',
+        tagType: 'warning',
+        statsTitle: '异常处理统计',
+        columns: [
+          { prop: 'name', label: '数据名称', minWidth: 180 },
+          { prop: 'type', label: '异常类型', width: 140 },
+          { prop: 'source', label: '来源任务', minWidth: 160 },
+          { prop: 'impact', label: '影响范围', minWidth: 180 },
+          { prop: 'suggestion', label: '处理建议', minWidth: 220 }
+        ],
+        tableData: [
+          { name: '人员画像批次-0329', type: '字段缺失', source: '目标画像标准化', impact: '2 条记录无法入库', suggestion: '补录证件号后重新执行标准化' },
+          { name: '车辆轨迹批次-041', type: '时间格式错误', source: '轨迹清洗任务', impact: '时间轴排序异常', suggestion: '统一转换为 yyyy-MM-dd HH:mm:ss' },
+          { name: '布控名单批次-007', type: '重复数据', source: '名单同步任务', impact: '命中结果重复', suggestion: '按证件号去重并保留最新版本' }
+        ],
+        stats: [
+          { label: '字段异常', value: '2 项' },
+          { label: '格式异常', value: '1 项' },
+          { label: '重复数据', value: '1 项' }
+        ]
       }
-    })
-  })
+    }
 
-  /**
-   * 打开评论详情抽屉
-   */
-  const openDrawer = (item: CommentItem) => {
-    showDrawer.value = true
-    clickItem.value = item
-  }
+    if (route.name === 'MessageHandleManage') {
+      return {
+        title: '消息通知处理',
+        description: '查看通知消息状态、接收对象、处置进度与跟踪结果。',
+        tagText: '未读消息 2 条',
+        tagType: 'primary',
+        statsTitle: '通知处理统计',
+        columns: [
+          { prop: 'title', label: '消息标题', minWidth: 200 },
+          { prop: 'channel', label: '通知方式', width: 120 },
+          { prop: 'receiver', label: '接收对象', minWidth: 160 },
+          { prop: 'status', label: '处理状态', width: 120 },
+          { prop: 'result', label: '跟踪结果', minWidth: 220 }
+        ],
+        tableData: [
+          { title: '边境雷达一号心跳超时', channel: '站内信', receiver: '边境设备值守组', status: '已送达', result: '值班员已确认并开始排查' },
+          { title: '采集链路延迟波动提醒', channel: '短信', receiver: '平台运维组', status: '处理中', result: '正在检查 Kafka 输入消费堆积情况' },
+          { title: '夜间备份任务执行成功', channel: '邮件', receiver: '数据管理组', status: '已归档', result: '通知记录已同步至台账' }
+        ],
+        stats: [
+          { label: '已送达', value: '2 条' },
+          { label: '处理中', value: '1 条' },
+          { label: '已归档', value: '1 条' }
+        ]
+      }
+    }
+
+    return {
+      title: '异常设备列表',
+      description: '集中查看异常设备、异常类型、影响范围和处置建议。',
+      tagText: '异常设备 3 台',
+      tagType: 'danger',
+      statsTitle: '异常统计',
+      columns: [
+        { prop: 'name', label: '设备名称', minWidth: 180 },
+        { prop: 'type', label: '异常类型', width: 140 },
+        { prop: 'level', label: '告警级别', width: 120 },
+        { prop: 'impact', label: '影响范围', minWidth: 180 },
+        { prop: 'suggestion', label: '处置建议', minWidth: 220 }
+      ],
+      tableData: [
+        { name: '卡口抓拍终端', type: '连接中断', level: '严重', impact: '视频采集链路不可用', suggestion: '检查网络与终端电源，恢复后重新建立连接' },
+        { name: '巡逻车载终端', type: '数据延迟', level: '一般', impact: '轨迹数据上报延后', suggestion: '检查车载网络信号与缓存队列' },
+        { name: '边境雷达二号', type: '心跳异常', level: '一般', impact: '设备状态不稳定', suggestion: '核对采集频率与超时阈值配置' }
+      ],
+      stats: [
+        { label: '严重异常', value: '1 台' },
+        { label: '一般异常', value: '2 台' },
+        { label: '待处置', value: '3 项' }
+      ]
+    }
+  })
 </script>
+
+<style scoped>
+  .stat-box {
+    padding: 16px;
+    border: 1px solid var(--el-border-color-light);
+    border-radius: 12px;
+    background: var(--el-fill-color-blank);
+  }
+</style>

@@ -6,7 +6,8 @@ export const templateRoutes: AppRouteRecord = {
   component: '/index/index',
   meta: {
     title: '数据可视化',
-    icon: 'ri:donut-chart-line'
+    icon: 'ri:bar-chart-box-line',
+    roles: ['R_SUPER', 'R_ADMIN']
   },
   children: [
     {

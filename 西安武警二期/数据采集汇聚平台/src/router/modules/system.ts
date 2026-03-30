@@ -1,50 +1,52 @@
 import { AppRouteRecord } from '@/types/router'
 
 export const systemRoutes: AppRouteRecord = {
-  path: '/system',
-  name: 'System',
+  path: '/notification-management',
+  name: 'NotificationManagement',
   component: '/index/index',
   meta: {
-    title: '报警与通知',
-    icon: 'ri:alarm-warning-line',
+    title: '通知下发管理',
+    icon: 'ri:notification-4-line',
     roles: ['R_SUPER', 'R_ADMIN']
   },
   children: [
     {
-      path: 'user',
-      name: 'User',
+      path: 'content-customization',
+      name: 'NotificationContentCustomization',
       component: '/system/user',
       meta: {
-        title: '告警组管理',
-        icon: 'ri:team-line',
+        title: '通知内容定制',
+        icon: 'ri:file-list-3-line',
         keepAlive: true,
         roles: ['R_SUPER', 'R_ADMIN']
       }
     },
     {
-      path: 'role',
-      name: 'Role',
+      path: 'record-tracking',
+      name: 'NotificationRecordTracking',
       component: '/system/role',
       meta: {
-        title: '消息通知处理',
-        icon: 'ri:mail-open-line',
+        title: '通知记录与追踪',
+        icon: 'ri:route-line',
         keepAlive: true,
         roles: ['R_SUPER', 'R_ADMIN']
       }
     },
     {
-      path: 'menu',
-      name: 'Menus',
+      path: 'permission-authorization',
+      name: 'NotificationPermissionAuthorization',
       component: '/system/menu',
       meta: {
-        title: '告警规则管理',
-        icon: 'ri:alarm-line',
+        title: '用户权限授权',
+        icon: 'ri:shield-user-line',
         keepAlive: true,
         roles: ['R_SUPER', 'R_ADMIN'],
         authList: [
           { title: '新增', authMark: 'add' },
           { title: '编辑', authMark: 'edit' },
-          { title: '删除', authMark: 'delete' }
+          { title: '删除', authMark: 'delete' },
+          { title: '配置', authMark: 'config' },
+          { title: '查看', authMark: 'view' }
         ]
       }
     },

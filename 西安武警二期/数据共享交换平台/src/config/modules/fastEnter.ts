@@ -1,125 +1,93 @@
-/**
- * 快速入口配置
- * 包含：应用列表、快速链接等配置
- */
-import { WEB_LINKS } from '@/utils/constants'
 import type { FastEnterConfig } from '@/types/config'
 
 const fastEnterConfig: FastEnterConfig = {
-  // 显示条件（屏幕宽度）
   minWidth: 1200,
-  // 应用列表
   applications: [
     {
-      name: '工作台',
-      description: '系统概览与数据统计',
-      icon: 'ri:pie-chart-line',
+      name: '平台总览',
+      description: '查看节点侧与管理中心能力全景',
+      icon: 'ri:dashboard-line',
       iconColor: '#377dff',
       enabled: true,
       order: 1,
-      routeName: 'Console'
+      routeName: 'ExchangePlatformOverview'
     },
     {
-      name: '分析页',
-      description: '数据分析与可视化',
-      icon: 'ri:game-line',
-      iconColor: '#ff3b30',
+      name: '管理代理',
+      description: '维护节点侧指定代理能力',
+      icon: 'ri:git-branch-line',
+      iconColor: '#13c2c2',
       enabled: true,
       order: 2,
-      routeName: 'Analysis'
+      routeName: 'NodeManagementAgent'
     },
     {
-      name: '礼花效果',
-      description: '动画特效展示',
-      icon: 'ri:loader-line',
-      iconColor: '#7A7FFF',
+      name: '交换节点管理',
+      description: '维护交换节点与运行状态',
+      icon: 'ri:server-line',
+      iconColor: '#ff7a45',
       enabled: true,
       order: 3,
-      routeName: 'Fireworks'
+      routeName: 'CenterNodeManagement'
     },
     {
-      name: '聊天',
-      description: '即时通讯功能',
-      icon: 'ri:user-line',
-      iconColor: '#13DEB9',
+      name: 'CDC管理',
+      description: '维护实时任务与任务目录',
+      icon: 'ri:radar-line',
+      iconColor: '#7a7fff',
       enabled: true,
       order: 4,
-      routeName: 'Chat'
+      routeName: 'CenterCdcManagement'
     },
     {
-      name: '官方文档',
-      description: '使用指南与开发文档',
-      icon: 'ri:bill-line',
+      name: '交换流程配置',
+      description: '维护工作流与目录结构',
+      icon: 'ri:flow-chart',
+      iconColor: '#60c041',
+      enabled: true,
+      order: 5,
+      routeName: 'CenterWorkflowConfig'
+    },
+    {
+      name: '资源目录',
+      description: '维护数据资源与资源目录',
+      icon: 'ri:book-open-line',
       iconColor: '#ffb100',
       enabled: true,
-      order: 5,
-      link: WEB_LINKS.DOCS
-    },
-    {
-      name: '技术支持',
-      description: '技术支持与问题反馈',
-      icon: 'ri:user-location-line',
-      iconColor: '#ff6b6b',
-      enabled: true,
       order: 6,
-      link: WEB_LINKS.COMMUNITY
-    },
-    {
-      name: '更新日志',
-      description: '版本更新与变更记录',
-      icon: 'ri:gamepad-line',
-      iconColor: '#38C0FC',
-      enabled: true,
-      order: 7,
-      routeName: 'ChangeLog'
-    },
-    {
-      name: '哔哩哔哩',
-      description: '技术分享与交流',
-      icon: 'ri:bilibili-line',
-      iconColor: '#FB7299',
-      enabled: true,
-      order: 8,
-      link: WEB_LINKS.BILIBILI
+      routeName: 'CenterResourceDirectory'
     }
   ],
-  // 快速链接
   quickLinks: [
     {
-      name: '登录',
+      name: '任务发布订阅',
       enabled: true,
       order: 1,
-      routeName: 'Login'
+      routeName: 'CenterPublishSubscribe'
     },
     {
-      name: '注册',
+      name: '交换环境监控',
       enabled: true,
       order: 2,
-      routeName: 'Register'
+      routeName: 'CenterEnvironmentMonitor'
     },
     {
-      name: '忘记密码',
+      name: '配置告警',
       enabled: true,
       order: 3,
-      routeName: 'ForgetPassword'
+      routeName: 'CenterAlertConfig'
     },
     {
-      name: '定价',
+      name: '统计分析',
       enabled: true,
       order: 4,
-      routeName: 'Pricing'
+      routeName: 'CenterStatisticsAnalysis'
     },
     {
-      name: '个人中心',
+      name: '文件管理',
       enabled: true,
       order: 5,
-      routeName: 'UserCenter'
-    },
-    {
-      name: '留言管理',
-      enabled: true,
-      order: 6,
-      routeName: 'ArticleComment'
+      routeName: 'CenterFileManagement'
     }
   ]
 }

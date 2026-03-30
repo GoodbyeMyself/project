@@ -1,18 +1,22 @@
 import { AppRouteRecord } from '@/types/router'
-import { dashboardRoutes } from './dashboard'
-import { templateRoutes } from './template'
-import { widgetsRoutes } from './widgets'
-import { systemRoutes } from './system'
 import { articleRoutes } from './article'
 import { resultRoutes } from './result'
+import { examplesRoutes } from './examples'
 import { safeguardRoutes } from './safeguard'
+import { alarmRoutes } from './alarm'
+import { templateRoutes } from './template'
+import { widgetsRoutes } from './widgets'
+import { dashboardRoutes } from './dashboard'
+import { systemRoutes } from './system'
 
 export const routeModules: AppRouteRecord[] = [
-  dashboardRoutes,
+  articleRoutes,
+  resultRoutes,
+  examplesRoutes,
   safeguardRoutes,
-  systemRoutes,
+  alarmRoutes,
   templateRoutes,
   widgetsRoutes,
-  articleRoutes,
-  resultRoutes
+  dashboardRoutes,
+  systemRoutes
 ]
