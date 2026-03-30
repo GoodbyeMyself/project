@@ -1,5 +1,7 @@
 <!-- 用户菜单 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/layouts/art-header-bar/widget/ArtUserMenu.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElPopover
     ref="userMenuPopover"
     placement="bottom-end"
@@ -60,6 +62,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/layouts/art-header-bar/widget/ArtUserMenu.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useI18n } from 'vue-i18n'
   import { useRouter } from 'vue-router'
   import { ElMessageBox } from 'element-plus'
@@ -74,12 +78,14 @@
   const userStore = useUserStore()
 
   const { getUserInfo: userInfo } = storeToRefs(userStore)
+  // Logic Note: Reactive state 'userMenuPopover' stores mutable runtime data used by this component.
   const userMenuPopover = ref()
 
   /**
    * 页面跳转
    * @param {string} path - 目标路径
    */
+  // Logic Note: Handler 'goPage' encapsulates a single interaction or data-processing flow.
   const goPage = (path: string): void => {
     router.push(path)
   }
@@ -87,6 +93,7 @@
   /**
    * 打开文档页面
    */
+  // Logic Note: Handler 'toDocs' encapsulates a single interaction or data-processing flow.
   const toDocs = (): void => {
     window.open(WEB_LINKS.DOCS)
   }
@@ -94,6 +101,7 @@
   /**
    * 打开 GitHub 页面
    */
+  // Logic Note: Handler 'toGithub' encapsulates a single interaction or data-processing flow.
   const toGithub = (): void => {
     window.open(WEB_LINKS.GITHUB)
   }
@@ -101,6 +109,7 @@
   /**
    * 打开锁屏功能
    */
+  // Logic Note: Handler 'lockScreen' encapsulates a single interaction or data-processing flow.
   const lockScreen = (): void => {
     mittBus.emit('openLockScreen')
   }
@@ -108,6 +117,7 @@
   /**
    * 用户登出确认
    */
+  // Logic Note: Handler 'loginOut' encapsulates a single interaction or data-processing flow.
   const loginOut = (): void => {
     closeUserMenu()
     setTimeout(() => {
@@ -124,6 +134,7 @@
   /**
    * 关闭用户菜单弹出层
    */
+  // Logic Note: Handler 'closeUserMenu' encapsulates a single interaction or data-processing flow.
   const closeUserMenu = (): void => {
     setTimeout(() => {
       userMenuPopover.value.hide()
@@ -132,6 +143,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据共享交换平台/src/components/core/layouts/art-header-bar/widget/ArtUserMenu.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   @layer components {

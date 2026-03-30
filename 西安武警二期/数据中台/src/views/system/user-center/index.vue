@@ -1,5 +1,7 @@
 <!-- 个人中心页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/system/user-center/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="w-full h-full p-0 bg-transparent border-none shadow-none">
     <div class="relative flex-b mt-2.5 max-md:block max-md:mt-1">
       <div class="w-112 mr-5 max-md:w-full max-md:mr-0">
@@ -147,22 +149,30 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/system/user-center/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useUserStore } from '@/store/modules/user'
   import type { FormInstance, FormRules } from 'element-plus'
 
   defineOptions({ name: 'UserCenter' })
 
   const userStore = useUserStore()
+  // Logic Note: Computed value 'userInfo' derives UI state from reactive sources and updates automatically.
   const userInfo = computed(() => userStore.getUserInfo)
 
+  // Logic Note: Reactive state 'isEdit' stores mutable runtime data used by this component.
   const isEdit = ref(false)
+  // Logic Note: Reactive state 'isEditPwd' stores mutable runtime data used by this component.
   const isEditPwd = ref(false)
+  // Logic Note: Reactive state 'date' stores mutable runtime data used by this component.
   const date = ref('')
+  // Logic Note: Reactive state 'ruleFormRef' stores mutable runtime data used by this component.
   const ruleFormRef = ref<FormInstance>()
 
   /**
    * 用户信息表单
    */
+  // Logic Note: Reactive state 'form' stores mutable runtime data used by this component.
   const form = reactive({
     realName: 'John Snow',
     nikeName: '皮卡丘',
@@ -176,6 +186,7 @@
   /**
    * 密码修改表单
    */
+  // Logic Note: Reactive state 'pwdForm' stores mutable runtime data used by this component.
   const pwdForm = reactive({
     password: '123456',
     newPassword: '123456',
@@ -185,6 +196,7 @@
   /**
    * 表单验证规则
    */
+  // Logic Note: Reactive state 'rules' stores mutable runtime data used by this component.
   const rules = reactive<FormRules>({
     realName: [
       { required: true, message: '请输入姓名', trigger: 'blur' },
@@ -220,6 +232,7 @@
   /**
    * 根据当前时间获取问候语
    */
+  // Logic Note: Handler 'getDate' encapsulates a single interaction or data-processing flow.
   const getDate = () => {
     const h = new Date().getHours()
 
@@ -234,6 +247,7 @@
   /**
    * 切换用户信息编辑状态
    */
+  // Logic Note: Handler 'edit' encapsulates a single interaction or data-processing flow.
   const edit = () => {
     isEdit.value = !isEdit.value
   }
@@ -241,6 +255,7 @@
   /**
    * 切换密码编辑状态
    */
+  // Logic Note: Handler 'editPwd' encapsulates a single interaction or data-processing flow.
   const editPwd = () => {
     isEditPwd.value = !isEditPwd.value
   }

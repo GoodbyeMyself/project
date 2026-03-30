@@ -1,5 +1,7 @@
 <!-- 文章发布页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/article/publish/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <div>
       <div class="max-w-250 mx-auto my-5">
@@ -76,6 +78,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/article/publish/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { Plus } from '@element-plus/icons-vue'
   import { ApiStatus } from '@/utils/http/status'
   import { useUserStore } from '@/store/modules/user'
@@ -116,18 +120,27 @@
   const uploadImageUrl = `${import.meta.env.VITE_API_URL}/api/common/upload`
   const uploadHeaders = { Authorization: accessToken }
 
+  // Logic Note: Reactive state 'pageMode' stores mutable runtime data used by this component.
   const pageMode = ref<PageModeEnum>(PageModeEnum.Add)
+  // Logic Note: Reactive state 'articleName' stores mutable runtime data used by this component.
   const articleName = ref('')
+  // Logic Note: Reactive state 'articleType' stores mutable runtime data used by this component.
   const articleType = ref<number>()
+  // Logic Note: Reactive state 'articleTypes' stores mutable runtime data used by this component.
   const articleTypes = ref<ArticleType[]>([])
+  // Logic Note: Reactive state 'editorHtml' stores mutable runtime data used by this component.
   const editorHtml = ref('')
+  // Logic Note: Reactive state 'createDate' stores mutable runtime data used by this component.
   const createDate = ref('')
+  // Logic Note: Reactive state 'cover' stores mutable runtime data used by this component.
   const cover = ref('')
+  // Logic Note: Reactive state 'visible' stores mutable runtime data used by this component.
   const visible = ref(true)
 
   /**
    * 初始化页面模式（新增或编辑）
    */
+  // Logic Note: Handler 'initPageMode' encapsulates a single interaction or data-processing flow.
   const initPageMode = () => {
     const { id } = route.query
     pageMode.value = id ? PageModeEnum.Edit : PageModeEnum.Add
@@ -142,6 +155,7 @@
   /**
    * 获取文章分类列表
    */
+  // Logic Note: Handler 'getArticleTypes' encapsulates a single interaction or data-processing flow.
   const getArticleTypes = async () => {
     try {
       const { data } = await axios.get('https://www.qiniu.lingchen.kim/classify.json')
@@ -163,6 +177,7 @@
   /**
    * 获取文章详情（编辑模式）
    */
+  // Logic Note: Handler 'getArticleDetail' encapsulates a single interaction or data-processing flow.
   const getArticleDetail = async () => {
     try {
       const { data } = await axios.get<ArticleDetailResponse>(
@@ -184,6 +199,7 @@
   /**
    * 格式化日期为 YYYY-MM-DD 格式
    */
+  // Logic Note: Handler 'formatDate' encapsulates a single interaction or data-processing flow.
   const formatDate = (date: string | Date): string => {
     return useDateFormat(date, 'YYYY-MM-DD').value
   }
@@ -191,6 +207,7 @@
   /**
    * 验证文章表单数据
    */
+  // Logic Note: Handler 'validateArticle' encapsulates a single interaction or data-processing flow.
   const validateArticle = (): boolean => {
     if (!articleName.value.trim()) {
       ElMessage.error('请输入文章标题')
@@ -218,6 +235,7 @@
   /**
    * 清理代码块中的多余空格
    */
+  // Logic Note: Handler 'cleanCodeContent' encapsulates a single interaction or data-processing flow.
   const cleanCodeContent = (content: string): string => {
     return content.replace(/(\s*)<\/code>/g, '</code>')
   }
@@ -225,6 +243,7 @@
   /**
    * 新增文章
    */
+  // Logic Note: Handler 'addArticle' encapsulates a single interaction or data-processing flow.
   const addArticle = async () => {
     if (!validateArticle()) return
 
@@ -255,6 +274,7 @@
   /**
    * 编辑文章
    */
+  // Logic Note: Handler 'editArticle' encapsulates a single interaction or data-processing flow.
   const editArticle = async () => {
     if (!validateArticle()) return
 
@@ -286,6 +306,7 @@
   /**
    * 提交表单（新增或编辑）
    */
+  // Logic Note: Handler 'submit' encapsulates a single interaction or data-processing flow.
   const submit = () => {
     if (pageMode.value === PageModeEnum.Edit) {
       editArticle()
@@ -297,6 +318,7 @@
   /**
    * 图片上传成功回调
    */
+  // Logic Note: Handler 'onSuccess' encapsulates a single interaction or data-processing flow.
   const onSuccess = (response: UploadResponse) => {
     cover.value = response.data.url
     ElMessage.success(`图片上传成功 ${EmojiText[200]}`)
@@ -305,6 +327,7 @@
   /**
    * 图片上传失败回调
    */
+  // Logic Note: Handler 'onError' encapsulates a single interaction or data-processing flow.
   const onError = () => {
     ElMessage.error(`图片上传失败 ${EmojiText[500]}`)
   }
@@ -312,6 +335,7 @@
   /**
    * 上传前的文件校验
    */
+  // Logic Note: Handler 'beforeUpload' encapsulates a single interaction or data-processing flow.
   const beforeUpload = (file: File): boolean => {
     const isImage = file.type.startsWith('image/')
     const isLt2M = file.size / 1024 / 1024 < MAX_IMAGE_SIZE

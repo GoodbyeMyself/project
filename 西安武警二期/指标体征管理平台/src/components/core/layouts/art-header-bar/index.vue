@@ -1,5 +1,7 @@
 <!-- 顶部栏 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/components/core/layouts/art-header-bar/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     class="w-full bg-[var(--default-bg-color)]"
     :class="[
@@ -169,6 +171,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/components/core/layouts/art-header-bar/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useI18n } from 'vue-i18n'
   import { useRouter } from 'vue-router'
   import { useFullscreen, useWindowSize } from '@vueuse/core'
@@ -219,13 +223,18 @@
   const { language } = storeToRefs(userStore)
   const { menuList } = storeToRefs(menuStore)
 
+  // Logic Note: Reactive state 'showNotice' stores mutable runtime data used by this component.
   const showNotice = ref(false)
+  // Logic Note: Reactive state 'notice' stores mutable runtime data used by this component.
   const notice = ref(null)
 
   // 菜单类型判断
   const isLeftMenu = computed(() => menuType.value === MenuTypeEnum.LEFT)
+  // Logic Note: Computed value 'isDualMenu' derives UI state from reactive sources and updates automatically.
   const isDualMenu = computed(() => menuType.value === MenuTypeEnum.DUAL_MENU)
+  // Logic Note: Computed value 'isTopMenu' derives UI state from reactive sources and updates automatically.
   const isTopMenu = computed(() => menuType.value === MenuTypeEnum.TOP)
+  // Logic Note: Computed value 'isTopLeftMenu' derives UI state from reactive sources and updates automatically.
   const isTopLeftMenu = computed(() => menuType.value === MenuTypeEnum.TOP_LEFT)
 
   const { isFullscreen, toggle: toggleFullscreen } = useFullscreen()
@@ -242,6 +251,7 @@
   /**
    * 切换全屏状态
    */
+  // Logic Note: Handler 'toggleFullScreen' encapsulates a single interaction or data-processing flow.
   const toggleFullScreen = (): void => {
     toggleFullscreen()
   }
@@ -249,6 +259,7 @@
   /**
    * 切换菜单显示/隐藏状态
    */
+  // Logic Note: Handler 'visibleMenu' encapsulates a single interaction or data-processing flow.
   const visibleMenu = (): void => {
     settingStore.setMenuOpen(!menuOpen.value)
   }
@@ -259,6 +270,7 @@
   /**
    * 跳转到首页
    */
+  // Logic Note: Handler 'toHome' encapsulates a single interaction or data-processing flow.
   const toHome = (): void => {
     router.push(homePath.value)
   }
@@ -267,6 +279,7 @@
    * 刷新页面
    * @param {number} time - 延迟时间，默认为0毫秒
    */
+  // Logic Note: Handler 'reload' encapsulates a single interaction or data-processing flow.
   const reload = (time: number = 0): void => {
     setTimeout(() => {
       refresh()
@@ -276,6 +289,7 @@
   /**
    * 初始化语言设置
    */
+  // Logic Note: Handler 'initLanguage' encapsulates a single interaction or data-processing flow.
   const initLanguage = (): void => {
     locale.value = language.value
   }
@@ -284,6 +298,7 @@
    * 切换系统语言
    * @param {LanguageEnum} lang - 目标语言类型
    */
+  // Logic Note: Handler 'changeLanguage' encapsulates a single interaction or data-processing flow.
   const changeLanguage = (lang: LanguageEnum): void => {
     if (locale.value === lang) return
     locale.value = lang
@@ -294,6 +309,7 @@
   /**
    * 打开设置面板
    */
+  // Logic Note: Handler 'openSetting' encapsulates a single interaction or data-processing flow.
   const openSetting = (): void => {
     mittBus.emit('openSetting')
 
@@ -306,6 +322,7 @@
   /**
    * 打开全局搜索对话框
    */
+  // Logic Note: Handler 'openSearchDialog' encapsulates a single interaction or data-processing flow.
   const openSearchDialog = (): void => {
     mittBus.emit('openSearchDialog')
   }
@@ -314,6 +331,7 @@
    * 点击页面其他区域关闭通知面板
    * @param {Event} e - 点击事件对象
    */
+  // Logic Note: Handler 'bodyCloseNotice' encapsulates a single interaction or data-processing flow.
   const bodyCloseNotice = (e: any): void => {
     if (!showNotice.value) return
 
@@ -331,6 +349,7 @@
   /**
    * 切换通知面板显示状态
    */
+  // Logic Note: Handler 'visibleNotice' encapsulates a single interaction or data-processing flow.
   const visibleNotice = (): void => {
     showNotice.value = !showNotice.value
   }
@@ -338,12 +357,15 @@
   /**
    * 打开聊天窗口
    */
+  // Logic Note: Handler 'openChat' encapsulates a single interaction or data-processing flow.
   const openChat = (): void => {
     mittBus.emit('openChat')
   }
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '指标体征管理平台/src/components/core/layouts/art-header-bar/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   /* Custom animations */
   @keyframes rotate180 {
     0% {

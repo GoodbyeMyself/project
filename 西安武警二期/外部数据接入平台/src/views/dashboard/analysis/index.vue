@@ -1,5 +1,7 @@
 <!-- 分析页页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/dashboard/analysis/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <ElRow :gutter="20">
       <ElCol :xl="14" :lg="15" :xs="24">
@@ -37,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/dashboard/analysis/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import TodaySales from './modules/today-sales.vue'
   import VisitorInsights from './modules/visitor-insights.vue'
   import TotalRevenue from './modules/total-revenue.vue'

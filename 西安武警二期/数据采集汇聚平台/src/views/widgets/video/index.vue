@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/widgets/video/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard>
       <template #header>
@@ -43,15 +45,22 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/widgets/video/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'DataRecovery' })
 
+  // Logic Note: Reactive state 'restorePoint' stores mutable runtime data used by this component.
   const restorePoint = ref('2026-03-30 00:00 全量备份')
+  // Logic Note: Reactive state 'restoreScope' stores mutable runtime data used by this component.
   const restoreScope = ref(['设备台账', '采集结果'])
+  // Logic Note: Reactive state 'remark' stores mutable runtime data used by this component.
   const remark = ref('用于恢复凌晨异常变更前的数据状态。')
+  // Logic Note: Reactive state 'recoverLogs' stores mutable runtime data used by this component.
   const recoverLogs = ref([
     { time: '2026-03-29 09:00', point: '2026-03-29 00:00 全量备份', status: '成功' },
     { time: '2026-03-28 22:10', point: '2026-03-28 00:00 全量备份', status: '成功' }
   ])
 
+  // Logic Note: Handler 'startRecover' encapsulates a single interaction or data-processing flow.
   const startRecover = () => ElMessage.success(`已执行数据恢复：${restorePoint.value}`)
 </script>

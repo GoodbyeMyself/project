@@ -1,5 +1,7 @@
 <!-- 设置操作按钮 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/layouts/art-settings-panel/widget/SettingActions.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     class="mt-10 flex gap-8 border-t border-[var(--default-border)] bg-[var(--art-bg-color)] pt-5"
   >
@@ -13,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/layouts/art-settings-panel/widget/SettingActions.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { nextTick } from 'vue'
   import { useSettingStore } from '@/store/modules/setting'
   import { SETTING_DEFAULT_CONFIG } from '@/config/setting'
@@ -95,6 +99,7 @@
   /**
    * 将值转换为代码字符串
    */
+  // Logic Note: Handler 'valueToCode' encapsulates a single interaction or data-processing flow.
   const valueToCode = (value: any, enumMap?: Record<string, string>): string => {
     if (value === null) return 'null'
     if (value === undefined) return 'undefined'
@@ -114,6 +119,7 @@
   /**
    * 生成配置代码
    */
+  // Logic Note: Handler 'generateConfigCode' encapsulates a single interaction or data-processing flow.
   const generateConfigCode = (): string => {
     const lines = ['export const SETTING_DEFAULT_CONFIG = {']
 
@@ -130,6 +136,7 @@
   /**
    * 复制配置到剪贴板
    */
+  // Logic Note: Handler 'handleCopyConfig' encapsulates a single interaction or data-processing flow.
   const handleCopyConfig = async () => {
     try {
       const configText = generateConfigCode()
@@ -163,6 +170,7 @@
   /**
    * 重置配置为默认值
    */
+  // Logic Note: Handler 'handleResetConfig' encapsulates a single interaction or data-processing flow.
   const handleResetConfig = async () => {
     try {
       const config = SETTING_DEFAULT_CONFIG

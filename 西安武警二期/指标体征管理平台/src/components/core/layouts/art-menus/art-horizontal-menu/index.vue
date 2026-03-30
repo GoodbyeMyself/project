@@ -1,5 +1,7 @@
 <!-- 水平菜单 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/components/core/layouts/art-menus/art-horizontal-menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex-1 overflow-hidden">
     <ElMenu
       :ellipsis="true"
@@ -25,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/components/core/layouts/art-menus/art-horizontal-menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { AppRouteRecord } from '@/types/router'
   import HorizontalSubmenu from './widget/HorizontalSubmenu.vue'
   import { useSettingStore } from '@/store/modules/setting'
@@ -49,6 +53,7 @@
    * 过滤后的菜单项列表
    * 只显示未隐藏的菜单项
    */
+  // Logic Note: Computed value 'filteredMenuItems' derives UI state from reactive sources and updates automatically.
   const filteredMenuItems = computed(() => {
     return filterMenuItems(props.list)
   })
@@ -57,6 +62,7 @@
    * 当前激活的路由路径
    * 用于菜单高亮显示
    */
+  // Logic Note: Computed value 'routerPath' derives UI state from reactive sources and updates automatically.
   const routerPath = computed(() => String(route.meta.activePath || route.path))
 
   /**
@@ -65,6 +71,7 @@
    * @param items 菜单项数组
    * @returns 过滤后的菜单项数组
    */
+  // Logic Note: Handler 'filterMenuItems' encapsulates a single interaction or data-processing flow.
   const filterMenuItems = (items: AppRouteRecord[]): AppRouteRecord[] => {
     return items
       .filter((item) => {
@@ -91,6 +98,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '指标体征管理平台/src/components/core/layouts/art-menus/art-horizontal-menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   /* Remove el-menu bottom border */
   :deep(.el-menu) {
     border-bottom: none !important;

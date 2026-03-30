@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/views/exception/ArtException.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content !border-0 !bg-transparent min-h-screen flex-cc">
     <div class="flex-cc max-md:!block max-md:text-center">
       <ThemeSvg :src="data.imgUrl" size="100%" class="!w-100" />
@@ -13,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/views/exception/ArtException.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useCommon } from '@/hooks/core/useCommon'
   import { useUserStore } from '@/store/modules/user'
 
@@ -39,6 +43,7 @@
 
   const { homePath } = useCommon()
 
+  // Logic Note: Handler 'backHome' encapsulates a single interaction or data-processing flow.
   const backHome = () => {
     const targetHomePath = homePath.value || '/'
 

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/widgets/wang-editor/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <!-- 完整工具栏编辑器 -->
     <ElCard class="editor-card">
@@ -211,12 +213,19 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/widgets/wang-editor/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'WidgetsWangEditor' })
 
+  // Logic Note: Reactive state 'fullEditorRef' stores mutable runtime data used by this component.
   const fullEditorRef = ref()
+  // Logic Note: Reactive state 'simpleEditorRef' stores mutable runtime data used by this component.
   const simpleEditorRef = ref()
+  // Logic Note: Reactive state 'fullActiveTab' stores mutable runtime data used by this component.
   const fullActiveTab = ref('preview')
+  // Logic Note: Reactive state 'simpleActiveTab' stores mutable runtime data used by this component.
   const simpleActiveTab = ref('preview')
+  // Logic Note: Reactive state 'activeCollapse' stores mutable runtime data used by this component.
   const activeCollapse = ref(['basic'])
 
   /**
@@ -281,6 +290,7 @@
 
 <h2>💻 代码块</h2>
 <pre><code class="language-javascript">// 完整编辑器支持代码高亮
+// Logic Note: Function 'createEditor' executes reusable logic for this view.
 function createEditor() {
   return new WangEditor({
     container: '#editor',
@@ -318,6 +328,7 @@ function createEditor() {
   /**
    * 清空完整编辑器内容
    */
+  // Logic Note: Handler 'clearFullEditor' encapsulates a single interaction or data-processing flow.
   const clearFullEditor = () => {
     fullEditorRef.value?.clear()
     ElMessage.success('完整编辑器已清空')
@@ -326,6 +337,7 @@ function createEditor() {
   /**
    * 获取完整编辑器内容
    */
+  // Logic Note: Handler 'getFullEditorContent' encapsulates a single interaction or data-processing flow.
   const getFullEditorContent = () => {
     const content = fullEditorRef.value?.getHtml()
     console.log('完整编辑器内容:', content)
@@ -335,6 +347,7 @@ function createEditor() {
   /**
    * 设置完整编辑器演示内容
    */
+  // Logic Note: Handler 'setFullEditorDemo' encapsulates a single interaction or data-processing flow.
   const setFullEditorDemo = () => {
     const demoContent = `<h2>🎉 完整编辑器演示内容</h2>
 <p>这是通过方法设置的演示内容，展示完整编辑器的强大功能。</p>
@@ -356,6 +369,7 @@ function createEditor() {
   /**
    * 清空简化编辑器内容
    */
+  // Logic Note: Handler 'clearSimpleEditor' encapsulates a single interaction or data-processing flow.
   const clearSimpleEditor = () => {
     simpleEditorRef.value?.clear()
     ElMessage.success('简化编辑器已清空')
@@ -364,6 +378,7 @@ function createEditor() {
   /**
    * 获取简化编辑器内容
    */
+  // Logic Note: Handler 'getSimpleEditorContent' encapsulates a single interaction or data-processing flow.
   const getSimpleEditorContent = () => {
     const content = simpleEditorRef.value?.getHtml()
     console.log('简化编辑器内容:', content)
@@ -373,6 +388,7 @@ function createEditor() {
   /**
    * 设置简化编辑器演示内容
    */
+  // Logic Note: Handler 'setSimpleEditorDemo' encapsulates a single interaction or data-processing flow.
   const setSimpleEditorDemo = () => {
     const demoContent = `<h2>⚡ 简化编辑器演示内容</h2>
 <p>这是通过方法设置的演示内容，展示简化编辑器的核心功能。</p>
@@ -394,6 +410,8 @@ function createEditor() {
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/views/widgets/wang-editor/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .page-content {
     padding: 20px;
   }

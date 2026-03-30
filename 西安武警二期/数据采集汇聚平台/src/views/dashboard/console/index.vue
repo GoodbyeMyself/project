@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/dashboard/console/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :lg="16">
@@ -170,6 +172,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/dashboard/console/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { FolderOpened } from '@element-plus/icons-vue'
   import type { ColumnOption } from '@/types'
 
@@ -199,6 +203,7 @@
     files: ReportFile[]
   }
 
+  // Logic Note: Reactive state 'reportPlans' stores mutable runtime data used by this component.
   const reportPlans = ref<ReportPlan[]>([
     {
       id: 1,
@@ -229,9 +234,12 @@
     }
   ])
 
+  // Logic Note: Reactive state 'selectedPlanId' stores mutable runtime data used by this component.
   const selectedPlanId = ref(1)
+  // Logic Note: Reactive state 'folderKeyword' stores mutable runtime data used by this component.
   const folderKeyword = ref('')
 
+  // Logic Note: Reactive state 'planForm' stores mutable runtime data used by this component.
   const planForm = reactive({
     name: '边境设备数据专项上报',
     type: '专项报送',
@@ -240,6 +248,7 @@
     description: '针对边境设备采集数据进行专项汇聚与人工审核后上报。'
   })
 
+  // Logic Note: Reactive state 'folders' stores mutable runtime data used by this component.
   const folders = ref<ReportFolder[]>([
     {
       id: 1,
@@ -273,6 +282,7 @@
     }
   ])
 
+  // Logic Note: Computed value 'overviewCards' derives UI state from reactive sources and updates automatically.
   const overviewCards = computed(() => [
     { label: '执行中计划', value: `${reportPlans.value.length} 个` },
     { label: '待上报批次', value: '12 批' },
@@ -280,10 +290,12 @@
     { label: '已归档文件', value: `${folders.value.reduce((sum, item) => sum + item.files.length, 0)} 个` }
   ])
 
+  // Logic Note: Computed value 'selectedPlanName' derives UI state from reactive sources and updates automatically.
   const selectedPlanName = computed(() => {
     return reportPlans.value.find((item) => item.id === selectedPlanId.value)?.name || '未选择'
   })
 
+  // Logic Note: Computed value 'filteredFolders' derives UI state from reactive sources and updates automatically.
   const filteredFolders = computed(() => {
     const keyword = folderKeyword.value.trim()
     if (!keyword) {
@@ -302,6 +314,7 @@
     { prop: 'operation', label: '操作', minWidth: 220, useSlot: true, fixed: 'right' }
   ]
 
+  // Logic Note: Handler 'createPlan' encapsulates a single interaction or data-processing flow.
   const createPlan = () => {
     const newPlan: ReportPlan = {
       id: Date.now(),
@@ -318,6 +331,7 @@
     ElMessage.success(`已制定上报计划：${newPlan.name}`)
   }
 
+  // Logic Note: Handler 'selectPreferredPlan' encapsulates a single interaction or data-processing flow.
   const selectPreferredPlan = () => {
     const nextPlan = reportPlans.value.find((item) => item.id !== selectedPlanId.value)
     if (!nextPlan) {
@@ -329,14 +343,17 @@
     ElMessage.success(`已选择上报计划：${nextPlan.name}`)
   }
 
+  // Logic Note: Handler 'queryFolder' encapsulates a single interaction or data-processing flow.
   const queryFolder = (folderName: string) => {
     ElMessage.info(`已查询文件夹：${folderName}`)
   }
 
+  // Logic Note: Handler 'downloadFile' encapsulates a single interaction or data-processing flow.
   const downloadFile = (folderName: string, fileName: string) => {
     ElMessage.success(`开始下载 ${folderName} / ${fileName}`)
   }
 
+  // Logic Note: Handler 'deleteFolder' encapsulates a single interaction or data-processing flow.
   const deleteFolder = (id: number) => {
     const index = folders.value.findIndex((item) => item.id === id)
     if (index === -1) {
@@ -349,6 +366,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/dashboard/console/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .grid-form :deep(.el-form-item) {
     margin-bottom: 18px;
   }

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/layouts/art-menus/art-sidebar-menu/widget/SidebarSubmenu.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <template v-for="(item, index) in filteredMenuItems" :key="getUniqueKey(item, index)">
     <ElSubMenu v-if="hasChildren(item)" :index="item.path || item.meta.title" :level="level">
       <template #title>
@@ -57,6 +59,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/layouts/art-menus/art-sidebar-menu/widget/SidebarSubmenu.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed } from 'vue'
   import type { AppRouteRecord } from '@/types/router'
   import { formatMenuTitle } from '@/utils/router'
@@ -103,12 +107,14 @@
    * 过滤后的菜单项列表
    * 只显示未隐藏的菜单项
    */
+  // Logic Note: Computed value 'filteredMenuItems' derives UI state from reactive sources and updates automatically.
   const filteredMenuItems = computed(() => filterRoutes(props.list))
 
   /**
    * 跳转到指定页面
    * @param item 菜单项数据
    */
+  // Logic Note: Handler 'goPage' encapsulates a single interaction or data-processing flow.
   const goPage = (item: AppRouteRecord): void => {
     closeMenu()
     handleMenuJump(item)
@@ -118,6 +124,7 @@
    * 关闭菜单
    * 触发父组件的关闭事件
    */
+  // Logic Note: Handler 'closeMenu' encapsulates a single interaction or data-processing flow.
   const closeMenu = (): void => {
     emit('close')
   }
@@ -125,6 +132,7 @@
   /**
    * 判断菜单项本身是否可以作为可点击页面保留在菜单中
    */
+  // Logic Note: Handler 'isNavigableRoute' encapsulates a single interaction or data-processing flow.
   const isNavigableRoute = (item: AppRouteRecord): boolean => {
     return !!(
       !item.meta.isHide &&
@@ -139,6 +147,7 @@
    * @param items 菜单项数组
    * @returns 过滤后的菜单项数组
    */
+  // Logic Note: Handler 'filterRoutes' encapsulates a single interaction or data-processing flow.
   const filterRoutes = (items: AppRouteRecord[]): AppRouteRecord[] => {
     return items
       .filter((item) => {
@@ -168,6 +177,7 @@
    * @param item 菜单项数据
    * @returns 是否包含可见的子菜单
    */
+  // Logic Note: Handler 'hasChildren' encapsulates a single interaction or data-processing flow.
   const hasChildren = (item: AppRouteRecord): boolean => {
     if (!item.children || item.children.length === 0) {
       return false
@@ -182,6 +192,7 @@
    * @param item 菜单项数据
    * @returns 是否为外部链接
    */
+  // Logic Note: Handler 'isExternalLink' encapsulates a single interaction or data-processing flow.
   const isExternalLink = (item: AppRouteRecord): boolean => {
     return !!(item.meta.link && !item.meta.isIframe)
   }
@@ -193,6 +204,7 @@
    * @param index 索引
    * @returns 唯一的 key
    */
+  // Logic Note: Handler 'getUniqueKey' encapsulates a single interaction or data-processing flow.
   const getUniqueKey = (item: AppRouteRecord, index: number): string => {
     return `${item.path || item.meta.title || 'menu'}-${props.level}-${index}`
   }

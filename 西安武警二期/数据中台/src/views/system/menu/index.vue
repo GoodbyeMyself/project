@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/system/menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content service-page">
     <ElAlert
       title="数据服务模块已按需求合并第三方服务挂载、访问控制、实体共享、模型共享四大能力。"
@@ -185,6 +187,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/system/menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'DataServiceMountAccessShare' })
 
   const mountList = [
@@ -214,6 +218,8 @@
 </script>
 
 <style scoped lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/views/system/menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .service-page {
     .module-card {
       margin-bottom: 16px;

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/safeguard/server/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content protection-page">
     <ElAlert
       title="数据保护模块已整合权限管理、数据加密、数据脱敏、数据流量管理、数字水印防护五类子功能。"
@@ -138,6 +140,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/safeguard/server/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'DataProtectionSecurityCenter' })
 
   const flowList = [
@@ -173,6 +177,8 @@
 </script>
 
 <style scoped lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/views/safeguard/server/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .protection-page {
     .module-card {
       margin-bottom: 16px;

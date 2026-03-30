@@ -1,5 +1,7 @@
 <!-- 外部数据接入平台概览 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/dashboard/console/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-5 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :sm="12" :lg="6" v-for="card in summaryCards" :key="card.title">
@@ -55,8 +57,11 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/dashboard/console/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'Console' })
 
+  // Logic Note: Reactive state 'summaryCards' stores mutable runtime data used by this component.
   const summaryCards = ref([
     {
       title: '接入数据源',
@@ -92,6 +97,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'moduleList' stores mutable runtime data used by this component.
   const moduleList = ref([
     {
       module: '接入来源管理',
@@ -119,6 +125,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'todoList' stores mutable runtime data used by this component.
   const todoList = ref([
     { title: '复核异常数据源并重新检测', time: '09:30', type: 'warning' },
     { title: '完成模板 v2.3.1 下放反馈确认', time: '10:00', type: 'primary' },

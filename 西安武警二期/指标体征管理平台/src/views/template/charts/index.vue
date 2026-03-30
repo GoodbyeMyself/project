@@ -12,6 +12,8 @@
  * 数据点类型： symbol="circle" | "rect" | "roundRect" | "triangle" | "diamond" | "pin" | "arrow" | "none"
 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/template/charts/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="pt-5">
     <h1 class="page-title">图表</h1>
 
@@ -291,6 +293,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/template/charts/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { LineDataItem } from '@/types/component/chart'
 
   defineOptions({ name: 'TemplateCharts' })
@@ -320,12 +324,15 @@
   /**
    * 单数据柱状图示例数据
    */
+  // Logic Note: Reactive state 'singleBarData' stores mutable runtime data used by this component.
   const singleBarData = ref([120, 200, 150, 80, 70, 110, 130])
+  // Logic Note: Reactive state 'xAxisData' stores mutable runtime data used by this component.
   const xAxisData = ref(['周一', '周二', '周三', '周四', '周五', '周六', '周日'])
 
   /**
    * 多数据柱状图示例数据
    */
+  // Logic Note: Reactive state 'multiBarData' stores mutable runtime data used by this component.
   const multiBarData = ref([
     { name: '销售额', data: [120, 200, 150, 80, 70, 110, 130] },
     { name: '利润', data: [20, 50, 30, 15, 10, 25, 35] }
@@ -334,15 +341,19 @@
   /**
    * 堆叠柱状图示例数据
    */
+  // Logic Note: Reactive state 'stackBarData' stores mutable runtime data used by this component.
   const stackBarData = ref([
     { name: 'Q1', data: [20, 25, 30, 35, 40], stack: 'total' },
     { name: 'Q2', data: [30, 35, 40, 45, 50], stack: 'total' }
   ])
 
+  // Logic Note: Reactive state 'stackXAxisData' stores mutable runtime data used by this component.
   const stackXAxisData = ref(['产品A', '产品B', '产品C', '产品D', '产品E'])
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '指标体征管理平台/src/views/template/charts/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .page-title {

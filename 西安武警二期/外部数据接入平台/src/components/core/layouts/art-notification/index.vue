@@ -1,5 +1,7 @@
 <!-- 通知组件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/layouts/art-notification/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     class="art-notification-panel art-card-sm !shadow-xl"
     :style="{
@@ -103,6 +105,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/layouts/art-notification/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, ref, watch, type Ref, type ComputedRef } from 'vue'
   import { useI18n } from 'vue-i18n'
 
@@ -167,10 +171,14 @@
     'update:value': [value: boolean]
   }>()
 
+  // Logic Note: Reactive state 'show' stores mutable runtime data used by this component.
   const show = ref(false)
+  // Logic Note: Reactive state 'visible' stores mutable runtime data used by this component.
   const visible = ref(false)
+  // Logic Note: Reactive state 'barActiveIndex' stores mutable runtime data used by this component.
   const barActiveIndex = ref(0)
 
+  // Logic Note: Handler 'useNotificationData' encapsulates a single interaction or data-processing flow.
   const useNotificationData = () => {
     // 通知数据
     const noticeList = ref<NoticeItem[]>([
@@ -292,6 +300,7 @@
       }
     }
 
+    // Logic Note: Handler 'getNoticeStyle' encapsulates a single interaction or data-processing flow.
     const getNoticeStyle = (type: NoticeType): NoticeStyle => {
       const defaultStyle: NoticeStyle = {
         icon: 'ri:arrow-right-circle-line',
@@ -308,6 +317,7 @@
 
   // 动画管理
   const useNotificationAnimation = () => {
+    // Logic Note: Handler 'showNotice' encapsulates a single interaction or data-processing flow.
     const showNotice = (open: boolean) => {
       if (open) {
         visible.value = true
@@ -338,6 +348,7 @@
       handlePendingAll: () => void
     }
   ) => {
+    // Logic Note: Handler 'changeBar' encapsulates a single interaction or data-processing flow.
     const changeBar = (index: number) => {
       barActiveIndex.value = index
     }
@@ -350,6 +361,7 @@
       return currentData && currentData.length === 0
     })
 
+    // Logic Note: Handler 'handleViewAll' encapsulates a single interaction or data-processing flow.
     const handleViewAll = () => {
       // 查看全部处理器映射
       const viewAllHandlers: Record<number, () => void> = {
@@ -374,16 +386,19 @@
 
   // 业务逻辑处理
   const useBusinessLogic = () => {
+    // Logic Note: Handler 'handleNoticeAll' encapsulates a single interaction or data-processing flow.
     const handleNoticeAll = () => {
       // 处理查看全部通知
       console.log('查看全部通知')
     }
 
+    // Logic Note: Handler 'handleMsgAll' encapsulates a single interaction or data-processing flow.
     const handleMsgAll = () => {
       // 处理查看全部消息
       console.log('查看全部消息')
     }
 
+    // Logic Note: Handler 'handlePendingAll' encapsulates a single interaction or data-processing flow.
     const handlePendingAll = () => {
       // 处理查看全部待办
       console.log('查看全部待办')
@@ -418,6 +433,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/components/core/layouts/art-notification/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .art-notification-panel {

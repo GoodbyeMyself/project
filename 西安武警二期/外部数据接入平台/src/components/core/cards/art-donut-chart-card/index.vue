@@ -1,5 +1,7 @@
 <!-- 环型图卡片 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/cards/art-donut-chart-card/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card overflow-hidden" :style="{ height: `${height}rem` }">
     <div class="flex box-border h-full p-5 pr-2">
       <div class="flex w-full items-start gap-5">
@@ -39,6 +41,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/cards/art-donut-chart-card/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { type EChartsOption } from '@/plugins/echarts'
   import { useChartOps, useChartComponent } from '@/hooks/core/useChart'
 
@@ -73,6 +77,7 @@
     data: () => [0, 0]
   })
 
+  // Logic Note: Handler 'formatNumber' encapsulates a single interaction or data-processing flow.
   const formatNumber = (num: number) => {
     return num.toLocaleString()
   }

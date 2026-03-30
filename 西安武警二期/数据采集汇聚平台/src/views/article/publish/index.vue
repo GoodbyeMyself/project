@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/article/publish/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :xl="14">
@@ -82,20 +84,25 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/article/publish/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ColumnOption } from '@/types'
 
   defineOptions({ name: 'AlarmNotificationCenter' })
 
+  // Logic Note: Reactive state 'alarmGroups' stores mutable runtime data used by this component.
   const alarmGroups = ref([
     { id: 1, name: '一级值班告警组', users: '张三、李四', scene: '边境巡检' },
     { id: 2, name: '平台运维告警组', users: '王五、赵六', scene: '系统故障' }
   ])
 
+  // Logic Note: Reactive state 'messages' stores mutable runtime data used by this component.
   const messages = ref([
     { id: 1, title: '设备离线告警', source: '巡检系统', read: false },
     { id: 2, title: '规则命中通知', source: '告警引擎', read: true }
   ])
 
+  // Logic Note: Reactive state 'rules' stores mutable runtime data used by this component.
   const rules = ref([
     { id: 1, name: '设备离线超时规则', level: '严重', enabled: true },
     { id: 2, name: '采集波动预警规则', level: '一般', enabled: true }
@@ -122,43 +129,56 @@
     { prop: 'operation', label: '操作', minWidth: 320, useSlot: true, fixed: 'right' }
   ]
 
+  // Logic Note: Handler 'addAlarmGroup' encapsulates a single interaction or data-processing flow.
   const addAlarmGroup = () => {
     alarmGroups.value.unshift({ id: Date.now(), name: '新建告警组', users: '待配置', scene: '待指定' })
     ElMessage.success('已创建告警组')
   }
+  // Logic Note: Handler 'editAlarmGroup' encapsulates a single interaction or data-processing flow.
   const editAlarmGroup = (row: { name: string }) => {
     row.name = `${row.name}-已修改`
     ElMessage.success('已修改告警组')
   }
+  // Logic Note: Handler 'deleteAlarmGroup' encapsulates a single interaction or data-processing flow.
   const deleteAlarmGroup = (id: number) => {
     alarmGroups.value = alarmGroups.value.filter((item) => item.id !== id)
     ElMessage.success('已删除告警组')
   }
+  // Logic Note: Handler 'configGroupUsers' encapsulates a single interaction or data-processing flow.
   const configGroupUsers = (row: { name: string }) => ElMessage.info(`告警组用户配置：${row.name}`)
 
+  // Logic Note: Handler 'queryMessage' encapsulates a single interaction or data-processing flow.
   const queryMessage = (row: { title: string }) => ElMessage.info(`查询消息：${row.title}`)
+  // Logic Note: Handler 'markRead' encapsulates a single interaction or data-processing flow.
   const markRead = (row: { read: boolean }) => {
     row.read = true
     ElMessage.success('消息已标记已读')
   }
+  // Logic Note: Handler 'deleteMessage' encapsulates a single interaction or data-processing flow.
   const deleteMessage = (id: number) => {
     messages.value = messages.value.filter((item) => item.id !== id)
     ElMessage.success('已删除消息')
   }
 
+  // Logic Note: Handler 'addRule' encapsulates a single interaction or data-processing flow.
   const addRule = () => {
     rules.value.unshift({ id: Date.now(), name: '新建告警规则', level: '一般', enabled: true })
     ElMessage.success('已新增告警规则')
   }
+  // Logic Note: Handler 'editRule' encapsulates a single interaction or data-processing flow.
   const editRule = (row: { name: string }) => {
     row.name = `${row.name}-已修改`
     ElMessage.success('已修改告警规则')
   }
+  // Logic Note: Handler 'deleteRule' encapsulates a single interaction or data-processing flow.
   const deleteRule = (id: number) => {
     rules.value = rules.value.filter((item) => item.id !== id)
     ElMessage.success('已删除告警规则')
   }
+  // Logic Note: Handler 'inspectRules' encapsulates a single interaction or data-processing flow.
   const inspectRules = () => ElMessage.success('已执行一键巡检告警规则')
+  // Logic Note: Handler 'queryReport' encapsulates a single interaction or data-processing flow.
   const queryReport = (row: { name: string }) => ElMessage.info(`查询告警报告：${row.name}`)
+  // Logic Note: Handler 'downloadReport' encapsulates a single interaction or data-processing flow.
   const downloadReport = (row: { name: string }) => ElMessage.success(`开始下载告警报告：${row.name}`)
 </script>

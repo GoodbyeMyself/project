@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/dashboard/ecommerce/modules/recent-transaction.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ArtTimelineListCard
     :list="timelineData"
     title="最近交易"
@@ -8,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/dashboard/ecommerce/modules/recent-transaction.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   interface TimelineItem {
     time: string
     status: string

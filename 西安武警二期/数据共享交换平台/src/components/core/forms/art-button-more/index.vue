@@ -1,5 +1,7 @@
 <!-- 更多按钮 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/forms/art-button-more/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <ElDropdown v-if="hasAnyAuthItem">
       <ArtIconButton icon="ri:more-2-fill" class="!size-8 bg-g-200 dark:bg-g-300/45 text-sm" />
@@ -24,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/forms/art-button-more/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useAuth } from '@/hooks/core/useAuth'
 
   defineOptions({ name: 'ArtButtonMore' })
@@ -65,6 +69,7 @@
     (e: 'click', item: ButtonMoreItem): void
   }>()
 
+  // Logic Note: Handler 'handleClick' encapsulates a single interaction or data-processing flow.
   const handleClick = (item: ButtonMoreItem) => {
     emit('click', item)
   }

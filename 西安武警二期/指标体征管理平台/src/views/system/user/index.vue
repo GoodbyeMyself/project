@@ -4,6 +4,8 @@
 <!-- 更多 useTable 使用示例请移步至 功能示例 下面的高级表格示例或者查看官方文档 -->
 <!-- useTable 文档：https://www.artd.pro/docs/zh/guide/hooks/use-table.html -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/system/user/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="user-page art-full-height">
     <!-- 搜索栏 -->
     <UserSearch v-model="searchForm" @search="handleSearch" @reset="resetSearchParams"></UserSearch>
@@ -42,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/system/user/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import ArtButtonTable from '@/components/core/forms/art-button-table/index.vue'
   import { ACCOUNT_TABLE_DATA } from '@/mock/temp/formData'
   import { useTable } from '@/hooks/core/useTable'
@@ -57,7 +61,9 @@
 
   // 弹窗相关
   const dialogType = ref<DialogType>('add')
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'currentUserData' stores mutable runtime data used by this component.
   const currentUserData = ref<Partial<UserListItem>>({})
 
   // 选中行
@@ -83,6 +89,7 @@
   /**
    * 获取用户状态配置
    */
+  // Logic Note: Handler 'getUserStatusConfig' encapsulates a single interaction or data-processing flow.
   const getUserStatusConfig = (status: string) => {
     return (
       USER_STATUS_CONFIG[status as keyof typeof USER_STATUS_CONFIG] || {
@@ -206,6 +213,7 @@
    * 搜索处理
    * @param params 参数
    */
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = (params: Api.SystemManage.UserSearchParams) => {
     replaceSearchParams(params)
     getData()
@@ -214,6 +222,7 @@
   /**
    * 显示用户弹窗
    */
+  // Logic Note: Handler 'showDialog' encapsulates a single interaction or data-processing flow.
   const showDialog = (type: DialogType, row?: UserListItem): void => {
     console.log('打开弹窗:', { type, row })
     dialogType.value = type
@@ -226,6 +235,7 @@
   /**
    * 删除用户
    */
+  // Logic Note: Handler 'deleteUser' encapsulates a single interaction or data-processing flow.
   const deleteUser = (row: UserListItem): void => {
     console.log('删除用户:', row)
     ElMessageBox.confirm(`确定要注销该用户吗？`, '注销用户', {
@@ -240,6 +250,7 @@
   /**
    * 处理弹窗提交事件
    */
+  // Logic Note: Handler 'handleDialogSubmit' encapsulates a single interaction or data-processing flow.
   const handleDialogSubmit = async () => {
     try {
       dialogVisible.value = false
@@ -252,6 +263,7 @@
   /**
    * 处理表格行选择变化
    */
+  // Logic Note: Handler 'handleSelectionChange' encapsulates a single interaction or data-processing flow.
   const handleSelectionChange = (selection: UserListItem[]): void => {
     selectedRows.value = selection
     console.log('选中行数据:', selectedRows.value)

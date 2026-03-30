@@ -1,5 +1,7 @@
 <!-- 标签页示例页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/examples/tabs/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content">
     <h3 class="mb-5 text-xl font-normal">标签页操作</h3>
 
@@ -50,13 +52,17 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/examples/tabs/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useWorktabStore } from '@/store/modules/worktab'
   import { WorkTab } from '@/types'
 
   defineOptions({ name: 'TabsExample' })
 
   const worktabStore = useWorktabStore()
+  // Logic Note: Reactive state 'currentTab' stores mutable runtime data used by this component.
   const currentTab = ref<WorkTab | null>(null)
+  // Logic Note: Reactive state 'newTabTitle' stores mutable runtime data used by this component.
   const newTabTitle = ref('')
   const routePath = '/examples/tabs'
 
@@ -64,6 +70,7 @@
    * 更新当前标签页标题
    * 验证输入内容后调用 store 方法更新标题
    */
+  // Logic Note: Handler 'handleUpdateTabTitle' encapsulates a single interaction or data-processing flow.
   const handleUpdateTabTitle = (): void => {
     const trimmedTitle = newTabTitle.value.trim()
     if (trimmedTitle) {
@@ -76,6 +83,7 @@
    * 重置标签页标题
    * 将标题重置为默认值并清空输入框
    */
+  // Logic Note: Handler 'handleResetTabTitle' encapsulates a single interaction or data-processing flow.
   const handleResetTabTitle = (): void => {
     worktabStore.resetTabTitle(routePath)
     newTabTitle.value = ''
@@ -86,6 +94,7 @@
    * 获取指定路径的标签页信息
    * @param path 标签页路径
    */
+  // Logic Note: Handler 'handleGetCurrentTabTitle' encapsulates a single interaction or data-processing flow.
   const handleGetCurrentTabTitle = (path: string): void => {
     const tab = worktabStore.getTabTitle(path)
     if (tab) {
@@ -100,6 +109,7 @@
    * 关闭指定路径的标签页
    * @param path 要关闭的标签页路径
    */
+  // Logic Note: Handler 'handleCloseTab' encapsulates a single interaction or data-processing flow.
   const handleCloseTab = (path: string): void => {
     worktabStore.removeTab(path)
   }
@@ -108,6 +118,7 @@
    * 关闭除指定路径外的其他所有标签页
    * @param path 要保留的标签页路径
    */
+  // Logic Note: Handler 'handleCloseOthersTab' encapsulates a single interaction or data-processing flow.
   const handleCloseOthersTab = (path: string): void => {
     worktabStore.removeOthers(path)
   }
@@ -115,6 +126,7 @@
   /**
    * 关闭所有标签页
    */
+  // Logic Note: Handler 'handleCloseAllTab' encapsulates a single interaction or data-processing flow.
   const handleCloseAllTab = (): void => {
     worktabStore.removeAll()
   }

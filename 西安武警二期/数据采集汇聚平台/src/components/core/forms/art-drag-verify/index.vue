@@ -1,5 +1,7 @@
 <!-- 拖拽验证组件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/forms/art-drag-verify/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     ref="dragVerify"
     class="drag_verify"
@@ -41,6 +43,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/forms/art-drag-verify/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'ArtDragVerify' })
 
   // 事件定义
@@ -118,8 +122,11 @@
 
   // DOM 元素引用
   const dragVerify = ref()
+  // Logic Note: Reactive state 'messageRef' stores mutable runtime data used by this component.
   const messageRef = ref()
+  // Logic Note: Reactive state 'handler' stores mutable runtime data used by this component.
   const handler = ref()
+  // Logic Note: Reactive state 'progressBar' stores mutable runtime data used by this component.
   const progressBar = ref()
 
   // 触摸事件变量 - 用于禁止页面滑动
@@ -129,6 +136,7 @@
    * 触摸开始事件处理
    * @param e 触摸事件对象
    */
+  // Logic Note: Handler 'onTouchStart' encapsulates a single interaction or data-processing flow.
   const onTouchStart = (e: any) => {
     startX = e.targetTouches[0].pageX
     startY = e.targetTouches[0].pageY
@@ -138,6 +146,7 @@
    * 触摸移动事件处理 - 判断是否为横向滑动，如果是则阻止默认行为
    * @param e 触摸事件对象
    */
+  // Logic Note: Handler 'onTouchMove' encapsulates a single interaction or data-processing flow.
   const onTouchMove = (e: any) => {
     moveX = e.targetTouches[0].pageX
     moveY = e.targetTouches[0].pageY
@@ -232,6 +241,7 @@
    * 拖拽开始处理函数
    * @param e 鼠标或触摸事件对象
    */
+  // Logic Note: Handler 'dragStart' encapsulates a single interaction or data-processing flow.
   const dragStart = (e: any) => {
     if (!props.value) {
       state.isMoving = true
@@ -247,6 +257,7 @@
    * 拖拽移动处理函数
    * @param e 鼠标或触摸事件对象
    */
+  // Logic Note: Handler 'dragMoving' encapsulates a single interaction or data-processing flow.
   const dragMoving = (e: any) => {
     if (state.isMoving && !props.value) {
       const numericWidth = getNumericWidth()
@@ -270,6 +281,7 @@
    * 拖拽结束处理函数
    * @param e 鼠标或触摸事件对象
    */
+  // Logic Note: Handler 'dragFinish' encapsulates a single interaction or data-processing flow.
   const dragFinish = (e: any) => {
     if (state.isMoving && !props.value) {
       const numericWidth = getNumericWidth()
@@ -297,6 +309,7 @@
   /**
    * 验证通过处理函数
    */
+  // Logic Note: Handler 'passVerify' encapsulates a single interaction or data-processing flow.
   const passVerify = () => {
     emit('update:value', true)
     state.isMoving = false
@@ -311,6 +324,7 @@
   /**
    * 重置验证状态函数
    */
+  // Logic Note: Handler 'reset' encapsulates a single interaction or data-processing flow.
   const reset = () => {
     // 重置滑块位置
     handler.value.style.left = '0'
@@ -334,6 +348,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/components/core/forms/art-drag-verify/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .drag_verify {
     position: relative;
     box-sizing: border-box;
@@ -408,6 +424,8 @@
 </style>
 
 <style lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/components/core/forms/art-drag-verify/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @keyframes slidetounlock {
     0% {
       background-position: var(--pwidth) 0;

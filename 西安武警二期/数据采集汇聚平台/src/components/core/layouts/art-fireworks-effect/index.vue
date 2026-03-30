@@ -1,5 +1,7 @@
 <!-- 烟花效果 | 礼花效果 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/layouts/art-fireworks-effect/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <canvas
     ref="canvasRef"
     class="fixed top-0 left-0 z-[9999] w-full h-full pointer-events-none"
@@ -7,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/layouts/art-fireworks-effect/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useEventListener } from '@vueuse/core'
   import { mittBus } from '@/utils/sys'
   import type { Handler } from 'mitt'
@@ -422,6 +426,7 @@
       const { SIZES } = CONFIG
       ctx.value.fillStyle = particle.color
 
+      // Logic Note: Branching logic maps action keys to explicit behavior paths.
       switch (particle.shape) {
         case 'rectangle':
           // 绘制矩形
@@ -563,6 +568,7 @@
    * 监听 Ctrl+Shift+P 或 Cmd+Shift+P 组合键触发烟花
    * @param event 键盘事件对象
    */
+  // Logic Note: Handler 'handleKeyPress' encapsulates a single interaction or data-processing flow.
   const handleKeyPress = (event: KeyboardEvent): void => {
     const isFireworkShortcut =
       (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'p') ||
@@ -578,6 +584,7 @@
    * 调整Canvas画布大小
    * 响应窗口大小变化，确保画布始终覆盖整个视口
    */
+  // Logic Note: Handler 'resizeCanvas' encapsulates a single interaction or data-processing flow.
   const resizeCanvas = (): void => {
     if (!canvasRef.value) return
 

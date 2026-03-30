@@ -1,5 +1,7 @@
 <!-- 时间轴列表卡片 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/components/core/cards/art-timeline-list-card/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card p-5">
     <div class="pb-3.5">
       <p class="text-lg font-medium">{{ title }}</p>
@@ -28,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/components/core/cards/art-timeline-list-card/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'ArtTimelineListCard' })
 
   // 常量配置

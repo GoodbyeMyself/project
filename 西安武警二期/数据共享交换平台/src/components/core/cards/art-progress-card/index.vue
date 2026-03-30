@@ -1,5 +1,7 @@
 <!-- 进度条卡片 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/cards/art-progress-card/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card h-32 flex flex-col justify-center px-5">
     <div class="mb-3.5 flex-c" :style="{ justifyContent: icon ? 'space-between' : 'flex-start' }">
       <div v-if="icon" class="size-11 flex-cc bg-g-300 text-xl rounded-lg" :class="iconStyle">
@@ -27,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/cards/art-progress-card/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'ArtProgressCard' })
 
   interface Props {
@@ -50,13 +54,16 @@
   })
 
   const animationDuration = 500
+  // Logic Note: Reactive state 'currentPercentage' stores mutable runtime data used by this component.
   const currentPercentage = ref(0)
 
+  // Logic Note: Handler 'animateProgress' encapsulates a single interaction or data-processing flow.
   const animateProgress = () => {
     const startTime = Date.now()
     const startValue = currentPercentage.value
     const endValue = props.percentage
 
+    // Logic Note: Handler 'animate' encapsulates a single interaction or data-processing flow.
     const animate = () => {
       const currentTime = Date.now()
       const elapsed = currentTime - startTime

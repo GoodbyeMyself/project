@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/system/menu/modules/menu-dialog.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElDialog
     :title="dialogTitle"
     :model-value="visible"
@@ -37,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/system/menu/modules/menu-dialog.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { FormRules } from 'element-plus'
   import { ElIcon, ElTooltip } from 'element-plus'
   import { QuestionFilled } from '@element-plus/icons-vue'
@@ -54,6 +58,7 @@
    * @param tooltip 提示文本
    * @returns 渲染函数
    */
+  // Logic Note: Handler 'createLabelTooltip' encapsulates a single interaction or data-processing flow.
   const createLabelTooltip = (label: string, tooltip: string) => {
     return () =>
       h('span', { class: 'flex items-center' }, [
@@ -116,9 +121,12 @@
 
   const emit = defineEmits<Emits>()
 
+  // Logic Note: Reactive state 'formRef' stores mutable runtime data used by this component.
   const formRef = ref()
+  // Logic Note: Reactive state 'isEdit' stores mutable runtime data used by this component.
   const isEdit = ref(false)
 
+  // Logic Note: Reactive state 'form' stores mutable runtime data used by this component.
   const form = reactive<MenuFormData & { menuType: 'menu' | 'button' }>({
     menuType: 'menu',
     id: 0,
@@ -147,6 +155,7 @@
     authSort: 1
   })
 
+  // Logic Note: Reactive state 'rules' stores mutable runtime data used by this component.
   const rules = reactive<FormRules>({
     name: [
       { required: true, message: '请输入菜单名称', trigger: 'blur' },
@@ -161,6 +170,7 @@
   /**
    * 表单项配置
    */
+  // Logic Note: Computed value 'formItems' derives UI state from reactive sources and updates automatically.
   const formItems = computed<FormItem[]>(() => {
     const baseItems: FormItem[] = [{ label: '菜单类型', key: 'menuType', span: 24 }]
 
@@ -261,6 +271,7 @@
     }
   })
 
+  // Logic Note: Computed value 'dialogTitle' derives UI state from reactive sources and updates automatically.
   const dialogTitle = computed(() => {
     const type = form.menuType === 'menu' ? '菜单' : '按钮'
     return isEdit.value ? `编辑${type}` : `新建${type}`
@@ -269,6 +280,7 @@
   /**
    * 是否禁用菜单类型切换
    */
+  // Logic Note: Computed value 'disableMenuType' derives UI state from reactive sources and updates automatically.
   const disableMenuType = computed(() => {
     if (isEdit.value) return true
     if (!isEdit.value && form.menuType === 'menu' && props.lockType) return true
@@ -278,6 +290,7 @@
   /**
    * 重置表单数据
    */
+  // Logic Note: Handler 'resetForm' encapsulates a single interaction or data-processing flow.
   const resetForm = (): void => {
     formRef.value?.reset()
     form.menuType = 'menu'
@@ -286,6 +299,7 @@
   /**
    * 加载表单数据（编辑模式）
    */
+  // Logic Note: Handler 'loadFormData' encapsulates a single interaction or data-processing flow.
   const loadFormData = (): void => {
     if (!props.editData) return
 
@@ -325,6 +339,7 @@
   /**
    * 提交表单
    */
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = async (): Promise<void> => {
     if (!formRef.value) return
 
@@ -341,6 +356,7 @@
   /**
    * 取消操作
    */
+  // Logic Note: Handler 'handleCancel' encapsulates a single interaction or data-processing flow.
   const handleCancel = (): void => {
     emit('update:visible', false)
   }
@@ -348,6 +364,7 @@
   /**
    * 对话框关闭后的回调
    */
+  // Logic Note: Handler 'handleClosed' encapsulates a single interaction or data-processing flow.
   const handleClosed = (): void => {
     resetForm()
     isEdit.value = false
@@ -356,6 +373,7 @@
   /**
    * 监听对话框显示状态
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => props.visible,
     (newVal) => {
@@ -373,6 +391,7 @@
   /**
    * 监听菜单类型变化
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => props.type,
     (newType) => {

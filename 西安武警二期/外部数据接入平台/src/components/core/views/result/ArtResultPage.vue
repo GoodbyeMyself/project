@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/views/result/ArtResultPage.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content box-border !px-20 py-3.5 text-center max-md:!px-5" :class="type">
     <ArtSvgIcon
       class="icon size-22 p-2 mt-16 block rounded-full !text-white"
@@ -21,6 +23,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/views/result/ArtResultPage.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'ArtResultPage' })
 
   interface ResultPageProps {

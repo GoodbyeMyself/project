@@ -1,5 +1,7 @@
 <!-- 数字滚动 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/text-effect/art-count-to/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <span
     class="text-g-900 tabular-nums"
     :class="isRunning ? 'transition-opacity duration-300 ease-in-out' : ''"
@@ -9,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/text-effect/art-count-to/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, watch, nextTick, onUnmounted, shallowRef } from 'vue'
   import { useTransition, TransitionPresets } from '@vueuse/core'
 
@@ -88,6 +92,7 @@
     return value
   }
 
+  // Logic Note: Handler 'clamp' encapsulates a single interaction or data-processing flow.
   const clamp = (value: number, min: number, max: number): number => {
     return Math.max(min, Math.min(value, max))
   }
@@ -117,12 +122,15 @@
 
   // 安全计算值
   const safeTarget = computed(() => validateNumber(props.target, 'target', 0))
+  // Logic Note: Computed value 'safeDuration' derives UI state from reactive sources and updates automatically.
   const safeDuration = computed(() =>
     clamp(validateNumber(props.duration, 'duration', DEFAULT_DURATION), MIN_DURATION, MAX_DURATION)
   )
+  // Logic Note: Computed value 'safeDecimals' derives UI state from reactive sources and updates automatically.
   const safeDecimals = computed(() =>
     clamp(validateNumber(props.decimals, 'decimals', 0), 0, MAX_DECIMALS)
   )
+  // Logic Note: Computed value 'safeEasing' derives UI state from reactive sources and updates automatically.
   const safeEasing = computed(() => {
     const easing = props.easing
     if (!(easing in TransitionPresets)) {
@@ -134,9 +142,13 @@
 
   // 状态管理
   const currentValue = shallowRef(0)
+  // Logic Note: Reactive state 'targetValue' stores mutable runtime data used by this component.
   const targetValue = shallowRef(safeTarget.value)
+  // Logic Note: Reactive state 'isRunning' stores mutable runtime data used by this component.
   const isRunning = shallowRef(false)
+  // Logic Note: Reactive state 'isPaused' stores mutable runtime data used by this component.
   const isPaused = shallowRef(false)
+  // Logic Note: Reactive state 'pausedValue' stores mutable runtime data used by this component.
   const pausedValue = shallowRef(0)
 
   // 动画控制
@@ -173,6 +185,7 @@
     return Math.abs(current - target) < EPSILON
   }
 
+  // Logic Note: Handler 'resetPauseState' encapsulates a single interaction or data-processing flow.
   const resetPauseState = (): void => {
     isPaused.value = false
     pausedValue.value = 0
@@ -209,6 +222,7 @@
     })
   }
 
+  // Logic Note: Handler 'pause' encapsulates a single interaction or data-processing flow.
   const pause = (): void => {
     if (!isRunning.value || isPaused.value) {
       return
@@ -221,6 +235,7 @@
     emit('paused', pausedValue.value)
   }
 
+  // Logic Note: Handler 'reset' encapsulates a single interaction or data-processing flow.
   const reset = (newTarget = 0): void => {
     const target = validateNumber(newTarget, 'reset target', 0)
 
@@ -231,6 +246,7 @@
     emit('reset')
   }
 
+  // Logic Note: Handler 'setTarget' encapsulates a single interaction or data-processing flow.
   const setTarget = (target: number): void => {
     if (!Number.isFinite(target)) {
       console.warn('[CountTo] Invalid target value for setTarget:', target)
@@ -244,6 +260,7 @@
     }
   }
 
+  // Logic Note: Handler 'stop' encapsulates a single interaction or data-processing flow.
   const stop = (): void => {
     if (isRunning.value || isPaused.value) {
       currentValue.value = 0
@@ -265,6 +282,7 @@
     { immediate: props.autoStart && !props.disabled }
   )
 
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => props.disabled,
     (disabled) => {

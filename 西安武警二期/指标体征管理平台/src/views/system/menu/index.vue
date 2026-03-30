@@ -1,5 +1,7 @@
 <!-- 菜单管理页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/system/menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="menu-page art-full-height">
     <!-- 搜索栏 -->
     <ArtSearchBar
@@ -50,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/system/menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { formatMenuTitle } from '@/utils/router'
   import ArtButtonTable from '@/components/core/forms/art-button-table/index.vue'
   import { useTableColumns } from '@/hooks/core/useTableColumns'
@@ -62,13 +66,18 @@
 
   // 状态管理
   const loading = ref(false)
+  // Logic Note: Reactive state 'isExpanded' stores mutable runtime data used by this component.
   const isExpanded = ref(false)
+  // Logic Note: Reactive state 'tableRef' stores mutable runtime data used by this component.
   const tableRef = ref()
 
   // 弹窗相关
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'dialogType' stores mutable runtime data used by this component.
   const dialogType = ref<'menu' | 'button'>('menu')
+  // Logic Note: Reactive state 'editData' stores mutable runtime data used by this component.
   const editData = ref<AppRouteRecord | any>(null)
+  // Logic Note: Reactive state 'lockMenuType' stores mutable runtime data used by this component.
   const lockMenuType = ref(false)
 
   // 搜索相关
@@ -77,9 +86,12 @@
     route: ''
   }
 
+  // Logic Note: Reactive state 'formFilters' stores mutable runtime data used by this component.
   const formFilters = reactive({ ...initialSearchState })
+  // Logic Note: Reactive state 'appliedFilters' stores mutable runtime data used by this component.
   const appliedFilters = reactive({ ...initialSearchState })
 
+  // Logic Note: Computed value 'formItems' derives UI state from reactive sources and updates automatically.
   const formItems = computed(() => [
     {
       label: '菜单名称',
@@ -102,6 +114,7 @@
   /**
    * 获取菜单列表数据
    */
+  // Logic Note: Handler 'getMenuList' encapsulates a single interaction or data-processing flow.
   const getMenuList = async (): Promise<void> => {
     loading.value = true
 
@@ -136,6 +149,7 @@
    * @param row 菜单行数据
    * @returns 菜单类型文本
    */
+  // Logic Note: Handler 'getMenuTypeText' encapsulates a single interaction or data-processing flow.
   const getMenuTypeText = (row: AppRouteRecord): string => {
     if (row.meta?.isAuthButton) return '按钮'
     if (row.children?.length) return '目录'
@@ -235,6 +249,7 @@
   /**
    * 重置搜索条件
    */
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = (): void => {
     Object.assign(formFilters, { ...initialSearchState })
     Object.assign(appliedFilters, { ...initialSearchState })
@@ -244,6 +259,7 @@
   /**
    * 执行搜索
    */
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = (): void => {
     Object.assign(appliedFilters, { ...formFilters })
     getMenuList()
@@ -252,6 +268,7 @@
   /**
    * 刷新菜单列表
    */
+  // Logic Note: Handler 'handleRefresh' encapsulates a single interaction or data-processing flow.
   const handleRefresh = (): void => {
     getMenuList()
   }
@@ -280,6 +297,7 @@
    * @param items 菜单项数组
    * @returns 转换后的菜单项数组
    */
+  // Logic Note: Handler 'convertAuthListToChildren' encapsulates a single interaction or data-processing flow.
   const convertAuthListToChildren = (items: AppRouteRecord[]): AppRouteRecord[] => {
     return items.map((item) => {
       const clonedItem = deepClone(item)
@@ -316,6 +334,7 @@
    * @param items 菜单项数组
    * @returns 搜索结果数组
    */
+  // Logic Note: Handler 'searchMenu' encapsulates a single interaction or data-processing flow.
   const searchMenu = (items: AppRouteRecord[]): AppRouteRecord[] => {
     const results: AppRouteRecord[] = []
 
@@ -354,6 +373,7 @@
   /**
    * 添加菜单
    */
+  // Logic Note: Handler 'handleAddMenu' encapsulates a single interaction or data-processing flow.
   const handleAddMenu = (): void => {
     dialogType.value = 'menu'
     editData.value = null
@@ -364,6 +384,7 @@
   /**
    * 添加权限按钮
    */
+  // Logic Note: Handler 'handleAddAuth' encapsulates a single interaction or data-processing flow.
   const handleAddAuth = (): void => {
     dialogType.value = 'menu'
     editData.value = null
@@ -375,6 +396,7 @@
    * 编辑菜单
    * @param row 菜单行数据
    */
+  // Logic Note: Handler 'handleEditMenu' encapsulates a single interaction or data-processing flow.
   const handleEditMenu = (row: AppRouteRecord): void => {
     dialogType.value = 'menu'
     editData.value = row
@@ -386,6 +408,7 @@
    * 编辑权限按钮
    * @param row 权限行数据
    */
+  // Logic Note: Handler 'handleEditAuth' encapsulates a single interaction or data-processing flow.
   const handleEditAuth = (row: AppRouteRecord): void => {
     dialogType.value = 'button'
     editData.value = {
@@ -413,6 +436,7 @@
    * 提交表单数据
    * @param formData 表单数据
    */
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = (formData: MenuFormData): void => {
     console.log('提交数据:', formData)
     // TODO: 调用API保存数据
@@ -422,6 +446,7 @@
   /**
    * 删除菜单
    */
+  // Logic Note: Handler 'handleDeleteMenu' encapsulates a single interaction or data-processing flow.
   const handleDeleteMenu = async (): Promise<void> => {
     try {
       await ElMessageBox.confirm('确定要删除该菜单吗？删除后无法恢复', '提示', {
@@ -441,6 +466,7 @@
   /**
    * 删除权限按钮
    */
+  // Logic Note: Handler 'handleDeleteAuth' encapsulates a single interaction or data-processing flow.
   const handleDeleteAuth = async (): Promise<void> => {
     try {
       await ElMessageBox.confirm('确定要删除该权限吗？删除后无法恢复', '提示', {
@@ -460,10 +486,12 @@
   /**
    * 切换展开/收起所有菜单
    */
+  // Logic Note: Handler 'toggleExpand' encapsulates a single interaction or data-processing flow.
   const toggleExpand = (): void => {
     isExpanded.value = !isExpanded.value
     nextTick(() => {
       if (tableRef.value?.elTableRef && filteredTableData.value) {
+        // Logic Note: Handler 'processRows' encapsulates a single interaction or data-processing flow.
         const processRows = (rows: AppRouteRecord[]) => {
           rows.forEach((row) => {
             if (row.children?.length) {

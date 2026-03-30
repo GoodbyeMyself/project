@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/system/user/modules/user-search.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ArtSearchBar
     ref="searchBarRef"
     v-model="formData"
@@ -11,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/system/user/modules/user-search.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   interface Props {
     modelValue: Api.SystemManage.UserSearchParams
   }
@@ -24,6 +28,7 @@
 
   // 表单数据双向绑定
   const searchBarRef = ref()
+  // Logic Note: Computed value 'formData' derives UI state from reactive sources and updates automatically.
   const formData = computed({
     get: () => props.modelValue,
     set: (val) => emit('update:modelValue', val)

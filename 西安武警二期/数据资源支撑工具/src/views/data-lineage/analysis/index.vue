@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/data-lineage/analysis/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -50,20 +52,25 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/data-lineage/analysis/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
   defineOptions({ name: 'DataLineageAnalysis' })
 
   const dataSets = ['人员主数据集', '装备运行数据集']
+  // Logic Note: Reactive state 'selectedDataSet' stores mutable runtime data used by this component.
   const selectedDataSet = ref(dataSets[0])
 
+  // Logic Note: Reactive state 'sourceTimeline' stores mutable runtime data used by this component.
   const sourceTimeline = ref([
     { time: '2026-03-30 08:00', text: '采集源：主中心业务库', type: 'primary' as const },
     { time: '2026-03-30 08:05', text: '处理源：数据清洗服务', type: 'success' as const },
     { time: '2026-03-30 08:08', text: '落地源：模型仓库', type: 'warning' as const }
   ])
 
+  // Logic Note: Reactive state 'lineageSteps' stores mutable runtime data used by this component.
   const lineageSteps = ref([
     '源库表：base_person',
     '清洗映射：person_standard_map',
@@ -71,10 +78,12 @@
     '报表视图：vw_person_overview'
   ])
 
+  // Logic Note: Handler 'loadLineage' encapsulates a single interaction or data-processing flow.
   const loadLineage = () => {
     ElMessage.success(`已加载 ${selectedDataSet.value} 的血缘关系`)
   }
 
+  // Logic Note: Handler 'createSnapshot' encapsulates a single interaction or data-processing flow.
   const createSnapshot = () => {
     sourceTimeline.value.unshift({
       time: new Date().toLocaleString(),

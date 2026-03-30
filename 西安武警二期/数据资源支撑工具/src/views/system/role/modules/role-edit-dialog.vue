@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/system/role/modules/role-edit-dialog.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElDialog
     v-model="visible"
     :title="dialogType === 'add' ? '新增角色' : '编辑角色'"
@@ -33,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/system/role/modules/role-edit-dialog.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { FormInstance, FormRules } from 'element-plus'
 
   type RoleListItem = Api.SystemManage.RoleListItem
@@ -56,11 +60,13 @@
 
   const emit = defineEmits<Emits>()
 
+  // Logic Note: Reactive state 'formRef' stores mutable runtime data used by this component.
   const formRef = ref<FormInstance>()
 
   /**
    * 弹窗显示状态双向绑定
    */
+  // Logic Note: Computed value 'visible' derives UI state from reactive sources and updates automatically.
   const visible = computed({
     get: () => props.modelValue,
     set: (value) => emit('update:modelValue', value)
@@ -69,6 +75,7 @@
   /**
    * 表单验证规则
    */
+  // Logic Note: Reactive state 'rules' stores mutable runtime data used by this component.
   const rules = reactive<FormRules>({
     roleName: [
       { required: true, message: '请输入角色名称', trigger: 'blur' },
@@ -84,6 +91,7 @@
   /**
    * 表单数据
    */
+  // Logic Note: Reactive state 'form' stores mutable runtime data used by this component.
   const form = reactive<RoleListItem>({
     roleId: 0,
     roleName: '',
@@ -96,6 +104,7 @@
   /**
    * 监听弹窗打开，初始化表单数据
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => props.modelValue,
     (newVal) => {
@@ -106,6 +115,7 @@
   /**
    * 监听角色数据变化，更新表单
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => props.roleData,
     (newData) => {
@@ -118,6 +128,7 @@
    * 初始化表单数据
    * 根据弹窗类型填充表单或重置表单
    */
+  // Logic Note: Handler 'initForm' encapsulates a single interaction or data-processing flow.
   const initForm = () => {
     if (props.dialogType === 'edit' && props.roleData) {
       Object.assign(form, props.roleData)
@@ -136,6 +147,7 @@
   /**
    * 关闭弹窗并重置表单
    */
+  // Logic Note: Handler 'handleClose' encapsulates a single interaction or data-processing flow.
   const handleClose = () => {
     visible.value = false
     formRef.value?.resetFields()
@@ -145,6 +157,7 @@
    * 提交表单
    * 验证通过后调用接口保存数据
    */
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = async () => {
     if (!formRef.value) return
 

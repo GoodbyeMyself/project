@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/dashboard/ecommerce/modules/transaction-list.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ArtDataListCard
     class="mb-5 max-sm:mb-4"
     :maxCount="4"
@@ -11,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/dashboard/ecommerce/modules/transaction-list.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   interface TransactionItem {
     title: string
     status: string
@@ -64,6 +68,7 @@
   /**
    * 处理查看更多按钮点击事件
    */
+  // Logic Note: Handler 'handleMore' encapsulates a single interaction or data-processing flow.
   const handleMore = (): void => {
     // TODO: 添加查看更多逻辑
   }

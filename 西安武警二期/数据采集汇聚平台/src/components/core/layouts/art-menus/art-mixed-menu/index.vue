@@ -1,5 +1,7 @@
 <!-- 混合菜单 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/layouts/art-menus/art-mixed-menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="relative box-border flex-c w-full overflow-hidden">
     <!-- 左侧滚动按钮 -->
     <div v-show="showLeftArrow" class="button-arrow" @click="scroll('left')">
@@ -53,6 +55,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/layouts/art-menus/art-mixed-menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref, computed, onMounted, nextTick } from 'vue'
   import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
   import { useThrottleFn } from '@vueuse/core'
@@ -80,8 +84,11 @@
     list: () => []
   })
 
+  // Logic Note: Reactive state 'scrollbarRef' stores mutable runtime data used by this component.
   const scrollbarRef = ref<any>()
+  // Logic Note: Reactive state 'showLeftArrow' stores mutable runtime data used by this component.
   const showLeftArrow = ref(false)
+  // Logic Note: Reactive state 'showRightArrow' stores mutable runtime data used by this component.
   const showRightArrow = ref(false)
 
   /** 滚动配置 */
@@ -100,6 +107,7 @@
    * 获取当前激活路径
    * 使用computed缓存，避免重复计算
    */
+  // Logic Note: Computed value 'currentActivePath' derives UI state from reactive sources and updates automatically.
   const currentActivePath = computed(() => {
     return String(route.meta.activePath || route.path)
   })
@@ -110,6 +118,7 @@
    * @param item 菜单项数据
    * @returns 是否为激活状态
    */
+  // Logic Note: Handler 'isMenuItemActive' encapsulates a single interaction or data-processing flow.
   const isMenuItemActive = (item: AppRouteRecord): boolean => {
     const activePath = currentActivePath.value
 
@@ -131,6 +140,7 @@
    * 预处理菜单列表
    * 缓存每个菜单项的激活状态和格式化标题
    */
+  // Logic Note: Computed value 'processedMenuList' derives UI state from reactive sources and updates automatically.
   const processedMenuList = computed<ProcessedMenuItem[]>(() => {
     return props.list.map((item) => ({
       ...item,
@@ -143,6 +153,7 @@
    * 处理滚动事件的核心逻辑
    * 根据滚动位置显示/隐藏滚动按钮
    */
+  // Logic Note: Handler 'handleScrollCore' encapsulates a single interaction or data-processing flow.
   const handleScrollCore = (): void => {
     if (!scrollbarRef.value?.wrapRef) return
 
@@ -165,6 +176,7 @@
    * 滚动菜单容器
    * @param direction 滚动方向，left 或 right
    */
+  // Logic Note: Handler 'scroll' encapsulates a single interaction or data-processing flow.
   const scroll = (direction: ScrollDirection): void => {
     if (!scrollbarRef.value?.wrapRef) return
 
@@ -186,6 +198,7 @@
    * 优化滚轮响应性能
    * @param event 滚轮事件
    */
+  // Logic Note: Handler 'handleWheel' encapsulates a single interaction or data-processing flow.
   const handleWheel = (event: WheelEvent): void => {
     // 立即阻止默认滚动行为和事件冒泡，避免页面滚动
     event.preventDefault()
@@ -215,6 +228,7 @@
   /**
    * 初始化滚动状态
    */
+  // Logic Note: Handler 'initScrollState' encapsulates a single interaction or data-processing flow.
   const initScrollState = (): void => {
     nextTick(() => {
       handleScrollCore()
@@ -225,6 +239,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/components/core/layouts/art-menus/art-mixed-menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .button-arrow {
@@ -247,6 +263,8 @@
 </style>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/components/core/layouts/art-menus/art-mixed-menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   :deep(.el-scrollbar__bar.is-horizontal) {
     bottom: 5px;
     display: none;

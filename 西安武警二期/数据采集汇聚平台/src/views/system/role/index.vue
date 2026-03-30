@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/system/role/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard>
       <template #header>
@@ -111,6 +113,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/system/role/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ColumnOption } from '@/types'
 
   defineOptions({ name: 'NotificationRecordTracking' })
@@ -127,11 +131,16 @@
     progress: number
   }
 
+  // Logic Note: Reactive state 'taskKeyword' stores mutable runtime data used by this component.
   const taskKeyword = ref('')
+  // Logic Note: Reactive state 'taskDialogVisible' stores mutable runtime data used by this component.
   const taskDialogVisible = ref(false)
+  // Logic Note: Reactive state 'taskMode' stores mutable runtime data used by this component.
   const taskMode = ref<'add' | 'edit'>('add')
+  // Logic Note: Reactive state 'editingTaskId' stores mutable runtime data used by this component.
   const editingTaskId = ref<number | null>(null)
 
+  // Logic Note: Reactive state 'tasks' stores mutable runtime data used by this component.
   const tasks = ref<DispatchTask[]>([
     {
       id: 1,
@@ -168,6 +177,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'taskForm' stores mutable runtime data used by this component.
   const taskForm = reactive({
     name: '',
     target: '',
@@ -185,6 +195,7 @@
     { prop: 'operation', label: '操作', minWidth: 180, useSlot: true, fixed: 'right' }
   ]
 
+  // Logic Note: Computed value 'filteredTasks' derives UI state from reactive sources and updates automatically.
   const filteredTasks = computed(() => {
     const keyword = taskKeyword.value.trim()
     if (!keyword) {
@@ -196,6 +207,7 @@
     )
   })
 
+  // Logic Note: Computed value 'trackingTimeline' derives UI state from reactive sources and updates automatically.
   const trackingTimeline = computed(() => [
     {
       time: '09:30',
@@ -217,6 +229,7 @@
     }
   ])
 
+  // Logic Note: Computed value 'taskStats' derives UI state from reactive sources and updates automatically.
   const taskStats = computed(() => [
     { label: '任务总量', value: `${tasks.value.length} 个` },
     { label: '待执行', value: `${tasks.value.filter((item) => item.status === '待执行').length} 个` },
@@ -224,8 +237,10 @@
     { label: '已完成', value: `${tasks.value.filter((item) => item.status === '已完成').length} 个` }
   ])
 
+  // Logic Note: Computed value 'taskDialogTitle' derives UI state from reactive sources and updates automatically.
   const taskDialogTitle = computed(() => (taskMode.value === 'add' ? '新增下发任务' : '修改下发任务'))
 
+  // Logic Note: Handler 'resetTaskForm' encapsulates a single interaction or data-processing flow.
   const resetTaskForm = () => {
     taskForm.name = ''
     taskForm.target = ''
@@ -233,12 +248,14 @@
     taskForm.scheduleTime = ''
   }
 
+  // Logic Note: Handler 'getPriorityType' encapsulates a single interaction or data-processing flow.
   const getPriorityType = (priority: string): DispatchTask['priorityType'] => {
     if (priority === '高') return 'danger'
     if (priority === '中') return 'warning'
     return 'success'
   }
 
+  // Logic Note: Handler 'openTaskDialog' encapsulates a single interaction or data-processing flow.
   const openTaskDialog = (mode: 'add' | 'edit', row?: DispatchTask) => {
     taskMode.value = mode
     taskDialogVisible.value = true
@@ -256,6 +273,7 @@
     resetTaskForm()
   }
 
+  // Logic Note: Handler 'submitTask' encapsulates a single interaction or data-processing flow.
   const submitTask = () => {
     if (taskMode.value === 'add') {
       tasks.value.unshift({
@@ -285,6 +303,7 @@
     taskDialogVisible.value = false
   }
 
+  // Logic Note: Handler 'deleteTask' encapsulates a single interaction or data-processing flow.
   const deleteTask = (id: number) => {
     tasks.value = tasks.value.filter((item) => item.id !== id)
     ElMessage.success('已删除下发任务')
@@ -292,6 +311,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/system/role/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .stat-item {
     display: flex;
     align-items: center;

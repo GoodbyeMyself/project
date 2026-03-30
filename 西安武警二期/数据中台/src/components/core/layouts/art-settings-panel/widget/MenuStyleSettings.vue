@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/layouts/art-settings-panel/widget/MenuStyleSettings.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <SectionTitle :title="$t('setting.menu.title')" />
   <div class="setting-box-wrap">
     <div
@@ -21,6 +23,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/layouts/art-settings-panel/widget/MenuStyleSettings.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import AppConfig from '@/config'
   import SectionTitle from './SectionTitle.vue'
   import { MenuTypeEnum, type MenuThemeEnum } from '@/enums/appEnum'
@@ -29,9 +33,12 @@
   const menuThemeList = AppConfig.themeList
   const settingStore = useSettingStore()
   const { menuThemeType, menuType, isDark } = storeToRefs(settingStore)
+  // Logic Note: Computed value 'isTopMenu' derives UI state from reactive sources and updates automatically.
   const isTopMenu = computed(() => menuType.value === MenuTypeEnum.TOP)
+  // Logic Note: Computed value 'isDualMenu' derives UI state from reactive sources and updates automatically.
   const isDualMenu = computed(() => menuType.value === MenuTypeEnum.DUAL_MENU)
 
+  // Logic Note: Computed value 'disabled' derives UI state from reactive sources and updates automatically.
   const disabled = computed(() => isTopMenu.value || isDualMenu.value || isDark.value)
 
   // 菜单样式切换

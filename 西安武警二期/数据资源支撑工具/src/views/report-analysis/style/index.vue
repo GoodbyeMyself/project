@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/report-analysis/style/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -33,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/report-analysis/style/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -45,16 +49,19 @@
     desc: string
   }
 
+  // Logic Note: Reactive state 'templates' stores mutable runtime data used by this component.
   const templates = ref<ReportTemplate[]>([
     { id: 1, name: '综合态势周报', style: '指挥视图', desc: '适用于周维度综合态势分析。' },
     { id: 2, name: '模型健康月报', style: '治理视图', desc: '聚焦模型质量与稳定性趋势。' },
     { id: 3, name: '资产运行日报', style: '运维视图', desc: '按日展示资产规模与异常情况。' }
   ])
 
+  // Logic Note: Handler 'editTemplate' encapsulates a single interaction or data-processing flow.
   const editTemplate = (template: ReportTemplate) => {
     ElMessage.success(`已进入《${template.name}》模板编辑`)
   }
 
+  // Logic Note: Handler 'customTemplate' encapsulates a single interaction or data-processing flow.
   const customTemplate = (template: ReportTemplate) => {
     ElMessage.info(`已加载《${template.name}》的定制参数面板`)
   }

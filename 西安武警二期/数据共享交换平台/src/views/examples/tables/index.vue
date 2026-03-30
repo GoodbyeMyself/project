@@ -1,6 +1,8 @@
 <!-- 高级表格能力展示 -->
 <!-- 实际开发中根据需求选择使用哪些功能，可参考功能示例下面的最小化示例进行开发 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/views/examples/tables/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <!-- 功能介绍卡片 -->
     <ElCard class="art-card-xs">
@@ -425,6 +427,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/views/examples/tables/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref, computed, watch, nextTick } from 'vue'
   import {
     Plus,
@@ -453,10 +457,12 @@
 
   // 调试面板状态
   const showDebugPanel = ref(false)
+  // Logic Note: Reactive state 'debugActiveNames' stores mutable runtime data used by this component.
   const debugActiveNames = ref(['cache', 'request', 'logs'])
 
   // 缓存调试状态
   const cacheDebugLogs = ref<string[]>([])
+  // Logic Note: Reactive state 'requestParams' stores mutable runtime data used by this component.
   const requestParams = ref<any>({
     current: 1,
     size: 20,
@@ -475,6 +481,7 @@
 
   // 事件演示相关
   const eventDemoEnabled = ref(false)
+  // Logic Note: Reactive state 'eventLogs' stores mutable runtime data used by this component.
   const eventLogs = ref<Array<{ type: string; message: string; time: string }>>([])
 
   // 表格配置演示
@@ -602,6 +609,7 @@
     )
   }
 
+  // Logic Note: Handler 'buildSearchParams' encapsulates a single interaction or data-processing flow.
   const buildSearchParams = (params: typeof searchFormState.value) => {
     const { daterange, ...filtersParams } = params
     const [startTime, endTime] = Array.isArray(daterange) ? daterange : [null, null]
@@ -860,6 +868,7 @@
     console.log('选择变更:', selection)
   }
 
+  // Logic Note: Handler 'handleRowClick' encapsulates a single interaction or data-processing flow.
   const handleRowClick = (row: UserListItem) => {
     console.log('行点击:', row)
     logEvent('行点击', `点击了用户: ${row.userName}`)
@@ -869,6 +878,7 @@
    * 表头点击事件处理
    * @param column 列信息
    */
+  // Logic Note: Handler 'handleHeaderClick' encapsulates a single interaction or data-processing flow.
   const handleHeaderClick = (column: { label: string; property: string }) => {
     console.log('表头点击:', column)
     logEvent('表头点击', `点击了 ${column.label} 列表头`)
@@ -886,6 +896,7 @@
    * 排序变更事件处理
    * @param sortInfo 排序信息
    */
+  // Logic Note: Handler 'handleSortChange' encapsulates a single interaction or data-processing flow.
   const handleSortChange = (sortInfo: SortInfo) => {
     console.log('排序事件:', sortInfo)
     console.log('排序字段:', sortInfo.prop)
@@ -931,19 +942,23 @@
     }
   }
 
+  // Logic Note: Handler 'clearEventLogs' encapsulates a single interaction or data-processing flow.
   const clearEventLogs = () => {
     eventLogs.value = []
     ElMessage.info('事件日志已清空')
   }
 
+  // Logic Note: Handler 'handleScrollToTop' encapsulates a single interaction or data-processing flow.
   const handleScrollToTop = () => {
     tableRef.value?.scrollToTop()
   }
 
+  // Logic Note: Handler 'handleScrollToPosition' encapsulates a single interaction or data-processing flow.
   const handleScrollToPosition = () => {
     tableRef.value?.elTableRef.setScrollTop(200)
   }
 
+  // Logic Note: Handler 'handleToggleSelection' encapsulates a single interaction or data-processing flow.
   const handleToggleSelection = () => {
     if (selectedRows.value.length === 0) {
       tableRef.value?.elTableRef.toggleAllSelection()
@@ -954,6 +969,7 @@
     }
   }
 
+  // Logic Note: Handler 'handleGetTableInfo' encapsulates a single interaction or data-processing flow.
   const handleGetTableInfo = () => {
     const info = {
       数据条数: data.value.length,
@@ -968,6 +984,7 @@
     ElMessage.info(`表格信息已输出到控制台，当前 ${info.数据条数} 条数据`)
   }
 
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = async () => {
     await searchBarRef.value.validate()
 
@@ -976,6 +993,7 @@
     getData()
   }
 
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = () => {
     addCacheLog('🔄 重置搜索')
     // 重置搜索表单状态
@@ -983,6 +1001,7 @@
     resetSearchParams()
   }
 
+  // Logic Note: Handler 'handlePhoneSearch' encapsulates a single interaction or data-processing flow.
   const handlePhoneSearch = (value: string) => {
     searchFormState.value.phone = value
     replaceSearchParams(buildSearchParams(searchFormState.value))
@@ -991,6 +1010,7 @@
     getDataDebounced()
   }
 
+  // Logic Note: Handler 'handleRefresh' encapsulates a single interaction or data-processing flow.
   const handleRefresh = () => {
     addCacheLog('🔄 手动刷新')
     refreshData()
@@ -1002,6 +1022,7 @@
     refreshCreate()
   }
 
+  // Logic Note: Handler 'handleEdit' encapsulates a single interaction or data-processing flow.
   const handleEdit = (row: UserListItem) => {
     ElMessage.success(`编辑用户 ${row.userName} 成功`)
     setTimeout(() => {
@@ -1009,6 +1030,7 @@
     }, 1000)
   }
 
+  // Logic Note: Handler 'handleDelete' encapsulates a single interaction or data-processing flow.
   const handleDelete = async (row: UserListItem) => {
     try {
       await ElMessageBox.confirm(`确定要删除用户 ${row.userName} 吗？`, '警告', {
@@ -1026,10 +1048,12 @@
     }
   }
 
+  // Logic Note: Handler 'handleView' encapsulates a single interaction or data-processing flow.
   const handleView = (row: UserListItem) => {
     ElMessage.info(`查看用户 ${row.userName}`)
   }
 
+  // Logic Note: Handler 'handleBatchDelete' encapsulates a single interaction or data-processing flow.
   const handleBatchDelete = async () => {
     try {
       await ElMessageBox.confirm(
@@ -1061,11 +1085,13 @@
    * Excel 导入成功处理
    * @param data 导入的数据数组
    */
+  // Logic Note: Handler 'handleImportSuccess' encapsulates a single interaction or data-processing flow.
   const handleImportSuccess = (data: Record<string, any>[]) => {
     ElMessage.success(`导入 ${data.length} 条数据成功`)
     refreshCreate()
   }
 
+  // Logic Note: Handler 'handleImportError' encapsulates a single interaction or data-processing flow.
   const handleImportError = (error: Error) => {
     ElMessage.error(`导入失败：${error.message}`)
   }
@@ -1078,24 +1104,28 @@
     ElMessage.success('缓存已清空')
   }
 
+  // Logic Note: Handler 'handleCleanExpiredCache' encapsulates a single interaction or data-processing flow.
   const handleCleanExpiredCache = () => {
     const count = clearExpiredCache()
     addCacheLog(`🧹 清理了 ${count} 条过期缓存`)
     ElMessage.info(`清理了 ${count} 条过期缓存`)
   }
 
+  // Logic Note: Handler 'handleCancelRequest' encapsulates a single interaction or data-processing flow.
   const handleCancelRequest = () => {
     cancelRequest()
     addCacheLog('❌ 取消当前请求')
     ElMessage.info('请求已取消')
   }
 
+  // Logic Note: Handler 'handleClearData' encapsulates a single interaction or data-processing flow.
   const handleClearData = () => {
     clearData()
     addCacheLog('🗑️ 清空所有数据')
     ElMessage.info('数据已清空')
   }
 
+  // Logic Note: Handler 'handleTestCache' encapsulates a single interaction or data-processing flow.
   const handleTestCache = () => {
     // 模拟快速切换页面来测试缓存
     const testPages = [1, 2, 3, 2, 1] // 测试页面序列
@@ -1127,6 +1157,7 @@
    * 添加缓存调试日志
    * @param message 日志消息
    */
+  // Logic Note: Handler 'addCacheLog' encapsulates a single interaction or data-processing flow.
   const addCacheLog = (message: string): void => {
     const timestamp = new Date().toLocaleTimeString()
     cacheDebugLogs.value.unshift(`[${timestamp}] ${message}`)
@@ -1140,6 +1171,7 @@
    * @param key 缓存键
    * @param operation 操作类型
    */
+  // Logic Note: Handler 'updateCacheKeys' encapsulates a single interaction or data-processing flow.
   const updateCacheKeys = (key: string, operation: 'add' | 'remove' = 'add'): void => {
     if (operation === 'add' && !cacheKeys.value.includes(key)) {
       cacheKeys.value.push(key)
@@ -1158,6 +1190,7 @@
    * @param key 缓存键
    * @returns 缓存键摘要
    */
+  // Logic Note: Handler 'getCacheKeySummary' encapsulates a single interaction or data-processing flow.
   const getCacheKeySummary = (key: string): string => {
     try {
       const params = JSON.parse(key)
@@ -1170,6 +1203,7 @@
   /**
    * 强制刷新缓存信息
    */
+  // Logic Note: Handler 'forceRefreshCacheInfo' encapsulates a single interaction or data-processing flow.
   const forceRefreshCacheInfo = (): void => {
     const currentStats = cacheInfo.value
     addCacheLog(`缓存信息刷新: ${currentStats.total} 条缓存`)
@@ -1199,7 +1233,9 @@
   /**
    * 处理动态列配置命令
    */
+  // Logic Note: Handler 'handleColumnCommand' encapsulates a single interaction or data-processing flow.
   const handleColumnCommand = (command: string): void => {
+    // Logic Note: Branching logic maps action keys to explicit behavior paths.
     switch (command) {
       case 'addColumn': {
         // 新增单个列
@@ -1315,6 +1351,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据共享交换平台/src/views/examples/tables/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .user-info .el-avatar {
     flex-shrink: 0;
     width: 40px !important;

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/check/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -50,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/check/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { reactive, ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -64,11 +68,13 @@
     checkedAt: string
   }
 
+  // Logic Note: Reactive state 'checkForm' stores mutable runtime data used by this component.
   const checkForm = reactive({
     modelName: '人员逻辑模型 v2.2',
     rules: ['命名规范检查', '字段完整性检查']
   })
 
+  // Logic Note: Reactive state 'checkLogs' stores mutable runtime data used by this component.
   const checkLogs = ref<CheckLog[]>([
     {
       id: 1,
@@ -80,6 +86,7 @@
     }
   ])
 
+  // Logic Note: Handler 'runCheck' encapsulates a single interaction or data-processing flow.
   const runCheck = () => {
     if (!checkForm.modelName || checkForm.rules.length === 0) {
       ElMessage.warning('请选择检查模型和规则')

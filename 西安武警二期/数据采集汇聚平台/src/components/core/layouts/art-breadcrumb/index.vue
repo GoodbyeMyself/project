@@ -1,5 +1,7 @@
 <!-- 面包屑导航 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/layouts/art-breadcrumb/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <nav class="ml-2.5 max-lg:!hidden" aria-label="breadcrumb">
     <ul class="flex-c h-full">
       <li
@@ -33,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/layouts/art-breadcrumb/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import type { RouteLocationMatched, RouteRecordRaw } from 'vue-router'

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/dashboard/ecommerce/modules/annual-sales.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card p-5 h-[28.2rem] mb-5 max-sm:mb-4">
     <div class="art-card-header">
       <div class="title">

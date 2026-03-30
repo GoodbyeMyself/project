@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/widgets/excel/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content">
     <ArtExcelImport @import-success="handleImportSuccess" @import-error="handleImportError">
       <template #import-text> 上传 Excel </template>
@@ -34,6 +36,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/widgets/excel/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'WidgetsExcel' })
 
   /**
@@ -48,6 +52,7 @@
   /**
    * 表格数据
    */
+  // Logic Note: Reactive state 'tableData' stores mutable runtime data used by this component.
   const tableData = ref<TableData[]>([
     { name: '李四', age: 20, city: '上海' },
     { name: '张三', age: 25, city: '北京' },
@@ -98,6 +103,7 @@
    * 将导入的数据转换为表格数据格式
    * @param data 导入的原始数据
    */
+  // Logic Note: Handler 'handleImportSuccess' encapsulates a single interaction or data-processing flow.
   const handleImportSuccess = (data: Array<Record<string, unknown>>) => {
     const formattedData: TableData[] = data.map((item) => ({
       name: String(item['姓名'] || ''),
@@ -112,6 +118,7 @@
    * 处理 Excel 导入错误
    * @param error 错误对象
    */
+  // Logic Note: Handler 'handleImportError' encapsulates a single interaction or data-processing flow.
   const handleImportError = (error: Error) => {
     console.error('导入失败:', error)
     ElMessage.error(`导入失败: ${error.message}`)
@@ -120,6 +127,7 @@
   /**
    * 处理 Excel 导出成功
    */
+  // Logic Note: Handler 'handleExportSuccess' encapsulates a single interaction or data-processing flow.
   const handleExportSuccess = () => {
     console.log('导出成功')
     ElMessage.success('Excel 导出成功')
@@ -129,6 +137,7 @@
    * 处理 Excel 导出错误
    * @param error 错误对象
    */
+  // Logic Note: Handler 'handleExportError' encapsulates a single interaction or data-processing flow.
   const handleExportError = (error: Error) => {
     ElMessage.error(`导出失败: ${error.message}`)
   }
@@ -137,6 +146,7 @@
    * 处理导出进度
    * @param progress 导出进度百分比
    */
+  // Logic Note: Handler 'handleProgress' encapsulates a single interaction or data-processing flow.
   const handleProgress = (progress: number) => {
     console.log('导出进度:', progress)
   }
@@ -144,6 +154,7 @@
   /**
    * 清空表格数据
    */
+  // Logic Note: Handler 'handleClear' encapsulates a single interaction or data-processing flow.
   const handleClear = () => {
     tableData.value = []
     ElMessage.info('已清空数据')

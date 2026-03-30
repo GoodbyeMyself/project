@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/App.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElConfigProvider
     size="default"
     :locale="locales[language]"
@@ -12,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/App.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useUserStore } from './store/modules/user'
   import zh from 'element-plus/es/locale/lang/zh-cn'
   import en from 'element-plus/es/locale/lang/en'

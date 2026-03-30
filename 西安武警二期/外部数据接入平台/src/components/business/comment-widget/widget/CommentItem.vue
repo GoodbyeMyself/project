@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/business/comment-widget/widget/CommentItem.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <li>
     <div>
       <div class="flex-c">
@@ -58,6 +60,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/business/comment-widget/widget/CommentItem.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import AppConfig from '@/config'
   import { ref } from 'vue'
 
@@ -79,18 +83,23 @@
     (event: 'add-reply', commentId: number, replyAuthor: string, replyContent: string): void
   }>()
 
+  // Logic Note: Reactive state 'replyAuthor' stores mutable runtime data used by this component.
   const replyAuthor = ref('')
+  // Logic Note: Reactive state 'replyContent' stores mutable runtime data used by this component.
   const replyContent = ref('')
 
+  // Logic Note: Handler 'toggleReply' encapsulates a single interaction or data-processing flow.
   const toggleReply = (commentId: number) => {
     emit('toggle-reply', commentId)
   }
 
+  // Logic Note: Handler 'addReply' encapsulates a single interaction or data-processing flow.
   const addReply = (commentId: number, author: string, content: string) => {
     emit('add-reply', commentId, author, content)
     replyAuthor.value = ''
     replyContent.value = ''
   }
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = () => {
     if (!replyAuthor.value.trim() || !replyContent.value.trim()) {
       return
@@ -100,6 +109,7 @@
     replyContent.value = ''
   }
 
+  // Logic Note: Handler 'formatDate' encapsulates a single interaction or data-processing flow.
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp)
     return date.toLocaleString()
@@ -107,6 +117,7 @@
 
   let lastColor: string | null = null
 
+  // Logic Note: Handler 'randomColor' encapsulates a single interaction or data-processing flow.
   const randomColor = () => {
     let newColor: string
 

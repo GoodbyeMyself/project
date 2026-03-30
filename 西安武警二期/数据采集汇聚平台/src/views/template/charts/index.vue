@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/template/charts/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :lg="12">
@@ -42,9 +44,13 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/template/charts/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'Charts' })
 
+  // Logic Note: Reactive state 'deviceKeyword' stores mutable runtime data used by this component.
   const deviceKeyword = ref('')
+  // Logic Note: Computed value 'displayCards' derives UI state from reactive sources and updates automatically.
   const displayCards = computed(() => [
     { label: '在线设备数', value: '72 台' },
     { label: '今日采集量', value: '125 万条' },
@@ -52,12 +58,14 @@
     { label: '处理成功率', value: '99.7%' }
   ])
 
+  // Logic Note: Reactive state 'statusList' stores mutable runtime data used by this component.
   const statusList = ref([
     { device: '边境雷达一号', status: '在线', metric: 'CPU 45% / 内存 62%' },
     { device: '卡口抓拍终端', status: '异常', metric: '丢包率 12%' },
     { device: '巡逻车载终端', status: '离线', metric: '最近上报 10 分钟前' }
   ])
 
+  // Logic Note: Computed value 'filteredStatusList' derives UI state from reactive sources and updates automatically.
   const filteredStatusList = computed(() => {
     const keyword = deviceKeyword.value.trim()
     if (!keyword) return statusList.value
@@ -66,6 +74,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/template/charts/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .stat-box {
     padding: 16px;
     margin-bottom: 16px;

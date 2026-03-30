@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/views/exchange-platform/module/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div v-if="pageConfig" class="module-page">
     <section class="hero-card art-card">
       <div class="hero-content">
@@ -204,6 +206,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/views/exchange-platform/module/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { ElMessage, ElMessageBox } from 'element-plus'
@@ -220,23 +224,38 @@
   const route = useRoute()
   const router = useRouter()
 
+  // Logic Note: Computed value 'pageConfig' derives UI state from reactive sources and updates automatically.
   const pageConfig = computed(() => modulePageConfigs[String(route.name || '')])
+  // Logic Note: Reactive state 'panels' stores mutable runtime data used by this component.
   const panels = ref<ModulePanelConfig[]>([])
+  // Logic Note: Reactive state 'activePanelKey' stores mutable runtime data used by this component.
   const activePanelKey = ref('')
+  // Logic Note: Reactive state 'keyword' stores mutable runtime data used by this component.
   const keyword = ref('')
+  // Logic Note: Reactive state 'statusFilter' stores mutable runtime data used by this component.
   const statusFilter = ref('')
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'dialogMode' stores mutable runtime data used by this component.
   const dialogMode = ref<'add' | 'edit'>('add')
+  // Logic Note: Reactive state 'dialogTitle' stores mutable runtime data used by this component.
   const dialogTitle = ref('')
+  // Logic Note: Reactive state 'editingId' stores mutable runtime data used by this component.
   const editingId = ref<number | null>(null)
+  // Logic Note: Reactive state 'drawerVisible' stores mutable runtime data used by this component.
   const drawerVisible = ref(false)
+  // Logic Note: Reactive state 'drawerTitle' stores mutable runtime data used by this component.
   const drawerTitle = ref('')
+  // Logic Note: Reactive state 'detailRow' stores mutable runtime data used by this component.
   const detailRow = ref<ModulePanelRow | null>(null)
+  // Logic Note: Reactive state 'formModel' stores mutable runtime data used by this component.
   const formModel = ref<Record<string, string | number | boolean | undefined>>({})
 
+  // Logic Note: Handler 'clonePanels' encapsulates a single interaction or data-processing flow.
   const clonePanels = (value?: ModulePanelConfig[]) =>
     JSON.parse(JSON.stringify(value ?? [])) as ModulePanelConfig[]
 
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     pageConfig,
     (config) => {
@@ -250,10 +269,12 @@
     { immediate: true }
   )
 
+  // Logic Note: Computed value 'activePanel' derives UI state from reactive sources and updates automatically.
   const activePanel = computed(
     () => panels.value.find((panel) => panel.key === activePanelKey.value) ?? panels.value[0]
   )
 
+  // Logic Note: Computed value 'statusOptions' derives UI state from reactive sources and updates automatically.
   const statusOptions = computed(() => {
     const values = activePanel.value?.rows
       .map((row) => String(row.status || ''))
@@ -262,6 +283,7 @@
     return Array.from(new Set(values))
   })
 
+  // Logic Note: Computed value 'filteredRows' derives UI state from reactive sources and updates automatically.
   const filteredRows = computed(() => {
     const panel = activePanel.value
     if (!panel) return []
@@ -279,10 +301,12 @@
     })
   })
 
+  // Logic Note: Computed value 'detailEntries' derives UI state from reactive sources and updates automatically.
   const detailEntries = computed(() =>
     Object.entries(detailRow.value ?? {}).filter(([key]) => key !== 'id')
   )
 
+  // Logic Note: Handler 'resolveFieldLabel' encapsulates a single interaction or data-processing flow.
   const resolveFieldLabel = (key: string) => {
     const panel = activePanel.value
     const fromFields = panel?.fields.find((item) => item.key === key)?.label
@@ -290,12 +314,14 @@
     return fromFields || fromColumns || key
   }
 
+  // Logic Note: Handler 'formatValue' encapsulates a single interaction or data-processing flow.
   const formatValue = (value: unknown) => {
     if (Array.isArray(value)) return value.join('、')
     if (value === undefined || value === null || value === '') return '-'
     return String(value)
   }
 
+  // Logic Note: Handler 'resolveTagType' encapsulates a single interaction or data-processing flow.
   const resolveTagType = (value: unknown) => {
     const text = String(value || '')
     if (['健康', '已上线'].includes(text)) return 'success'
@@ -304,16 +330,20 @@
     return 'info'
   }
 
+  // Logic Note: Handler 'getActivePanel' encapsulates a single interaction or data-processing flow.
   const getActivePanel = () => activePanel.value
 
+  // Logic Note: Handler 'getTargetRow' encapsulates a single interaction or data-processing flow.
   const getTargetRow = (row?: ModulePanelRow) => {
     if (row) return row
     return filteredRows.value[0] ?? activePanel.value?.rows[0] ?? null
   }
 
+  // Logic Note: Handler 'buildTimestamp' encapsulates a single interaction or data-processing flow.
   const buildTimestamp = () =>
     new Date().toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-')
 
+  // Logic Note: Handler 'resetForm' encapsulates a single interaction or data-processing flow.
   const resetForm = (row?: ModulePanelRow | null) => {
     const nextModel: Record<string, string | number | boolean | undefined> = {}
     ;(activePanel.value?.fields ?? []).forEach((field) => {
@@ -322,6 +352,7 @@
     formModel.value = nextModel
   }
 
+  // Logic Note: Handler 'openDialog' encapsulates a single interaction or data-processing flow.
   const openDialog = (mode: 'add' | 'edit', title: string, row?: ModulePanelRow | null) => {
     dialogMode.value = mode
     dialogTitle.value = title
@@ -330,6 +361,7 @@
     dialogVisible.value = true
   }
 
+  // Logic Note: Handler 'openDrawer' encapsulates a single interaction or data-processing flow.
   const openDrawer = (title: string, row: ModulePanelRow | null) => {
     if (!row) {
       ElMessage.warning('当前没有可查看的记录')
@@ -340,9 +372,11 @@
     drawerVisible.value = true
   }
 
+  // Logic Note: Handler 'nextRowId' encapsulates a single interaction or data-processing flow.
   const nextRowId = (panel: ModulePanelConfig) =>
     Math.max(0, ...panel.rows.map((item) => item.id)) + 1
 
+  // Logic Note: Handler 'exportRows' encapsulates a single interaction or data-processing flow.
   const exportRows = (rows: ModulePanelRow[], filename: string) => {
     if (!rows.length) {
       ElMessage.warning('没有可导出的数据')
@@ -358,6 +392,7 @@
     ElMessage.success('导出完成')
   }
 
+  // Logic Note: Handler 'triggerDownload' encapsulates a single interaction or data-processing flow.
   const triggerDownload = (row: ModulePanelRow) => {
     const blob = new Blob([JSON.stringify(row, null, 2)], {
       type: 'application/json;charset=utf-8'
@@ -371,6 +406,7 @@
     ElMessage.success('下载完成')
   }
 
+  // Logic Note: Handler 'removeRow' encapsulates a single interaction or data-processing flow.
   const removeRow = async (row: ModulePanelRow | null, label: string) => {
     const panel = getActivePanel()
     if (!panel || !row) {
@@ -391,6 +427,7 @@
     }
   }
 
+  // Logic Note: Handler 'changeStatus' encapsulates a single interaction or data-processing flow.
   const changeStatus = (row: ModulePanelRow | null, status: string, label: string) => {
     if (!row) {
       ElMessage.warning('当前没有可操作的记录')
@@ -401,6 +438,7 @@
     ElMessage.success(`${label}成功`)
   }
 
+  // Logic Note: Handler 'duplicateRow' encapsulates a single interaction or data-processing flow.
   const duplicateRow = (row: ModulePanelRow | null) => {
     const panel = getActivePanel()
     if (!panel || !row) {
@@ -418,6 +456,7 @@
     ElMessage.success('复制成功')
   }
 
+  // Logic Note: Handler 'moveRow' encapsulates a single interaction or data-processing flow.
   const moveRow = (row: ModulePanelRow | null) => {
     if (!row) {
       ElMessage.warning('当前没有可移动的记录')
@@ -431,6 +470,7 @@
     ElMessage.success(`已移动到 ${row.group}`)
   }
 
+  // Logic Note: Handler 'copyToPanel' encapsulates a single interaction or data-processing flow.
   const copyToPanel = (source: ModulePanelRow, panelKey: string, status?: string) => {
     const targetPanel = panels.value.find((item) => item.key === panelKey)
     if (!targetPanel) return false
@@ -448,12 +488,14 @@
     return true
   }
 
+  // Logic Note: Handler 'removeFromPanel' encapsulates a single interaction or data-processing flow.
   const removeFromPanel = (panelKey: string, row: ModulePanelRow | null) => {
     const targetPanel = panels.value.find((item) => item.key === panelKey)
     if (!targetPanel || !row) return
     targetPanel.rows = targetPanel.rows.filter((item) => item.id !== row.id)
   }
 
+  // Logic Note: Handler 'submitDialog' encapsulates a single interaction or data-processing flow.
   const submitDialog = () => {
     const panel = getActivePanel()
     if (!panel) return
@@ -485,10 +527,12 @@
     dialogVisible.value = false
   }
 
+  // Logic Note: Handler 'handleAction' encapsulates a single interaction or data-processing flow.
   const handleAction = async (action: ModuleActionConfig, row?: ModulePanelRow) => {
     const panel = getActivePanel()
     const target = getTargetRow(row)
 
+    // Logic Note: Branching logic maps action keys to explicit behavior paths.
     switch (action.key) {
       case 'query':
         ElMessage.success(`${action.label}完成`)
@@ -588,6 +632,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据共享交换平台/src/views/exchange-platform/module/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .module-page {
     display: flex;
     flex-direction: column;

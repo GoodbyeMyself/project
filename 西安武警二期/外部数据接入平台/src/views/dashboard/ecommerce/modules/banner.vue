@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/dashboard/ecommerce/modules/banner.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ArtBasicBanner
     class="justify-center !h-53 mb-5 max-sm:!pt-8 max-sm:!h-48 max-sm:mb-4"
     :title="`欢迎回来 ${userInfo.userName}`"
@@ -46,6 +48,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/dashboard/ecommerce/modules/banner.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import bannerCover from '@imgs/login/lf_icon2.webp'
   import { useUserStore } from '@/store/modules/user'
 
@@ -54,11 +58,13 @@
   /**
    * 获取当前用户信息
    */
+  // Logic Note: Computed value 'userInfo' derives UI state from reactive sources and updates automatically.
   const userInfo = computed(() => userStore.getUserInfo)
 
   /**
    * 处理横幅点击事件
    */
+  // Logic Note: Handler 'handleBannerClick' encapsulates a single interaction or data-processing flow.
   const handleBannerClick = (): void => {
     // TODO: 添加横幅点击处理逻辑
   }

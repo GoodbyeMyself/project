@@ -1,5 +1,7 @@
 <!-- 角色管理页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/system/role/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-full-height">
     <RoleSearch
       v-show="showSearchBar"
@@ -52,6 +54,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/system/role/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ButtonMoreItem } from '@/components/core/forms/art-button-more/index.vue'
   import { useTable } from '@/hooks/core/useTable'
   import { fetchGetRoleList } from '@/api/system-manage'
@@ -77,10 +81,14 @@
     daterange: undefined
   })
 
+  // Logic Note: Reactive state 'showSearchBar' stores mutable runtime data used by this component.
   const showSearchBar = ref(false)
 
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'permissionDialog' stores mutable runtime data used by this component.
   const permissionDialog = ref(false)
+  // Logic Note: Reactive state 'currentRoleData' stores mutable runtime data used by this component.
   const currentRoleData = ref<RoleListItem | undefined>(undefined)
 
   const {
@@ -182,8 +190,10 @@
     }
   })
 
+  // Logic Note: Reactive state 'dialogType' stores mutable runtime data used by this component.
   const dialogType = ref<'add' | 'edit'>('add')
 
+  // Logic Note: Handler 'showDialog' encapsulates a single interaction or data-processing flow.
   const showDialog = (type: 'add' | 'edit', row?: RoleListItem) => {
     dialogVisible.value = true
     dialogType.value = type
@@ -194,6 +204,7 @@
    * 搜索处理
    * @param params 搜索参数
    */
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = (params: RoleSearchFormParams) => {
     // 处理日期区间参数，把 daterange 转换为 startTime 和 endTime
     const { daterange, ...filtersParams } = params
@@ -203,7 +214,9 @@
     getData()
   }
 
+  // Logic Note: Handler 'buttonMoreClick' encapsulates a single interaction or data-processing flow.
   const buttonMoreClick = (item: ButtonMoreItem, row: RoleListItem) => {
+    // Logic Note: Branching logic maps action keys to explicit behavior paths.
     switch (item.key) {
       case 'permission':
         showPermissionDialog(row)
@@ -217,11 +230,13 @@
     }
   }
 
+  // Logic Note: Handler 'showPermissionDialog' encapsulates a single interaction or data-processing flow.
   const showPermissionDialog = (row?: RoleListItem) => {
     permissionDialog.value = true
     currentRoleData.value = row
   }
 
+  // Logic Note: Handler 'deleteRole' encapsulates a single interaction or data-processing flow.
   const deleteRole = (row: RoleListItem) => {
     ElMessageBox.confirm(`确定删除角色"${row.roleName}"吗？此操作不可恢复！`, '删除确认', {
       confirmButtonText: '确定',

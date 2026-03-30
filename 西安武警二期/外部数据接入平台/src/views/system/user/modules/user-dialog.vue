@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/system/user/modules/user-dialog.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElDialog
     v-model="dialogVisible"
     :title="dialogType === 'add' ? '添加用户' : '编辑用户'"
@@ -39,6 +41,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/system/user/modules/user-dialog.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ROLE_LIST_DATA } from '@/mock/temp/formData'
   import type { FormInstance, FormRules } from 'element-plus'
 
@@ -65,6 +69,7 @@
     set: (value) => emit('update:visible', value)
   })
 
+  // Logic Note: Computed value 'dialogType' derives UI state from reactive sources and updates automatically.
   const dialogType = computed(() => props.type)
 
   // 表单实例
@@ -96,6 +101,7 @@
    * 初始化表单数据
    * 根据对话框类型（新增/编辑）填充表单
    */
+  // Logic Note: Handler 'initFormData' encapsulates a single interaction or data-processing flow.
   const initFormData = () => {
     const isEdit = props.type === 'edit' && props.userData
     const row = props.userData
@@ -112,6 +118,7 @@
    * 监听对话框状态变化
    * 当对话框打开时初始化表单数据并清除验证状态
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => [props.visible, props.type, props.userData],
     ([visible]) => {
@@ -129,6 +136,7 @@
    * 提交表单
    * 验证通过后触发提交事件
    */
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = async () => {
     if (!formRef.value) return
 

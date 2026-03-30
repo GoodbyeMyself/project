@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/sync/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -54,6 +56,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/sync/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { reactive, ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -69,12 +73,14 @@
     createdAt: string
   }
 
+  // Logic Note: Reactive state 'syncForm' stores mutable runtime data used by this component.
   const syncForm = reactive({
     strategy: '增量同步',
     qualityThreshold: 95,
     permissionMode: '角色隔离'
   })
 
+  // Logic Note: Reactive state 'logs' stores mutable runtime data used by this component.
   const logs = ref<SyncLog[]>([
     {
       id: 1,
@@ -96,6 +102,7 @@
     }
   ])
 
+  // Logic Note: Handler 'runSync' encapsulates a single interaction or data-processing flow.
   const runSync = () => {
     const score = 96
     logs.value.unshift({

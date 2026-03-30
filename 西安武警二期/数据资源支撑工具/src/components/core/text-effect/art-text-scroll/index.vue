@@ -1,5 +1,7 @@
 <!-- 文字滚动 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/components/core/text-effect/art-text-scroll/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     ref="containerRef"
     class="relative overflow-hidden rounded-custom-sm border flex-c box-border text-sm"
@@ -43,6 +45,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/components/core/text-effect/art-text-scroll/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import {
     useElementSize,
     useRafFn,
@@ -102,6 +106,7 @@
     close: []
   }>()
 
+  // Logic Note: Handler 'handleClose' encapsulates a single interaction or data-processing flow.
   const handleClose = () => {
     emit('close')
   }
@@ -109,17 +114,27 @@
   const settingStore = useSettingStore()
   const { isDark } = storeToRefs(settingStore)
 
+  // Logic Note: Reactive state 'containerRef' stores mutable runtime data used by this component.
   const containerRef = ref<HTMLElement>()
+  // Logic Note: Reactive state 'contentRef' stores mutable runtime data used by this component.
   const contentRef = ref<HTMLElement>()
+  // Logic Note: Reactive state 'textRef' stores mutable runtime data used by this component.
   const textRef = ref<HTMLElement>()
+  // Logic Note: Reactive state 'isReady' stores mutable runtime data used by this component.
   const isReady = ref(false)
 
+  // Logic Note: Reactive state 'currentPosition' stores mutable runtime data used by this component.
   const currentPosition = ref(0)
+  // Logic Note: Reactive state 'textSize' stores mutable runtime data used by this component.
   const textSize = ref(0)
+  // Logic Note: Reactive state 'containerSize' stores mutable runtime data used by this component.
   const containerSize = ref(0)
+  // Logic Note: Reactive state 'shouldClone' stores mutable runtime data used by this component.
   const shouldClone = ref(false)
 
+  // Logic Note: Computed value 'isHorizontal' derives UI state from reactive sources and updates automatically.
   const isHorizontal = computed(() => props.direction === 'left' || props.direction === 'right')
+  // Logic Note: Computed value 'isReverse' derives UI state from reactive sources and updates automatically.
   const isReverse = computed(() => props.direction === 'right' || props.direction === 'down')
 
   // 使用 VueUse 的 useElementSize 监听容器尺寸变化
@@ -158,12 +173,14 @@
       `color-mix(in oklch, var(--color-${props.type}) ${isDark.value ? '25' : '10'}%, var(--art-color))`
   )
 
+  // Logic Note: Computed value 'containerStyle' derives UI state from reactive sources and updates automatically.
   const containerStyle = computed(() => ({
     width: props.width,
     height: props.height,
     backgroundColor: bgColor.value
   }))
 
+  // Logic Note: Computed value 'contentClass' derives UI state from reactive sources and updates automatically.
   const contentClass = computed(() => {
     if (!isHorizontal.value) {
       return 'flex flex-col'
@@ -171,6 +188,7 @@
     return ''
   })
 
+  // Logic Note: Computed value 'contentStyle' derives UI state from reactive sources and updates automatically.
   const contentStyle = computed(() => {
     const transform = isHorizontal.value
       ? `translateX(${currentPosition.value}px)`
@@ -188,6 +206,7 @@
     return isHorizontal.value ? { marginLeft: spacing } : { marginTop: spacing }
   })
 
+  // Logic Note: Handler 'measureSizes' encapsulates a single interaction or data-processing flow.
   const measureSizes = () => {
     if (!containerRef.value || !textRef.value) return
 
@@ -247,6 +266,7 @@
     { immediate: false }
   )
 
+  // Logic Note: Handler 'handleContentClick' encapsulates a single interaction or data-processing flow.
   const handleContentClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement
     if (target.tagName === 'A') {

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/widgets/qrcode/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content">
     <ElRow :gutter="20">
       <ElCol
@@ -26,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/widgets/qrcode/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import QrcodeVue from 'qrcode.vue'
   import type { Level, RenderAs, ImageSettings } from 'qrcode.vue'
 
@@ -34,7 +38,9 @@
   /**
    * 二维码内容
    */
+  // Logic Note: Reactive state 'qrValue' stores mutable runtime data used by this component.
   const qrValue = ref('https://www.artd.pro')
+  // Logic Note: Reactive state 'isShowLogo' stores mutable runtime data used by this component.
   const isShowLogo = ref(false)
 
   /**
@@ -96,6 +102,7 @@
   /**
    * 二维码配置
    */
+  // Logic Note: Reactive state 'qrcodeConfig' stores mutable runtime data used by this component.
   const qrcodeConfig = reactive({
     size: 160,
     level: 'H' as Level,
@@ -115,6 +122,7 @@
    * 监听是否显示 logo
    * 根据状态动态设置二维码中心的 logo 图片
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(isShowLogo, (val) => {
     if (!val) {
       qrcodeConfig.imageSettings = {} as ImageSettings

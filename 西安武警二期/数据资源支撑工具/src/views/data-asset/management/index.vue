@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/data-asset/management/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -32,6 +34,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/data-asset/management/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, reactive, ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -47,10 +51,12 @@
     qualityScore: number
   }
 
+  // Logic Note: Reactive state 'queryForm' stores mutable runtime data used by this component.
   const queryForm = reactive({
     keyword: ''
   })
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<AssetRow[]>([
     {
       id: 1,
@@ -72,6 +78,7 @@
     }
   ])
 
+  // Logic Note: Computed value 'filteredRows' derives UI state from reactive sources and updates automatically.
   const filteredRows = computed(() => {
     if (!queryForm.keyword) {
       return rows.value
@@ -85,10 +92,12 @@
     })
   })
 
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = () => {
     ElMessage.success('已完成统一搜索')
   }
 
+  // Logic Note: Handler 'syncMetadata' encapsulates a single interaction or data-processing flow.
   const syncMetadata = () => {
     rows.value = rows.value.map((item) => ({
       ...item,

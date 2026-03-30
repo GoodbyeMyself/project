@@ -1,5 +1,7 @@
 <!-- 注册页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/auth/register/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex w-full h-screen">
     <LoginLeftView />
 
@@ -86,6 +88,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/auth/register/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useI18n } from 'vue-i18n'
   import type { FormInstance, FormRules } from 'element-plus'
 
@@ -105,9 +109,12 @@
 
   const { t, locale } = useI18n()
   const router = useRouter()
+  // Logic Note: Reactive state 'formRef' stores mutable runtime data used by this component.
   const formRef = ref<FormInstance>()
 
+  // Logic Note: Reactive state 'loading' stores mutable runtime data used by this component.
   const loading = ref(false)
+  // Logic Note: Reactive state 'formKey' stores mutable runtime data used by this component.
   const formKey = ref(0)
 
   // 监听语言切换，重置表单
@@ -115,6 +122,7 @@
     formKey.value++
   })
 
+  // Logic Note: Reactive state 'formData' stores mutable runtime data used by this component.
   const formData = reactive<RegisterForm>({
     username: '',
     password: '',
@@ -126,6 +134,7 @@
    * 验证密码
    * 当密码输入后，如果确认密码已填写，则触发确认密码的验证
    */
+  // Logic Note: Handler 'validatePassword' encapsulates a single interaction or data-processing flow.
   const validatePassword = (_rule: any, value: string, callback: (error?: Error) => void) => {
     if (!value) {
       callback(new Error(t('register.placeholder.password')))
@@ -165,6 +174,7 @@
    * 验证用户协议
    * 确保用户已勾选同意协议
    */
+  // Logic Note: Handler 'validateAgreement' encapsulates a single interaction or data-processing flow.
   const validateAgreement = (_rule: any, value: boolean, callback: (error?: Error) => void) => {
     if (!value) {
       callback(new Error(t('register.rule.agreementRequired')))
@@ -173,6 +183,7 @@
     callback()
   }
 
+  // Logic Note: Computed value 'rules' derives UI state from reactive sources and updates automatically.
   const rules = computed<FormRules<RegisterForm>>(() => ({
     username: [
       { required: true, message: t('register.placeholder.username'), trigger: 'blur' },
@@ -195,6 +206,7 @@
    * 注册用户
    * 验证表单后提交注册请求
    */
+  // Logic Note: Handler 'register' encapsulates a single interaction or data-processing flow.
   const register = async () => {
     if (!formRef.value) return
 
@@ -228,6 +240,7 @@
   /**
    * 跳转到登录页面
    */
+  // Logic Note: Handler 'toLogin' encapsulates a single interaction or data-processing flow.
   const toLogin = () => {
     setTimeout(() => {
       router.push({ name: 'Login' })
@@ -236,5 +249,7 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/views/auth/register/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @import '../login/style.css';
 </style>

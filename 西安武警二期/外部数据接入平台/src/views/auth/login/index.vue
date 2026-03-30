@@ -1,5 +1,7 @@
 <!-- 登录页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/auth/login/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex w-full h-screen">
     <LoginLeftView />
 
@@ -108,6 +110,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/auth/login/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import AppConfig from '@/config'
   import { useUserStore } from '@/store/modules/user'
   import { useI18n } from 'vue-i18n'
@@ -121,6 +125,7 @@
   const settingStore = useSettingStore()
   const { isDark } = storeToRefs(settingStore)
   const { t, locale } = useI18n()
+  // Logic Note: Reactive state 'formKey' stores mutable runtime data used by this component.
   const formKey = ref(0)
 
   // 监听语言切换，重置表单
@@ -138,6 +143,7 @@
     roles: string[]
   }
 
+  // Logic Note: Computed value 'accounts' derives UI state from reactive sources and updates automatically.
   const accounts = computed<Account[]>(() => [
     {
       key: 'super',
@@ -162,17 +168,22 @@
     }
   ])
 
+  // Logic Note: Reactive state 'dragVerify' stores mutable runtime data used by this component.
   const dragVerify = ref()
 
   const userStore = useUserStore()
   const router = useRouter()
   const route = useRoute()
+  // Logic Note: Reactive state 'isPassing' stores mutable runtime data used by this component.
   const isPassing = ref(false)
+  // Logic Note: Reactive state 'isClickPass' stores mutable runtime data used by this component.
   const isClickPass = ref(false)
 
   const systemName = AppConfig.systemInfo.name
+  // Logic Note: Reactive state 'formRef' stores mutable runtime data used by this component.
   const formRef = ref<FormInstance>()
 
+  // Logic Note: Reactive state 'formData' stores mutable runtime data used by this component.
   const formData = reactive({
     account: '',
     username: '',
@@ -180,11 +191,13 @@
     rememberPassword: true
   })
 
+  // Logic Note: Computed value 'rules' derives UI state from reactive sources and updates automatically.
   const rules = computed<FormRules>(() => ({
     username: [{ required: true, message: t('login.placeholder.username'), trigger: 'blur' }],
     password: [{ required: true, message: t('login.placeholder.password'), trigger: 'blur' }]
   }))
 
+  // Logic Note: Reactive state 'loading' stores mutable runtime data used by this component.
   const loading = ref(false)
 
   onMounted(() => {
@@ -274,10 +287,14 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/views/auth/login/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @import './style.css';
 </style>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/views/auth/login/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   :deep(.el-select__wrapper) {
     height: 40px !important;
   }

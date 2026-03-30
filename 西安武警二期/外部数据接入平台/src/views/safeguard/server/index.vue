@@ -1,5 +1,7 @@
 <!-- 资源监控页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/safeguard/server/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-5 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :sm="12" :lg="8" v-for="item in monitorCards" :key="item.name">
@@ -42,8 +44,11 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/safeguard/server/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'SafeguardServer' })
 
+  // Logic Note: Reactive state 'monitorCards' stores mutable runtime data used by this component.
   const monitorCards = ref([
     { name: 'Master 状态', desc: '当前调度主节点负载稳定', status: '正常', type: 'success', percent: 82 },
     { name: 'Worker 状态', desc: '2 个 Worker 需关注负载峰值', status: '告警', type: 'warning', percent: 68 },
@@ -52,6 +57,7 @@
     { name: 'Carte 状态', desc: '1 个节点通信超时', status: '异常', type: 'danger', percent: 41 }
   ])
 
+  // Logic Note: Reactive state 'monitorTable' stores mutable runtime data used by this component.
   const monitorTable = ref([
     {
       target: 'Master-01',

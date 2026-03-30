@@ -1,9 +1,13 @@
 <!-- 视频播放器组件：https://h5player.bytedance.com/-->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/media/art-video-player/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div :id="playerId" />
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/media/art-video-player/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import Player from 'xgplayer'
   import 'xgplayer/dist/index.min.css'
 

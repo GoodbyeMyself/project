@@ -1,5 +1,7 @@
 <!-- 锁屏 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/layouts/art-screen-lock/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="layout-lock-screen">
     <!-- 开发者工具警告覆盖层 -->
     <div
@@ -107,6 +109,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/layouts/art-screen-lock/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { Lock, Unlock } from '@element-plus/icons-vue'
   import type { FormInstance, FormRules } from 'element-plus'
   import { useI18n } from 'vue-i18n'
@@ -126,18 +130,24 @@
 
   // 响应式数据
   const visible = ref<boolean>(false)
+  // Logic Note: Reactive state 'lockInputRef' stores mutable runtime data used by this component.
   const lockInputRef = ref<any>(null)
+  // Logic Note: Reactive state 'unlockInputRef' stores mutable runtime data used by this component.
   const unlockInputRef = ref<any>(null)
+  // Logic Note: Reactive state 'showDevToolsWarning' stores mutable runtime data used by this component.
   const showDevToolsWarning = ref<boolean>(false)
 
   // 表单相关
   const formRef = ref<FormInstance>()
+  // Logic Note: Reactive state 'unlockFormRef' stores mutable runtime data used by this component.
   const unlockFormRef = ref<FormInstance>()
 
+  // Logic Note: Reactive state 'formData' stores mutable runtime data used by this component.
   const formData = reactive({
     password: ''
   })
 
+  // Logic Note: Reactive state 'unlockForm' stores mutable runtime data used by this component.
   const unlockForm = reactive({
     password: ''
   })
@@ -288,6 +298,7 @@
     const threshold = 160
     let devToolsInterval: ReturnType<typeof setInterval> | null = null
 
+    // Logic Note: Handler 'checkDevTools' encapsulates a single interaction or data-processing flow.
     const checkDevTools = () => {
       if (!isLock.value || isMobile()) return
 
@@ -342,12 +353,14 @@
     }
   }
 
+  // Logic Note: Handler 'handleDialogOpen' encapsulates a single interaction or data-processing flow.
   const handleDialogOpen = () => {
     setTimeout(() => {
       lockInputRef.value?.input?.focus()
     }, 100)
   }
 
+  // Logic Note: Handler 'handleLock' encapsulates a single interaction or data-processing flow.
   const handleLock = async () => {
     if (!formRef.value) return
 
@@ -364,6 +377,7 @@
     })
   }
 
+  // Logic Note: Handler 'handleUnlock' encapsulates a single interaction or data-processing flow.
   const handleUnlock = async () => {
     if (!unlockFormRef.value) return
 
@@ -399,10 +413,12 @@
     })
   }
 
+  // Logic Note: Handler 'toLogin' encapsulates a single interaction or data-processing flow.
   const toLogin = () => {
     userStore.logOut()
   }
 
+  // Logic Note: Handler 'openLockScreen' encapsulates a single interaction or data-processing flow.
   const openLockScreen = () => {
     visible.value = true
   }
@@ -451,6 +467,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/components/core/layouts/art-screen-lock/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .layout-lock-screen :deep(.el-dialog) {
     border-radius: 10px;
   }

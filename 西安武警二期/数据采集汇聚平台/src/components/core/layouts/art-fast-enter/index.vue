@@ -1,5 +1,7 @@
 <!-- 顶部快速入口面板 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/layouts/art-fast-enter/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElPopover
     ref="popoverRef"
     :width="700"
@@ -62,12 +64,15 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/layouts/art-fast-enter/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useFastEnter } from '@/hooks/core/useFastEnter'
   import type { FastEnterApplication, FastEnterQuickLink } from '@/types/config'
 
   defineOptions({ name: 'ArtFastEnter' })
 
   const router = useRouter()
+  // Logic Note: Reactive state 'popoverRef' stores mutable runtime data used by this component.
   const popoverRef = ref()
 
   // 使用快速入口配置
@@ -78,6 +83,7 @@
    * @param routeName 路由名称
    * @param link 外部链接
    */
+  // Logic Note: Handler 'handleNavigate' encapsulates a single interaction or data-processing flow.
   const handleNavigate = (routeName?: string, link?: string): void => {
     const targetPath = routeName || link
 
@@ -99,6 +105,7 @@
    * 处理应用项点击
    * @param application 应用配置对象
    */
+  // Logic Note: Handler 'handleApplicationClick' encapsulates a single interaction or data-processing flow.
   const handleApplicationClick = (application: FastEnterApplication): void => {
     handleNavigate(application.routeName, application.link)
   }
@@ -107,6 +114,7 @@
    * 处理快速链接点击
    * @param quickLink 快速链接配置对象
    */
+  // Logic Note: Handler 'handleQuickLinkClick' encapsulates a single interaction or data-processing flow.
   const handleQuickLinkClick = (quickLink: FastEnterQuickLink): void => {
     handleNavigate(quickLink.routeName, quickLink.link)
   }

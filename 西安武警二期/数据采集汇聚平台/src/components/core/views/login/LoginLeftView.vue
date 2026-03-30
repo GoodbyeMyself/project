@@ -1,5 +1,7 @@
 <!-- 登录、注册、忘记密码左侧背景 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/views/login/LoginLeftView.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="login-left-view">
     <div class="logo">
       <ArtLogo class="icon" size="46" />
@@ -71,6 +73,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/views/login/LoginLeftView.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import AppConfig from '@/config'
   import loginIcon from '@imgs/svg/login_icon.svg'
   import { themeAnimation } from '@/utils/ui/animation'
@@ -82,6 +86,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/components/core/views/login/LoginLeftView.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   // 颜色变量定义
   $primary-light-7: var(--el-color-primary-light-7);
   $primary-light-8: var(--el-color-primary-light-8);

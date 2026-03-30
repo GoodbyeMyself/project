@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/widgets/context-menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content">
     <ElButton @contextmenu.prevent="showMenu"> 右键触发菜单 </ElButton>
 
@@ -17,18 +19,23 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/widgets/context-menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, nextTick } from 'vue'
   import ArtMenuRight from '@/components/core/others/art-menu-right/index.vue'
   import type { MenuItemType } from '@/components/core/others/art-menu-right/index.vue'
 
   defineOptions({ name: 'TemplateContextMenu' })
 
+  // Logic Note: Reactive state 'menuRef' stores mutable runtime data used by this component.
   const menuRef = ref<InstanceType<typeof ArtMenuRight>>()
+  // Logic Note: Reactive state 'lastAction' stores mutable runtime data used by this component.
   const lastAction = ref('')
 
   /**
    * 右键菜单选项配置
    */
+  // Logic Note: Computed value 'menuItems' derives UI state from reactive sources and updates automatically.
   const menuItems = computed((): MenuItemType[] => [
     {
       key: 'copy',
@@ -101,6 +108,7 @@
    * 处理菜单项选择
    * @param item 选中的菜单项
    */
+  // Logic Note: Handler 'handleSelect' encapsulates a single interaction or data-processing flow.
   const handleSelect = (item: MenuItemType) => {
     lastAction.value = `${item.label} (${item.key})`
     ElMessage.success(`执行操作: ${item.label}`)
@@ -111,6 +119,7 @@
    * 显示右键菜单
    * @param e 鼠标事件
    */
+  // Logic Note: Handler 'showMenu' encapsulates a single interaction or data-processing flow.
   const showMenu = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -123,6 +132,7 @@
   /**
    * 菜单显示回调
    */
+  // Logic Note: Handler 'onMenuShow' encapsulates a single interaction or data-processing flow.
   const onMenuShow = () => {
     console.log('菜单显示')
   }
@@ -130,6 +140,7 @@
   /**
    * 菜单隐藏回调
    */
+  // Logic Note: Handler 'onMenuHide' encapsulates a single interaction or data-processing flow.
   const onMenuHide = () => {
     console.log('菜单隐藏')
   }

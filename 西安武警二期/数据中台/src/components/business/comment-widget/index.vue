@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/business/comment-widget/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <ElForm @submit.prevent="addComment" class="w-full mx-auto mb-10">
       <ElFormItem prop="author" class="mt-5">
@@ -41,18 +43,23 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/business/comment-widget/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import CommentItem from './widget/CommentItem.vue'
   import { commentList, Comment } from '@/mock/temp/commentDetail'
   const comments = commentList
 
+  // Logic Note: Reactive state 'newComment' stores mutable runtime data used by this component.
   const newComment = ref<Partial<Comment>>({
     author: '',
     content: ''
   })
 
+  // Logic Note: Reactive state 'showReplyForm' stores mutable runtime data used by this component.
   const showReplyForm = ref<number | null>(null)
 
+  // Logic Note: Handler 'addComment' encapsulates a single interaction or data-processing flow.
   const addComment = () => {
     if (!newComment.value.author?.trim() || !newComment.value.content?.trim()) {
       ElMessage.warning('请填写完整的评论信息')
@@ -72,6 +79,7 @@
     ElMessage.success('评论发布成功')
   }
 
+  // Logic Note: Handler 'addReply' encapsulates a single interaction or data-processing flow.
   const addReply = (commentId: number, replyAuthor: string, replyContent: string) => {
     if (!replyAuthor?.trim() || !replyContent?.trim()) {
       ElMessage.warning('请填写完整的回复信息')
@@ -92,10 +100,12 @@
     }
   }
 
+  // Logic Note: Handler 'toggleReply' encapsulates a single interaction or data-processing flow.
   const toggleReply = (commentId: number) => {
     showReplyForm.value = showReplyForm.value === commentId ? null : commentId
   }
 
+  // Logic Note: Handler 'findComment' encapsulates a single interaction or data-processing flow.
   const findComment = (comments: Comment[], commentId: number): Comment | undefined => {
     for (const comment of comments) {
       if (comment.id === commentId) {

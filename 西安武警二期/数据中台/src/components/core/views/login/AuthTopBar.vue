@@ -1,5 +1,7 @@
 <!-- 授权页右上角组件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/views/login/AuthTopBar.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     class="absolute w-full flex-cb top-4.5 z-10 flex-c !justify-end max-[1180px]:!justify-between"
   >
@@ -71,6 +73,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/views/login/AuthTopBar.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useI18n } from 'vue-i18n'
   import { useSettingStore } from '@/store/modules/setting'
   import { useUserStore } from '@/store/modules/user'
@@ -91,12 +95,14 @@
   const mainColors = AppConfig.systemMainColor
   const color = systemThemeColor // css v-bind 使用
 
+  // Logic Note: Handler 'changeLanguage' encapsulates a single interaction or data-processing flow.
   const changeLanguage = (lang: LanguageEnum) => {
     if (locale.value === lang) return
     locale.value = lang
     userStore.setLanguage(lang)
   }
 
+  // Logic Note: Handler 'changeThemeColor' encapsulates a single interaction or data-processing flow.
   const changeThemeColor = (color: string) => {
     if (systemThemeColor.value === color) return
     settingStore.setElementTheme(color)
@@ -105,6 +111,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/views/login/AuthTopBar.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .color-dots {
     pointer-events: none;
     backdrop-filter: blur(10px);

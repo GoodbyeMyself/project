@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/report-analysis/drilldown/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -35,6 +37,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/report-analysis/drilldown/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -48,8 +52,10 @@
   }
 
   const metricOptions = ['模型覆盖率', '同步成功率', '资产完备率']
+  // Logic Note: Reactive state 'selectedMetric' stores mutable runtime data used by this component.
   const selectedMetric = ref(metricOptions[0])
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<DrilldownRow[]>([
     {
       dimension: '人员域',
@@ -65,10 +71,12 @@
     }
   ])
 
+  // Logic Note: Handler 'loadMetricData' encapsulates a single interaction or data-processing flow.
   const loadMetricData = () => {
     ElMessage.success(`已完成 ${selectedMetric.value} 指标下钻分析`)
   }
 
+  // Logic Note: Handler 'exportReport' encapsulates a single interaction or data-processing flow.
   const exportReport = () => {
     ElMessage.success('下钻报告已导出')
   }

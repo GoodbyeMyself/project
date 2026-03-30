@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/dashboard/analysis/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :lg="16">
@@ -120,6 +122,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/dashboard/analysis/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ColumnOption } from '@/types'
 
   defineOptions({ name: 'ReportComplianceMonitor' })
@@ -143,6 +147,7 @@
     statusType: 'success' | 'warning' | 'info'
   }
 
+  // Logic Note: Reactive state 'complianceRules' stores mutable runtime data used by this component.
   const complianceRules = ref<ComplianceRule[]>([
     {
       id: 1,
@@ -174,6 +179,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'complianceSummary' stores mutable runtime data used by this component.
   const complianceSummary = reactive({
     batchNo: '20260330-01',
     passCount: 2,
@@ -181,12 +187,14 @@
     checkTime: '2026-03-30 14:30'
   })
 
+  // Logic Note: Reactive state 'complianceTimeline' stores mutable runtime data used by this component.
   const complianceTimeline = ref([
     { time: '14:00', content: '批次材料进入待校验队列', type: 'primary' },
     { time: '14:12', content: '自动校验完成，识别到 2 项异常', type: 'warning' },
     { time: '14:30', content: '生成人工复核通知', type: 'danger' }
   ])
 
+  // Logic Note: Reactive state 'alertRecords' stores mutable runtime data used by this component.
   const alertRecords = ref<AlertRecord[]>([
     {
       id: 1,
@@ -234,9 +242,12 @@
     { prop: 'status', label: '状态', width: 110, useSlot: true }
   ]
 
+  // Logic Note: Computed value 'dangerCount' derives UI state from reactive sources and updates automatically.
   const dangerCount = computed(() => alertRecords.value.filter((item) => item.level === '严重').length)
+  // Logic Note: Computed value 'warningCount' derives UI state from reactive sources and updates automatically.
   const warningCount = computed(() => alertRecords.value.filter((item) => item.level === '一般').length)
 
+  // Logic Note: Computed value 'monitorMetrics' derives UI state from reactive sources and updates automatically.
   const monitorMetrics = computed(() => [
     { label: '实时接入成功率', value: '98.6%' },
     { label: '平均校验耗时', value: '4.8 分钟' },
@@ -244,6 +255,7 @@
     { label: '自动闭环率', value: '76%' }
   ])
 
+  // Logic Note: Handler 'runComplianceCheck' encapsulates a single interaction or data-processing flow.
   const runComplianceCheck = () => {
     complianceSummary.checkTime = '2026-03-30 15:00'
     ElMessage.success('已触发新一轮合规校验')
@@ -251,6 +263,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/dashboard/analysis/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .summary-item {
     display: flex;
     align-items: center;

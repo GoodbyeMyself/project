@@ -1,5 +1,7 @@
 <!-- 表格按钮 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/forms/art-button-table/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     :class="[
       'inline-flex items-center justify-center min-w-8 h-8 px-2.5 mr-2.5 text-sm c-p rounded-md align-middle',
@@ -13,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/forms/art-button-table/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'ArtButtonTable' })
 
   interface Props {
@@ -53,6 +57,7 @@
     return props.iconClass || (props.type ? defaultButtons[props.type]?.class : '') || ''
   })
 
+  // Logic Note: Handler 'handleClick' encapsulates a single interaction or data-processing flow.
   const handleClick = () => {
     emit('click')
   }

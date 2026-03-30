@@ -1,5 +1,7 @@
 <!-- 留言管理页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/article/comment/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <h1 class="text-4xl font-medium mt-5">留言墙</h1>
     <p class="mt-3.5 text-g-600">每一份留言都记录了您的想法，也为我们提供了珍贵的回忆</p>
@@ -73,6 +75,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/article/comment/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { commentList } from '@/mock/temp/commentList'
 
   defineOptions({ name: 'ArticleComment' })
@@ -89,7 +93,9 @@
 
   const COLOR_LIST = ['#D8F8FF', '#FDDFD9', '#FCE6F0', '#D3F8F0', '#FFEABC', '#F5E1FF', '#E1E6FE']
 
+  // Logic Note: Reactive state 'showDrawer' stores mutable runtime data used by this component.
   const showDrawer = ref(false)
+  // Logic Note: Reactive state 'clickItem' stores mutable runtime data used by this component.
   const clickItem = ref<CommentItem>({
     id: 1,
     date: '2024-9-3',
@@ -103,6 +109,7 @@
   /**
    * 为评论列表分配随机颜色
    */
+  // Logic Note: Computed value 'commentsWithColors' derives UI state from reactive sources and updates automatically.
   const commentsWithColors = computed(() => {
     let lastColorIndex = -1
 
@@ -125,6 +132,7 @@
   /**
    * 打开评论详情抽屉
    */
+  // Logic Note: Handler 'openDrawer' encapsulates a single interaction or data-processing flow.
   const openDrawer = (item: CommentItem) => {
     showDrawer.value = true
     clickItem.value = item

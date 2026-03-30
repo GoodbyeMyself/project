@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/examples/forms/search-bar.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard>
       <template #header>
@@ -26,10 +28,14 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/examples/forms/search-bar.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'CollectionProtocolAdapter' })
 
+  // Logic Note: Reactive state 'searchForm' stores mutable runtime data used by this component.
   const searchForm = ref({ protocol: '', scene: '', status: '' })
 
+  // Logic Note: Computed value 'searchItems' derives UI state from reactive sources and updates automatically.
   const searchItems = computed(() => [
     {
       key: 'protocol',
@@ -63,6 +69,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'adapterRows' stores mutable runtime data used by this component.
   const adapterRows = ref([
     { protocol: 'Hbase 输入', scene: '历史轨迹归档接入', status: '启用' },
     { protocol: '关系型数据库表输入', scene: '业务台账同步', status: '启用' },
@@ -72,6 +79,8 @@
     { protocol: 'Excel 读取', scene: '离线模板导入', status: '启用' }
   ])
 
+  // Logic Note: Handler 'searchAdapter' encapsulates a single interaction or data-processing flow.
   const searchAdapter = () => ElMessage.success('已执行协议适配检索')
+  // Logic Note: Handler 'resetSearch' encapsulates a single interaction or data-processing flow.
   const resetSearch = () => ElMessage.info('已重置检索条件')
 </script>

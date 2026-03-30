@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/system/user/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard>
       <template #header>
@@ -113,6 +115,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/system/user/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ColumnOption } from '@/types'
 
   defineOptions({ name: 'NotificationContentCustomization' })
@@ -136,17 +140,28 @@
     description: string
   }
 
+  // Logic Note: Reactive state 'activeTab' stores mutable runtime data used by this component.
   const activeTab = ref('resource')
+  // Logic Note: Reactive state 'resourceKeyword' stores mutable runtime data used by this component.
   const resourceKeyword = ref('')
+  // Logic Note: Reactive state 'resourceDialogVisible' stores mutable runtime data used by this component.
   const resourceDialogVisible = ref(false)
+  // Logic Note: Reactive state 'catalogDialogVisible' stores mutable runtime data used by this component.
   const catalogDialogVisible = ref(false)
+  // Logic Note: Reactive state 'detailDialogVisible' stores mutable runtime data used by this component.
   const detailDialogVisible = ref(false)
+  // Logic Note: Reactive state 'resourceMode' stores mutable runtime data used by this component.
   const resourceMode = ref<'add' | 'edit'>('add')
+  // Logic Note: Reactive state 'catalogMode' stores mutable runtime data used by this component.
   const catalogMode = ref<'add' | 'edit'>('add')
+  // Logic Note: Reactive state 'editingResourceId' stores mutable runtime data used by this component.
   const editingResourceId = ref<number | null>(null)
+  // Logic Note: Reactive state 'editingCatalogId' stores mutable runtime data used by this component.
   const editingCatalogId = ref<number | null>(null)
+  // Logic Note: Reactive state 'currentResource' stores mutable runtime data used by this component.
   const currentResource = ref<DataResource | null>(null)
 
+  // Logic Note: Reactive state 'resources' stores mutable runtime data used by this component.
   const resources = ref<DataResource[]>([
     {
       id: 1,
@@ -177,6 +192,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'catalogs' stores mutable runtime data used by this component.
   const catalogs = ref<ResourceCatalog[]>([
     {
       id: 1,
@@ -204,6 +220,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'resourceForm' stores mutable runtime data used by this component.
   const resourceForm = reactive({
     name: '',
     code: '',
@@ -211,6 +228,7 @@
     description: ''
   })
 
+  // Logic Note: Reactive state 'catalogForm' stores mutable runtime data used by this component.
   const catalogForm = reactive({
     name: '',
     code: '',
@@ -235,6 +253,7 @@
     { prop: 'operation', label: '操作', minWidth: 180, useSlot: true, fixed: 'right' }
   ]
 
+  // Logic Note: Computed value 'filteredResources' derives UI state from reactive sources and updates automatically.
   const filteredResources = computed(() => {
     const keyword = resourceKeyword.value.trim()
     if (!keyword) {
@@ -247,6 +266,7 @@
     )
   })
 
+  // Logic Note: Computed value 'filteredCatalogs' derives UI state from reactive sources and updates automatically.
   const filteredCatalogs = computed(() => {
     const keyword = resourceKeyword.value.trim()
     if (!keyword) {
@@ -256,13 +276,16 @@
     return catalogs.value.filter((item) => item.name.includes(keyword) || item.code.includes(keyword))
   })
 
+  // Logic Note: Computed value 'resourceDialogTitle' derives UI state from reactive sources and updates automatically.
   const resourceDialogTitle = computed(() =>
     resourceMode.value === 'add' ? '新增数据资源' : '修改数据资源'
   )
+  // Logic Note: Computed value 'catalogDialogTitle' derives UI state from reactive sources and updates automatically.
   const catalogDialogTitle = computed(() =>
     catalogMode.value === 'add' ? '新增资源目录' : '修改资源目录'
   )
 
+  // Logic Note: Handler 'resetResourceForm' encapsulates a single interaction or data-processing flow.
   const resetResourceForm = () => {
     resourceForm.name = ''
     resourceForm.code = ''
@@ -270,12 +293,14 @@
     resourceForm.description = ''
   }
 
+  // Logic Note: Handler 'resetCatalogForm' encapsulates a single interaction or data-processing flow.
   const resetCatalogForm = () => {
     catalogForm.name = ''
     catalogForm.code = ''
     catalogForm.description = ''
   }
 
+  // Logic Note: Handler 'openResourceDialog' encapsulates a single interaction or data-processing flow.
   const openResourceDialog = (mode: 'add' | 'edit', row?: DataResource) => {
     resourceMode.value = mode
     resourceDialogVisible.value = true
@@ -293,6 +318,7 @@
     resetResourceForm()
   }
 
+  // Logic Note: Handler 'openCatalogDialog' encapsulates a single interaction or data-processing flow.
   const openCatalogDialog = (mode: 'add' | 'edit', row?: ResourceCatalog) => {
     catalogMode.value = mode
     catalogDialogVisible.value = true
@@ -309,6 +335,7 @@
     resetCatalogForm()
   }
 
+  // Logic Note: Handler 'submitResource' encapsulates a single interaction or data-processing flow.
   const submitResource = () => {
     if (resourceMode.value === 'add') {
       resources.value.unshift({
@@ -336,6 +363,7 @@
     resourceDialogVisible.value = false
   }
 
+  // Logic Note: Handler 'submitCatalog' encapsulates a single interaction or data-processing flow.
   const submitCatalog = () => {
     if (catalogMode.value === 'add') {
       catalogs.value.unshift({
@@ -361,16 +389,19 @@
     catalogDialogVisible.value = false
   }
 
+  // Logic Note: Handler 'deleteResource' encapsulates a single interaction or data-processing flow.
   const deleteResource = (id: number) => {
     resources.value = resources.value.filter((item) => item.id !== id)
     ElMessage.success('已删除数据资源')
   }
 
+  // Logic Note: Handler 'deleteCatalog' encapsulates a single interaction or data-processing flow.
   const deleteCatalog = (id: number) => {
     catalogs.value = catalogs.value.filter((item) => item.id !== id)
     ElMessage.success('已删除资源目录')
   }
 
+  // Logic Note: Handler 'viewResourceDetail' encapsulates a single interaction or data-processing flow.
   const viewResourceDetail = (row: DataResource) => {
     currentResource.value = row
     detailDialogVisible.value = true

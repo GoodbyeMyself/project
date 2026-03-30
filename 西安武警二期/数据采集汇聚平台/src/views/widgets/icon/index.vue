@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/widgets/icon/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="space-y-5 mb-5">
     <div class="text-2xl font-medium mt-5 max-sm:text-2xl max-sm:mt-3">图标</div>
     <div class="text-g-800">
@@ -104,6 +106,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/widgets/icon/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import ArtSvgIcon from '@/components/core/base/art-svg-icon/index.vue'
 
   defineOptions({ name: 'IconPage' })

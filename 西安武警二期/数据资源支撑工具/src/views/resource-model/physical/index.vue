@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/physical/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -48,6 +50,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/physical/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { ElMessage, ElMessageBox } from 'element-plus'
 
@@ -75,6 +79,7 @@
     '测试报告结果查询'
   ]
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<PhysicalRow[]>([
     {
       id: 1,
@@ -98,6 +103,7 @@
     }
   ])
 
+  // Logic Note: Handler 'createPhysicalModel' encapsulates a single interaction or data-processing flow.
   const createPhysicalModel = () => {
     rows.value.unshift({
       id: Date.now(),
@@ -112,10 +118,12 @@
     ElMessage.success('已新增物理模型')
   }
 
+  // Logic Note: Handler 'autoConvert' encapsulates a single interaction or data-processing flow.
   const autoConvert = () => {
     ElMessage.success('自动转换任务已提交，正在生成物理模型')
   }
 
+  // Logic Note: Handler 'runValidation' encapsulates a single interaction or data-processing flow.
   const runValidation = () => {
     rows.value.forEach((item) => {
       item.testResult = '通过'
@@ -124,16 +132,19 @@
     ElMessage.success('验证与测试执行完成')
   }
 
+  // Logic Note: Handler 'migrateModel' encapsulates a single interaction or data-processing flow.
   const migrateModel = (row: PhysicalRow) => {
     row.migrationStatus = '已完成'
     row.updatedAt = new Date().toLocaleString()
     ElMessage.success(`${row.name} 迁移完成`)
   }
 
+  // Logic Note: Handler 'viewReport' encapsulates a single interaction or data-processing flow.
   const viewReport = (row: PhysicalRow) => {
     ElMessage.info(`已打开 ${row.name} 的测试报告`)
   }
 
+  // Logic Note: Handler 'removeModel' encapsulates a single interaction or data-processing flow.
   const removeModel = async (id: number) => {
     try {
       await ElMessageBox.confirm('删除后将不可恢复，是否继续？', '删除确认', { type: 'warning' })

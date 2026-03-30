@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/widgets/watermark/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <!-- 基础文字水印 -->
     <ElCard class="mb-7.5">
@@ -54,6 +56,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/widgets/watermark/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useSettingStore } from '@/store/modules/setting'
 
   defineOptions({ name: 'Watermark' })
@@ -63,11 +67,13 @@
   /**
    * 水印图片 URL
    */
+  // Logic Note: Reactive state 'watermarkImage' stores mutable runtime data used by this component.
   const watermarkImage = ref('https://element-plus.org/images/element-plus-logo.svg')
 
   /**
    * 切换全局水印显示状态
    */
+  // Logic Note: Handler 'handleWatermarkVisible' encapsulates a single interaction or data-processing flow.
   const handleWatermarkVisible = () => {
     useSettingStore().setWatermarkVisible(!settingStore.watermarkVisible)
     ElMessage.success(settingStore.watermarkVisible ? '已显示全局水印' : '已隐藏全局水印')

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/template/pricing/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="pt-24 px-20 max-md:!pt-15 max-sm:!px-5 max-md:!px-8 bg-transparent !border-none">
     <div class="mb-10 text-center">
       <h1 class="mb-2 text-4xl font-medium max-sm:text-3xl">超过 53,476 位信赖的开发者</h1>
@@ -55,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/template/pricing/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { Check, Close } from '@element-plus/icons-vue'
 
@@ -73,6 +77,7 @@
     features: Feature[]
   }
 
+  // Logic Note: Reactive state 'pricingPlans' stores mutable runtime data used by this component.
   const pricingPlans = ref<PricingPlan[]>([
     {
       type: 'single',

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/examples/socket-chat/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <div class="mb-15 text-center">
       <h1 class="my-4 text-2xl font-semibold leading-tight">WebSocket 连接示例</h1>
@@ -182,6 +184,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/examples/socket-chat/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import WebSocketClient from '@/utils/socket'
   import { ElMessage } from 'element-plus'
 
@@ -192,8 +196,11 @@
 
   // 连接状态
   const isConnecting = ref(false)
+  // Logic Note: Reactive state 'isConnected' stores mutable runtime data used by this component.
   const isConnected = ref(false)
+  // Logic Note: Reactive state 'reconnectCount' stores mutable runtime data used by this component.
   const reconnectCount = ref(0)
+  // Logic Note: Reactive state 'messageCount' stores mutable runtime data used by this component.
   const messageCount = ref(0)
 
   // 用于清理 watch 的函数
@@ -207,6 +214,7 @@
     heartbeat: true
   })
 
+  // Logic Note: Reactive state 'messageForm' stores mutable runtime data used by this component.
   const messageForm = ref({
     type: 'text',
     content: ''
@@ -221,6 +229,7 @@
     }>
   >([])
 
+  // Logic Note: Reactive state 'logList' stores mutable runtime data used by this component.
   const logList = ref<
     Array<{
       type: 'info' | 'success' | 'warning' | 'error'
@@ -239,6 +248,7 @@
   /**
    * 添加日志
    */
+  // Logic Note: Handler 'addLog' encapsulates a single interaction or data-processing flow.
   const addLog = (type: 'info' | 'success' | 'warning' | 'error', message: string) => {
     logList.value.unshift({
       type,
@@ -255,6 +265,7 @@
   /**
    * 添加消息记录
    */
+  // Logic Note: Handler 'addMessage' encapsulates a single interaction or data-processing flow.
   const addMessage = (type: 'sent' | 'received', content: string) => {
     messageList.value.unshift({
       type,
@@ -271,6 +282,7 @@
   /**
    * 处理WebSocket消息
    */
+  // Logic Note: Handler 'handleSocketMessage' encapsulates a single interaction or data-processing flow.
   const handleSocketMessage = (event: MessageEvent) => {
     messageCount.value++
     addMessage('received', event.data)
@@ -280,6 +292,7 @@
   /**
    * 连接WebSocket
    */
+  // Logic Note: Handler 'handleConnect' encapsulates a single interaction or data-processing flow.
   const handleConnect = () => {
     if (isConnecting.value || isConnected.value) {
       return
@@ -345,6 +358,7 @@
   /**
    * 断开连接
    */
+  // Logic Note: Handler 'handleDisconnect' encapsulates a single interaction or data-processing flow.
   const handleDisconnect = () => {
     if (wsClient.value) {
       wsClient.value.close()
@@ -368,6 +382,7 @@
   /**
    * 重新连接
    */
+  // Logic Note: Handler 'handleReconnect' encapsulates a single interaction or data-processing flow.
   const handleReconnect = () => {
     handleDisconnect()
     setTimeout(() => {
@@ -378,6 +393,7 @@
   /**
    * 发送消息
    */
+  // Logic Note: Handler 'handleSendMessage' encapsulates a single interaction or data-processing flow.
   const handleSendMessage = () => {
     if (!isConnected.value || !wsClient.value) {
       ElMessage.warning('请先建立WebSocket连接')
@@ -417,6 +433,7 @@
   /**
    * 清空消息表单
    */
+  // Logic Note: Handler 'clearMessageForm' encapsulates a single interaction or data-processing flow.
   const clearMessageForm = () => {
     messageForm.value.content = ''
   }
@@ -424,6 +441,7 @@
   /**
    * 清空消息记录
    */
+  // Logic Note: Handler 'clearMessages' encapsulates a single interaction or data-processing flow.
   const clearMessages = () => {
     messageList.value = []
   }
@@ -431,6 +449,7 @@
   /**
    * 清空日志
    */
+  // Logic Note: Handler 'clearLogs' encapsulates a single interaction or data-processing flow.
   const clearLogs = () => {
     logList.value = []
   }
@@ -455,6 +474,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/views/examples/socket-chat/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .message-container {

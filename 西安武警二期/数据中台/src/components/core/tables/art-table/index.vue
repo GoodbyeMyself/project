@@ -3,6 +3,8 @@
 <!-- 扩展功能：分页组件、渲染自定义列、loading、表格全局边框、斑马纹、表格尺寸、表头背景配置 -->
 <!-- 获取 ref：默认暴露了 elTableRef 外部通过 ref.value.elTableRef 可以调用 el-table 方法 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/tables/art-table/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-table" :class="{ 'is-empty': isEmpty }" :style="containerHeight">
     <ElTable ref="elTableRef" v-loading="!!loading" v-bind="mergedTableProps">
       <template v-for="col in columns" :key="col.prop || col.type">
@@ -72,6 +74,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/tables/art-table/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref, computed, nextTick, watchEffect, getCurrentInstance, useAttrs } from 'vue'
   import type { ElTable, TableProps } from 'element-plus'
   import { storeToRefs } from 'pinia'
@@ -84,8 +88,11 @@
   defineOptions({ name: 'ArtTable' })
 
   const { width } = useWindowSize()
+  // Logic Note: Reactive state 'elTableRef' stores mutable runtime data used by this component.
   const elTableRef = ref<InstanceType<typeof ElTable> | null>(null)
+  // Logic Note: Reactive state 'paginationRef' stores mutable runtime data used by this component.
   const paginationRef = ref<HTMLElement>()
+  // Logic Note: Reactive state 'tableHeaderRef' stores mutable runtime data used by this component.
   const tableHeaderRef = ref<HTMLElement>()
   const tableStore = useTableStore()
   const { isBorder, isZebra, tableSize, isFullScreen, isHeaderBackground } = storeToRefs(tableStore)
@@ -156,6 +163,7 @@
     DESKTOP: 'total, prev, pager, next, sizes, jumper'
   }
 
+  // Logic Note: Computed value 'layout' derives UI state from reactive sources and updates automatically.
   const layout = computed(() => {
     if (width.value < 768) {
       return LAYOUT.MOBILE
@@ -192,7 +200,9 @@
   // 数据是否为空
   const isEmpty = computed(() => props.data?.length === 0)
 
+  // Logic Note: Reactive state 'paginationHeight' stores mutable runtime data used by this component.
   const paginationHeight = ref(0)
+  // Logic Note: Reactive state 'tableHeaderHeight' stores mutable runtime data used by this component.
   const tableHeaderHeight = ref(0)
 
   // 使用 useResizeObserver 监听分页器高度变化
@@ -255,6 +265,7 @@
     return propName in rawProps || kebabName in rawProps
   }
 
+  // Logic Note: Computed value 'mergedTableProps' derives UI state from reactive sources and updates automatically.
   const mergedTableProps = computed(() => ({
     ...attrs,
     ...props,
@@ -364,5 +375,7 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/tables/art-table/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @use './style';
 </style>

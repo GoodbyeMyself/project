@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/article/list/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <template v-if="route.name === 'AlarmGroupManage'">
       <ElRow :gutter="20">
@@ -173,6 +175,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/article/list/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ColumnOption } from '@/types'
   import { useRoute } from 'vue-router'
 
@@ -201,19 +205,27 @@
 
   const route = useRoute()
 
+  // Logic Note: Reactive state 'keyword' stores mutable runtime data used by this component.
   const keyword = ref('')
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'detailVisible' stores mutable runtime data used by this component.
   const detailVisible = ref(false)
+  // Logic Note: Reactive state 'mode' stores mutable runtime data used by this component.
   const mode = ref<'add' | 'edit'>('add')
+  // Logic Note: Reactive state 'editingId' stores mutable runtime data used by this component.
   const editingId = ref<number | null>(null)
+  // Logic Note: Reactive state 'currentDevice' stores mutable runtime data used by this component.
   const currentDevice = ref<DeviceItem | null>(null)
 
+  // Logic Note: Reactive state 'devices' stores mutable runtime data used by this component.
   const devices = ref<DeviceItem[]>([
     { id: 1, name: '边境雷达一号', ip: '10.1.1.21', protocol: 'MQTT', group: '一线设备', status: '在线', statusType: 'success', abnormal: false },
     { id: 2, name: '卡口抓拍终端', ip: '10.1.1.35', protocol: 'HTTP', group: '视频采集', status: '异常', statusType: 'danger', abnormal: true },
     { id: 3, name: '巡逻车载终端', ip: '10.1.2.18', protocol: 'TCP', group: '移动设备', status: '离线', statusType: 'warning', abnormal: true }
   ])
 
+  // Logic Note: Reactive state 'deviceForm' stores mutable runtime data used by this component.
   const deviceForm = reactive({ name: '', ip: '', protocol: 'MQTT', group: '' })
 
   const deviceColumns: ColumnOption[] = [
@@ -226,15 +238,19 @@
     { prop: 'operation', label: '操作', minWidth: 220, useSlot: true, fixed: 'right' }
   ]
 
+  // Logic Note: Computed value 'filteredDevices' derives UI state from reactive sources and updates automatically.
   const filteredDevices = computed(() => {
     const text = keyword.value.trim()
     if (!text) return devices.value
     return devices.value.filter((item) => item.name.includes(text) || item.ip.includes(text) || item.group.includes(text))
   })
 
+  // Logic Note: Computed value 'abnormalDevices' derives UI state from reactive sources and updates automatically.
   const abnormalDevices = computed(() => devices.value.filter((item) => item.abnormal))
+  // Logic Note: Computed value 'dialogTitle' derives UI state from reactive sources and updates automatically.
   const dialogTitle = computed(() => (mode.value === 'add' ? '新增设备连接' : '编辑设备连接'))
 
+  // Logic Note: Handler 'resetForm' encapsulates a single interaction or data-processing flow.
   const resetForm = () => {
     deviceForm.name = ''
     deviceForm.ip = ''
@@ -242,6 +258,7 @@
     deviceForm.group = ''
   }
 
+  // Logic Note: Handler 'openDialog' encapsulates a single interaction or data-processing flow.
   const openDialog = (nextMode: 'add' | 'edit', row?: DeviceItem) => {
     mode.value = nextMode
     dialogVisible.value = true
@@ -257,6 +274,7 @@
     deviceForm.group = row.group
   }
 
+  // Logic Note: Handler 'submitDevice' encapsulates a single interaction or data-processing flow.
   const submitDevice = () => {
     if (mode.value === 'add') {
       devices.value.unshift({
@@ -283,29 +301,39 @@
     dialogVisible.value = false
   }
 
+  // Logic Note: Handler 'deleteDevice' encapsulates a single interaction or data-processing flow.
   const deleteDevice = (id: number) => {
     devices.value = devices.value.filter((item) => item.id !== id)
     ElMessage.success('已删除设备连接')
   }
 
+  // Logic Note: Handler 'viewDetail' encapsulates a single interaction or data-processing flow.
   const viewDetail = (row: DeviceItem) => {
     currentDevice.value = row
     detailVisible.value = true
   }
 
+  // Logic Note: Reactive state 'alarmKeyword' stores mutable runtime data used by this component.
   const alarmKeyword = ref('')
+  // Logic Note: Reactive state 'alarmDialogVisible' stores mutable runtime data used by this component.
   const alarmDialogVisible = ref(false)
+  // Logic Note: Reactive state 'alarmDetailVisible' stores mutable runtime data used by this component.
   const alarmDetailVisible = ref(false)
+  // Logic Note: Reactive state 'alarmMode' stores mutable runtime data used by this component.
   const alarmMode = ref<'add' | 'edit'>('add')
+  // Logic Note: Reactive state 'editingAlarmId' stores mutable runtime data used by this component.
   const editingAlarmId = ref<number | null>(null)
+  // Logic Note: Reactive state 'currentAlarmGroup' stores mutable runtime data used by this component.
   const currentAlarmGroup = ref<AlarmGroupItem | null>(null)
 
+  // Logic Note: Reactive state 'alarmGroups' stores mutable runtime data used by this component.
   const alarmGroups = ref<AlarmGroupItem[]>([
     { id: 1, name: '边境设备值守组', scope: '边境雷达与卡口设备', owner: '张伟', level: '一级响应', levelType: 'danger', members: '12 人' },
     { id: 2, name: '平台运维告警组', scope: '采集链路与存储节点', owner: '李强', level: '二级响应', levelType: 'warning', members: '8 人' },
     { id: 3, name: '夜间备份巡检组', scope: '备份恢复与留存任务', owner: '王敏', level: '三级响应', levelType: 'success', members: '6 人' }
   ])
 
+  // Logic Note: Reactive state 'alarmForm' stores mutable runtime data used by this component.
   const alarmForm = reactive({ name: '', scope: '', owner: '', level: '二级响应' })
 
   const alarmColumns: ColumnOption[] = [
@@ -317,20 +345,24 @@
     { prop: 'operation', label: '操作', minWidth: 180, useSlot: true, fixed: 'right' }
   ]
 
+  // Logic Note: Computed value 'filteredAlarmGroups' derives UI state from reactive sources and updates automatically.
   const filteredAlarmGroups = computed(() => {
     const text = alarmKeyword.value.trim()
     if (!text) return alarmGroups.value
     return alarmGroups.value.filter((item) => item.name.includes(text) || item.scope.includes(text) || item.owner.includes(text))
   })
 
+  // Logic Note: Computed value 'alarmDutySummary' derives UI state from reactive sources and updates automatically.
   const alarmDutySummary = computed(() => [
     { label: '当前告警组', value: `${alarmGroups.value.length} 个` },
     { label: '一级响应组', value: `${alarmGroups.value.filter((item) => item.level === '一级响应').length} 个` },
     { label: '覆盖设备范围', value: '边境设备、采集链路、备份留存' }
   ])
 
+  // Logic Note: Computed value 'alarmDialogTitle' derives UI state from reactive sources and updates automatically.
   const alarmDialogTitle = computed(() => (alarmMode.value === 'add' ? '新增告警组' : '修改告警组'))
 
+  // Logic Note: Handler 'resetAlarmForm' encapsulates a single interaction or data-processing flow.
   const resetAlarmForm = () => {
     alarmForm.name = ''
     alarmForm.scope = ''
@@ -338,6 +370,7 @@
     alarmForm.level = '二级响应'
   }
 
+  // Logic Note: Handler 'openAlarmDialog' encapsulates a single interaction or data-processing flow.
   const openAlarmDialog = (nextMode: 'add' | 'edit', row?: AlarmGroupItem) => {
     alarmMode.value = nextMode
     alarmDialogVisible.value = true
@@ -353,6 +386,7 @@
     alarmForm.level = row.level
   }
 
+  // Logic Note: Handler 'submitAlarmGroup' encapsulates a single interaction or data-processing flow.
   const submitAlarmGroup = () => {
     const levelTypeMap: Record<string, AlarmGroupItem['levelType']> = {
       一级响应: 'danger',
@@ -385,11 +419,13 @@
     alarmDialogVisible.value = false
   }
 
+  // Logic Note: Handler 'deleteAlarmGroup' encapsulates a single interaction or data-processing flow.
   const deleteAlarmGroup = (id: number) => {
     alarmGroups.value = alarmGroups.value.filter((item) => item.id !== id)
     ElMessage.success('已删除告警组')
   }
 
+  // Logic Note: Handler 'viewAlarmGroup' encapsulates a single interaction or data-processing flow.
   const viewAlarmGroup = (row: AlarmGroupItem) => {
     currentAlarmGroup.value = row
     alarmDetailVisible.value = true
@@ -397,6 +433,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/article/list/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .summary-box {
     padding: 12px 14px;
     border: 1px solid var(--el-border-color-light);

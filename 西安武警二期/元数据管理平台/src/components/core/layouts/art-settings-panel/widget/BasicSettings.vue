@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/components/core/layouts/art-settings-panel/widget/BasicSettings.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <SectionTitle :title="$t('setting.basics.title')" class="mt-10" />
     <SettingItem
@@ -12,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/components/core/layouts/art-settings-panel/widget/BasicSettings.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import SectionTitle from './SectionTitle.vue'
   import SettingItem from './SettingItem.vue'
   import { useSettingStore } from '@/store/modules/setting'

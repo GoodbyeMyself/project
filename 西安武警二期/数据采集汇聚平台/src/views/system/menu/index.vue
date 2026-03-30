@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/system/menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElRow :gutter="20">
       <ElCol :xs="24" :lg="15">
@@ -89,6 +91,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/system/menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ElTree } from 'element-plus'
 
   defineOptions({ name: 'NotificationPermissionAuthorization' })
@@ -99,11 +103,16 @@
     children?: PermissionNode[]
   }
 
+  // Logic Note: Reactive state 'permissionTreeRef' stores mutable runtime data used by this component.
   const permissionTreeRef = ref<InstanceType<typeof ElTree> | null>(null)
+  // Logic Note: Reactive state 'selectedRole' stores mutable runtime data used by this component.
   const selectedRole = ref('通知管理员')
+  // Logic Note: Reactive state 'permissionScope' stores mutable runtime data used by this component.
   const permissionScope = ref(['内容定制', '记录追踪', '权限配置'])
+  // Logic Note: Reactive state 'checkedPermissionKeys' stores mutable runtime data used by this component.
   const checkedPermissionKeys = ref([11, 12, 13, 21, 22, 31])
 
+  // Logic Note: Reactive state 'permissionTree' stores mutable runtime data used by this component.
   const permissionTree = ref<PermissionNode[]>([
     {
       id: 1,
@@ -137,6 +146,7 @@
     }
   ])
 
+  // Logic Note: Computed value 'permissionMatrix' derives UI state from reactive sources and updates automatically.
   const permissionMatrix = computed(() => [
     {
       name: '通知管理员',
@@ -152,6 +162,7 @@
     }
   ])
 
+  // Logic Note: Handler 'savePermissionConfig' encapsulates a single interaction or data-processing flow.
   const savePermissionConfig = () => {
     const checkedKeys = permissionTreeRef.value?.getCheckedKeys(false) || []
     checkedPermissionKeys.value = checkedKeys as number[]
@@ -160,6 +171,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/system/menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .summary-row,
   .permission-item {
     padding: 12px 14px;

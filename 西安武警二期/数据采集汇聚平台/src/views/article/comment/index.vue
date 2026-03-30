@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/article/comment/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard>
       <template #header>
@@ -31,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/article/comment/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useRoute } from 'vue-router'
 
   defineOptions({ name: 'ArticleCommentBusinessPage' })
@@ -62,6 +66,7 @@
 
   const route = useRoute()
 
+  // Logic Note: Computed value 'pageConfig' derives UI state from reactive sources and updates automatically.
   const pageConfig = computed<PageConfig>(() => {
     if (route.name === 'AbnormalDataProcess') {
       return {
@@ -145,6 +150,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/article/comment/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .stat-box {
     padding: 16px;
     border: 1px solid var(--el-border-color-light);

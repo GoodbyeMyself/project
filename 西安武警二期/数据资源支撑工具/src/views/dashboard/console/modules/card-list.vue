@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/dashboard/console/modules/card-list.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElRow :gutter="20" class="flex">
     <ElCol v-for="(item, index) in dataList" :key="index" :sm="12" :md="6" :lg="6">
       <div class="art-card relative flex flex-col justify-center h-35 px-5 mb-5 max-sm:mb-4">
@@ -24,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/dashboard/console/modules/card-list.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   interface CardDataItem {
     des: string
     icon: string
@@ -37,6 +41,7 @@
    * 卡片统计数据列表
    * 展示总访问次数、在线访客数、点击量和新用户等核心数据指标
    */
+  // Logic Note: Reactive state 'dataList' stores mutable runtime data used by this component.
   const dataList = reactive<CardDataItem[]>([
     {
       des: '总访问次数',

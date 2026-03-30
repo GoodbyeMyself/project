@@ -1,5 +1,7 @@
 <!-- 地图图表 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/components/core/charts/art-map-chart/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="relative w-full" :style="{ height: 'calc(100vh - 120px)' }">
     <div v-if="isEmpty" class="h-full flex-cc">
       <ElEmpty description="暂无地图数据" />
@@ -10,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/components/core/charts/art-map-chart/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { echarts } from '@/plugins/echarts'
   import { useSettingStore } from '@/store/modules/setting'
   import chinaMapJson from '@/mock/json/chinaMap.json'
@@ -17,7 +21,9 @@
 
   defineOptions({ name: 'ArtMapChart' })
 
+  // Logic Note: Reactive state 'chinaMapRef' stores mutable runtime data used by this component.
   const chinaMapRef = ref<HTMLElement | null>(null)
+  // Logic Note: Reactive state 'chartInstance' stores mutable runtime data used by this component.
   const chartInstance = shallowRef<echarts.ECharts | null>(null)
   const settingStore = useSettingStore()
   const { isDark } = storeToRefs(settingStore)

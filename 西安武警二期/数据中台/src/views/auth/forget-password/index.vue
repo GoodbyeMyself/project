@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/auth/forget-password/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex w-full h-screen">
     <LoginLeftView />
 
@@ -42,21 +44,30 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/auth/forget-password/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'ForgetPassword' })
 
   const router = useRouter()
+  // Logic Note: Reactive state 'showInputLabel' stores mutable runtime data used by this component.
   const showInputLabel = ref(false)
 
+  // Logic Note: Reactive state 'username' stores mutable runtime data used by this component.
   const username = ref('')
+  // Logic Note: Reactive state 'loading' stores mutable runtime data used by this component.
   const loading = ref(false)
 
+  // Logic Note: Handler 'register' encapsulates a single interaction or data-processing flow.
   const register = async () => {}
 
+  // Logic Note: Handler 'toLogin' encapsulates a single interaction or data-processing flow.
   const toLogin = () => {
     router.push({ name: 'Login' })
   }
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/views/auth/forget-password/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @import '../login/style.css';
 </style>

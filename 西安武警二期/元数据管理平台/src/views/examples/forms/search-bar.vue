@@ -1,5 +1,7 @@
 <!-- 表格搜索栏示例 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/examples/forms/search-bar.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="pb-5">
     <h2 class="mb-1 text-lg font-medium">基础示例（默认收起）</h2>
     <ArtSearchBar
@@ -63,6 +65,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/examples/forms/search-bar.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ElInput } from 'element-plus'
   import { SearchFormItem } from '@/components/core/forms/art-search-bar/index.vue'
 
@@ -101,12 +105,15 @@
 
   const FETCH_DELAY = 500
 
+  // Logic Note: Reactive state 'searchBarBasicRef' stores mutable runtime data used by this component.
   const searchBarBasicRef = ref()
+  // Logic Note: Reactive state 'searchBarAdvancedRef' stores mutable runtime data used by this component.
   const searchBarAdvancedRef = ref()
 
   /**
    * 基础示例表单数据
    */
+  // Logic Note: Reactive state 'formDataBasic' stores mutable runtime data used by this component.
   const formDataBasic = ref<BasicFormData>({
     name: undefined,
     phone: undefined,
@@ -120,6 +127,7 @@
   /**
    * 完整示例表单数据
    */
+  // Logic Note: Reactive state 'formDataAdvanced' stores mutable runtime data used by this component.
   const formDataAdvanced = ref<AdvancedFormData>({
     name: undefined,
     phone: undefined,
@@ -150,11 +158,16 @@
     address: [{ required: true, message: '请输入地址', trigger: 'blur' }]
   }
 
+  // Logic Note: Reactive state 'labelWidthAdvanced' stores mutable runtime data used by this component.
   const labelWidthAdvanced = ref(100)
+  // Logic Note: Reactive state 'labelPositionAdvanced' stores mutable runtime data used by this component.
   const labelPositionAdvanced = ref<'right' | 'left' | 'top'>('right')
+  // Logic Note: Reactive state 'spanAdvanced' stores mutable runtime data used by this component.
   const spanAdvanced = ref(6)
+  // Logic Note: Reactive state 'gutterAdvanced' stores mutable runtime data used by this component.
   const gutterAdvanced = ref(12)
 
+  // Logic Note: Reactive state 'levelOptions' stores mutable runtime data used by this component.
   const levelOptions = ref<OptionItem[]>([])
 
   /**
@@ -188,6 +201,7 @@
    * 模拟接口获取用户等级数据
    * @returns 用户等级选项列表
    */
+  // Logic Note: Handler 'fetchLevelOptions' encapsulates a single interaction or data-processing flow.
   const fetchLevelOptions = (): Promise<OptionItem[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -199,6 +213,7 @@
   /**
    * 获取用户等级数据
    */
+  // Logic Note: Handler 'getLevelOptions' encapsulates a single interaction or data-processing flow.
   const getLevelOptions = async (): Promise<void> => {
     levelOptions.value = await fetchLevelOptions()
     if (levelOptions.value.length) {
@@ -222,6 +237,7 @@
   /**
    * 创建表单项的工厂函数
    */
+  // Logic Note: Handler 'createFormItem' encapsulates a single interaction or data-processing flow.
   const createFormItem = (config: FormItemConfig) => config
 
   // 基础表单项配置
@@ -296,6 +312,7 @@
     baseFormItems.gender
   ])
 
+  // Logic Note: Reactive state 'userItem' stores mutable runtime data used by this component.
   const userItem = ref<SearchFormItem>({
     label: '用户名',
     key: 'name',
@@ -633,6 +650,7 @@
    * @param formData 表单数据
    * @param type 表单类型描述
    */
+  // Logic Note: Handler 'createFormHandler' encapsulates a single interaction or data-processing flow.
   const createFormHandler = (ref: Ref<any>, formData: Record<string, any>, type: string) => ({
     reset: () => {
       console.log(`重置${type}表单`)
@@ -649,6 +667,7 @@
   /**
    * 基础表单处理器
    */
+  // Logic Note: Computed value 'basicFormHandler' derives UI state from reactive sources and updates automatically.
   const basicFormHandler = computed(() =>
     createFormHandler(searchBarBasicRef, formDataBasic, '基础')
   )
@@ -656,6 +675,7 @@
   /**
    * 完整表单处理器
    */
+  // Logic Note: Computed value 'advancedFormHandler' derives UI state from reactive sources and updates automatically.
   const advancedFormHandler = computed(() =>
     createFormHandler(searchBarAdvancedRef, formDataAdvanced, '完整')
   )
@@ -663,36 +683,43 @@
   /**
    * 处理基础表单重置事件
    */
+  // Logic Note: Handler 'handleBasicReset' encapsulates a single interaction or data-processing flow.
   const handleBasicReset = () => basicFormHandler.value.reset()
 
   /**
    * 处理基础表单搜索事件
    */
+  // Logic Note: Handler 'handleBasicSearch' encapsulates a single interaction or data-processing flow.
   const handleBasicSearch = () => basicFormHandler.value.search()
 
   /**
    * 处理完整表单重置事件
    */
+  // Logic Note: Handler 'handleAdvancedReset' encapsulates a single interaction or data-processing flow.
   const handleAdvancedReset = () => advancedFormHandler.value.reset()
 
   /**
    * 处理完整表单搜索事件
    */
+  // Logic Note: Handler 'handleAdvancedSearch' encapsulates a single interaction or data-processing flow.
   const handleAdvancedSearch = () => advancedFormHandler.value.search()
 
   /**
    * 校验完整表单
    */
+  // Logic Note: Handler 'advancedValidate' encapsulates a single interaction or data-processing flow.
   const advancedValidate = () => advancedFormHandler.value.validate()
 
   /**
    * 重置完整表单
    */
+  // Logic Note: Handler 'advancedReset' encapsulates a single interaction or data-processing flow.
   const advancedReset = () => searchBarAdvancedRef.value.reset()
 
   /**
    * 更新用户名字段配置
    */
+  // Logic Note: Handler 'updateUserName' encapsulates a single interaction or data-processing flow.
   const updateUserName = (): void => {
     userItem.value = {
       ...userItem.value,
@@ -706,6 +733,7 @@
   /**
    * 删除用户名字段
    */
+  // Logic Note: Handler 'deleteUserName' encapsulates a single interaction or data-processing flow.
   const deleteUserName = (): void => {
     showUserName.value = false
     formDataAdvanced.value.name = undefined
@@ -714,6 +742,7 @@
   /**
    * 新增表单项
    */
+  // Logic Note: Handler 'addFormItem' encapsulates a single interaction or data-processing flow.
   const addFormItem = (): void => {
     dynamicItemCounter++
     const newItem: SearchFormItem = {
@@ -732,6 +761,7 @@
   /**
    * 修改表单项（修改最后一个动态表单项）
    */
+  // Logic Note: Handler 'updateFormItem' encapsulates a single interaction or data-processing flow.
   const updateFormItem = (): void => {
     if (dynamicFormItems.value.length === 0) {
       ElMessage.warning('没有可修改的动态表单项，请先新增')
@@ -762,6 +792,7 @@
   /**
    * 删除表单项（删除最后一个动态表单项）
    */
+  // Logic Note: Handler 'deleteFormItem' encapsulates a single interaction or data-processing flow.
   const deleteFormItem = (): void => {
     if (dynamicFormItems.value.length === 0) {
       ElMessage.warning('没有可删除的动态表单项')
@@ -779,6 +810,7 @@
   /**
    * 批量新增表单项
    */
+  // Logic Note: Handler 'batchAddFormItems' encapsulates a single interaction or data-processing flow.
   const batchAddFormItems = (): void => {
     const batchItems: SearchFormItem[] = [
       {
@@ -823,6 +855,7 @@
   /**
    * 重置动态表单项
    */
+  // Logic Note: Handler 'resetDynamicItems' encapsulates a single interaction or data-processing flow.
   const resetDynamicItems = (): void => {
     if (dynamicFormItems.value.length === 0) {
       ElMessage.info('当前没有动态表单项')

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/layouts/art-settings-panel/widget/ContainerSettings.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <SectionTitle :title="$t('setting.container.title')" class="mt-12.5" />
     <div class="flex">
@@ -20,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/layouts/art-settings-panel/widget/ContainerSettings.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import SectionTitle from './SectionTitle.vue'
   import { useSettingStore } from '@/store/modules/setting'
   import { useSettingsConfig } from '../composables/useSettingsConfig'

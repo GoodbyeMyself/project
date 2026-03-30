@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/dashboard/ecommerce/modules/hot-products-list.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card p-5 h-[27.8rem] mb-5 overflow-hidden max-sm:mb-4">
     <div class="art-card-header">
       <div class="title">
@@ -55,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/dashboard/ecommerce/modules/hot-products-list.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import product1 from '@/assets/images/3d/icon1.webp'
   import product2 from '@/assets/images/3d/icon2.webp'
   import product3 from '@/assets/images/3d/icon3.webp'
@@ -84,6 +88,7 @@
    * 热销产品表格数据
    * 包含产品信息、库存、销量和销售趋势
    */
+  // Logic Note: Reactive state 'tableData' stores mutable runtime data used by this component.
   const tableData = reactive<ProductItem[]>([
     {
       name: '智能手表 Pro',
@@ -158,6 +163,7 @@
    * @param stock 库存数量
    * @returns 库存状态文本
    */
+  // Logic Note: Handler 'getStockStatus' encapsulates a single interaction or data-processing flow.
   const getStockStatus = (stock: number): string => {
     if (stock === 0) return '缺货'
     if (stock < STOCK_THRESHOLD.LOW) return '低库存'
@@ -170,6 +176,7 @@
    * @param stock 库存数量
    * @returns CSS 类名
    */
+  // Logic Note: Handler 'getStockClass' encapsulates a single interaction or data-processing flow.
   const getStockClass = (stock: number): string => {
     if (stock === 0) return 'text-danger bg-danger/12'
     if (stock < STOCK_THRESHOLD.LOW) return 'text-warning bg-warning/12'
@@ -181,6 +188,7 @@
    * 添加进度条动画效果
    * 延迟后将进度值从 0 更新到目标百分比，触发动画
    */
+  // Logic Note: Handler 'addAnimation' encapsulates a single interaction or data-processing flow.
   const addAnimation = (): void => {
     setTimeout(() => {
       tableData.forEach((item) => {

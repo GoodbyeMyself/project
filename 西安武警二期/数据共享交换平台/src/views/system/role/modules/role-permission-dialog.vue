@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/views/system/role/modules/role-permission-dialog.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElDialog
     v-model="visible"
     title="菜单权限"
@@ -41,6 +43,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/views/system/role/modules/role-permission-dialog.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useMenuStore } from '@/store/modules/menu'
   import { formatMenuTitle } from '@/utils/router'
 
@@ -64,13 +68,17 @@
   const emit = defineEmits<Emits>()
 
   const { menuList } = storeToRefs(useMenuStore())
+  // Logic Note: Reactive state 'treeRef' stores mutable runtime data used by this component.
   const treeRef = ref()
+  // Logic Note: Reactive state 'isExpandAll' stores mutable runtime data used by this component.
   const isExpandAll = ref(true)
+  // Logic Note: Reactive state 'isSelectAll' stores mutable runtime data used by this component.
   const isSelectAll = ref(false)
 
   /**
    * 弹窗显示状态双向绑定
    */
+  // Logic Note: Computed value 'visible' derives UI state from reactive sources and updates automatically.
   const visible = computed({
     get: () => props.modelValue,
     set: (value) => emit('update:modelValue', value)
@@ -99,7 +107,9 @@
    * 处理菜单数据，将 authList 转换为树形子节点
    * 递归处理菜单树，将权限列表展开为可选择的子节点
    */
+  // Logic Note: Computed value 'processedMenuList' derives UI state from reactive sources and updates automatically.
   const processedMenuList = computed(() => {
+    // Logic Note: Handler 'processNode' encapsulates a single interaction or data-processing flow.
     const processNode = (node: MenuNode): MenuNode => {
       const processed = { ...node }
 
@@ -139,6 +149,7 @@
   /**
    * 监听弹窗打开，初始化权限数据
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => props.modelValue,
     (newVal) => {
@@ -152,6 +163,7 @@
   /**
    * 关闭弹窗并清空选中状态
    */
+  // Logic Note: Handler 'handleClose' encapsulates a single interaction or data-processing flow.
   const handleClose = () => {
     visible.value = false
     treeRef.value?.setCheckedKeys([])
@@ -160,6 +172,7 @@
   /**
    * 保存权限配置
    */
+  // Logic Note: Handler 'savePermission' encapsulates a single interaction or data-processing flow.
   const savePermission = () => {
     // TODO: 调用保存权限接口
     ElMessage.success('权限保存成功')
@@ -170,6 +183,7 @@
   /**
    * 切换全部展开/收起状态
    */
+  // Logic Note: Handler 'toggleExpandAll' encapsulates a single interaction or data-processing flow.
   const toggleExpandAll = () => {
     const tree = treeRef.value
     if (!tree) return
@@ -186,6 +200,7 @@
   /**
    * 切换全选/取消全选状态
    */
+  // Logic Note: Handler 'toggleSelectAll' encapsulates a single interaction or data-processing flow.
   const toggleSelectAll = () => {
     const tree = treeRef.value
     if (!tree) return
@@ -205,8 +220,10 @@
    * @param nodes 节点列表
    * @returns 所有节点的 key 数组
    */
+  // Logic Note: Handler 'getAllNodeKeys' encapsulates a single interaction or data-processing flow.
   const getAllNodeKeys = (nodes: MenuNode[]): string[] => {
     const keys: string[] = []
+    // Logic Note: Handler 'traverse' encapsulates a single interaction or data-processing flow.
     const traverse = (nodeList: MenuNode[]): void => {
       nodeList.forEach((node) => {
         if (node.name) keys.push(node.name)
@@ -221,6 +238,7 @@
    * 处理树节点选中状态变化
    * 同步更新全选按钮状态
    */
+  // Logic Note: Handler 'handleTreeCheck' encapsulates a single interaction or data-processing flow.
   const handleTreeCheck = () => {
     const tree = treeRef.value
     if (!tree) return
@@ -235,6 +253,7 @@
    * 输出选中的权限数据到控制台
    * 用于调试和查看当前选中的权限配置
    */
+  // Logic Note: Handler 'outputSelectedData' encapsulates a single interaction or data-processing flow.
   const outputSelectedData = () => {
     const tree = treeRef.value
     if (!tree) return

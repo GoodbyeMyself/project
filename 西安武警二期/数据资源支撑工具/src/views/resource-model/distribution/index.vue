@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/distribution/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -55,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/distribution/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { reactive, ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -81,12 +85,14 @@
     '权限配置'
   ]
 
+  // Logic Note: Reactive state 'configForm' stores mutable runtime data used by this component.
   const configForm = reactive({
     globalVersion: 'v2.4.0',
     edgeVersion: 'v2.3.6',
     permissionMode: '管理员审批'
   })
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<DistributionRow[]>([
     {
       id: 1,
@@ -110,6 +116,7 @@
     }
   ])
 
+  // Logic Note: Handler 'dispatchModel' encapsulates a single interaction or data-processing flow.
   const dispatchModel = () => {
     rows.value.unshift({
       id: Date.now(),
@@ -124,6 +131,7 @@
     ElMessage.success('模型下发任务已创建')
   }
 
+  // Logic Note: Handler 'checkCompatibility' encapsulates a single interaction or data-processing flow.
   const checkCompatibility = () => {
     rows.value.forEach((item) => {
       item.compatibility = '通过'
@@ -131,10 +139,12 @@
     ElMessage.success('版本兼容性检查已完成')
   }
 
+  // Logic Note: Handler 'viewAuditLog' encapsulates a single interaction or data-processing flow.
   const viewAuditLog = (row: DistributionRow) => {
     ElMessage.info(`已打开 ${row.taskName} 的审计日志`)
   }
 
+  // Logic Note: Handler 'revokeTask' encapsulates a single interaction or data-processing flow.
   const revokeTask = (row: DistributionRow) => {
     row.auditStatus = '已回滚'
     row.updatedAt = new Date().toLocaleString()

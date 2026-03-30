@@ -1,5 +1,7 @@
 <!-- 设置面板 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/components/core/layouts/art-settings-panel/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="layout-settings">
     <SettingDrawer v-model="showDrawer" @open="handleOpen" @close="handleClose">
       <!-- 头部关闭按钮 -->
@@ -25,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/components/core/layouts/art-settings-panel/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useSettingsPanel } from './composables/useSettingsPanel'
 
   import SettingDrawer from './widget/SettingDrawer.vue'
@@ -68,5 +72,7 @@
 </script>
 
 <style lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/components/core/layouts/art-settings-panel/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @use './style';
 </style>

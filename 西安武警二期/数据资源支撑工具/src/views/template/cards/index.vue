@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/template/cards/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="py-5">
     <h1 class="page-title">统计卡片（文字）</h1>
     <ElRow :gutter="20">
@@ -198,6 +200,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/template/cards/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import cover1 from '@imgs/cover/img1.webp'
   import cover2 from '@imgs/cover/img2.webp'
   import cover3 from '@imgs/cover/img3.webp'
@@ -414,6 +418,7 @@
   /**
    * 处理查看更多按钮点击
    */
+  // Logic Note: Handler 'handleMore' encapsulates a single interaction or data-processing flow.
   const handleMore = () => {
     ElMessage.info('查看更多')
   }
@@ -436,12 +441,15 @@
    * 处理图片卡片点击事件
    * @param card 卡片数据
    */
+  // Logic Note: Handler 'handleImageCardClick' encapsulates a single interaction or data-processing flow.
   const handleImageCardClick = (card: ImageCard) => {
     console.log('点击卡片:', card)
   }
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/views/template/cards/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .page-title {

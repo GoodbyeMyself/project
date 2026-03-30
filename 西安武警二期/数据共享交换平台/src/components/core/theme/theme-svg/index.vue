@@ -1,12 +1,16 @@
 <!-- 一个让 SVG 图片跟随主题的组件，只对特定 svg 图片生效，不建议开发者使用 -->
 <!-- 图片地址 https://iconpark.oceanengine.com/illustrations/13 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/theme/theme-svg/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="theme-svg" :style="sizeStyle">
     <div v-if="src" class="svg-container" v-html="svgContent"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/theme/theme-svg/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref, computed, watchEffect } from 'vue'
 
   interface Props {
@@ -20,6 +24,7 @@
     themeColor: 'var(--el-color-primary)'
   })
 
+  // Logic Note: Reactive state 'svgContent' stores mutable runtime data used by this component.
   const svgContent = ref('')
 
   // 计算样式
@@ -84,6 +89,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据共享交换平台/src/components/core/theme/theme-svg/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .theme-svg {
     display: inline-block;
 

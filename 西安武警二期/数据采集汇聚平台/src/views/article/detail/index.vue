@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/article/detail/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard>
       <template #header>
@@ -44,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/article/detail/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useRoute } from 'vue-router'
 
   defineOptions({ name: 'ArticleDetailBusinessPage' })
@@ -76,6 +80,7 @@
 
   const route = useRoute()
 
+  // Logic Note: Computed value 'pageConfig' derives UI state from reactive sources and updates automatically.
   const pageConfig = computed<DetailPageConfig>(() => {
     if (route.name === 'DataStandardizationManage') {
       return {

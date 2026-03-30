@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/widgets/count-to/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <div class="mb-15 text-center">
       <h1 class="my-4 text-2xl font-semibold leading-tight"
@@ -74,12 +76,17 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/widgets/count-to/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import ArtCountTo from '@/components/core/text-effect/art-count-to/index.vue'
 
   defineOptions({ name: 'TemplateCountTo' })
 
+  // Logic Note: Reactive state 'controlTarget' stores mutable runtime data used by this component.
   const controlTarget = ref(0)
+  // Logic Note: Reactive state 'countToRef' stores mutable runtime data used by this component.
   const countToRef = ref()
+  // Logic Note: Reactive state 'easingTarget' stores mutable runtime data used by this component.
   const easingTarget = ref(0)
 
   /**
@@ -97,6 +104,7 @@
   /**
    * 开始计数动画
    */
+  // Logic Note: Handler 'startCount' encapsulates a single interaction or data-processing flow.
   const startCount = () => {
     const newTarget = 5000
     controlTarget.value = newTarget
@@ -106,6 +114,7 @@
   /**
    * 暂停计数动画
    */
+  // Logic Note: Handler 'pauseCount' encapsulates a single interaction or data-processing flow.
   const pauseCount = () => {
     countToRef.value?.pause()
   }
@@ -113,6 +122,7 @@
   /**
    * 重置计数动画
    */
+  // Logic Note: Handler 'resetCount' encapsulates a single interaction or data-processing flow.
   const resetCount = () => {
     countToRef.value?.reset()
     controlTarget.value = 0
@@ -122,6 +132,7 @@
    * 触发缓动效果演示
    * 在 0 和 1000 之间切换
    */
+  // Logic Note: Handler 'triggerEasing' encapsulates a single interaction or data-processing flow.
   const triggerEasing = () => {
     easingTarget.value = easingTarget.value === 0 ? 1000 : 0
   }
@@ -130,6 +141,7 @@
    * 动画开始回调
    * @param value 目标值
    */
+  // Logic Note: Handler 'handleAnimationStarted' encapsulates a single interaction or data-processing flow.
   const handleAnimationStarted = (value: number) => {
     console.log('动画开始，目标值:', value)
   }
@@ -138,6 +150,7 @@
    * 动画完成回调
    * @param value 最终值
    */
+  // Logic Note: Handler 'handleAnimationFinished' encapsulates a single interaction or data-processing flow.
   const handleAnimationFinished = (value: number) => {
     console.log('动画完成，最终值:', value)
   }
@@ -146,6 +159,7 @@
    * 动画暂停回调
    * @param value 当前值
    */
+  // Logic Note: Handler 'handleAnimationPaused' encapsulates a single interaction or data-processing flow.
   const handleAnimationPaused = (value: number) => {
     console.log('动画暂停，当前值:', value)
   }
@@ -153,12 +167,15 @@
   /**
    * 动画重置回调
    */
+  // Logic Note: Handler 'handleAnimationReset' encapsulates a single interaction or data-processing flow.
   const handleAnimationReset = () => {
     console.log('动画已重置')
   }
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据采集汇聚平台/src/views/widgets/count-to/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .count {

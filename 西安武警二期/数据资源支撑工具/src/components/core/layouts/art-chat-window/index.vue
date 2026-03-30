@@ -1,5 +1,7 @@
 <!-- 系统聊天窗口 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/components/core/layouts/art-chat-window/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div>
     <ElDrawer v-model="isDrawerVisible" :size="isMobile ? '100%' : '480px'" :with-header="false">
       <div class="mb-5 flex-cb">
@@ -89,6 +91,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/components/core/layouts/art-chat-window/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { Picture, Paperclip, Close } from '@element-plus/icons-vue'
   import { mittBus } from '@/utils/sys'
   import meAvatar from '@/assets/images/avatar/avatar5.webp'
@@ -114,15 +118,19 @@
 
   // 响应式布局
   const { width } = useWindowSize()
+  // Logic Note: Computed value 'isMobile' derives UI state from reactive sources and updates automatically.
   const isMobile = computed(() => width.value < MOBILE_BREAKPOINT)
 
   // 组件状态
   const isDrawerVisible = ref(false)
+  // Logic Note: Reactive state 'isOnline' stores mutable runtime data used by this component.
   const isOnline = ref(true)
 
   // 消息相关状态
   const messageText = ref('')
+  // Logic Note: Reactive state 'messageId' stores mutable runtime data used by this component.
   const messageId = ref(10)
+  // Logic Note: Reactive state 'messageContainer' stores mutable runtime data used by this component.
   const messageContainer = ref<HTMLElement | null>(null)
 
   // 初始化聊天消息数据
@@ -201,6 +209,7 @@
     }
   ]
 
+  // Logic Note: Reactive state 'messages' stores mutable runtime data used by this component.
   const messages = ref<ChatMessage[]>(initializeMessages())
 
   // 工具函数
@@ -211,6 +220,7 @@
     })
   }
 
+  // Logic Note: Handler 'scrollToBottom' encapsulates a single interaction or data-processing flow.
   const scrollToBottom = (): void => {
     nextTick(() => {
       setTimeout(() => {
@@ -246,6 +256,7 @@
     scrollToBottom()
   }
 
+  // Logic Note: Handler 'closeChat' encapsulates a single interaction or data-processing flow.
   const closeChat = (): void => {
     isDrawerVisible.value = false
   }

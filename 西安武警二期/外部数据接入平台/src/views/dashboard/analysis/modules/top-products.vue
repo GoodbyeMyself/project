@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/dashboard/analysis/modules/top-products.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card h-82 p-5 mb-5 overflow-hidden max-sm:mb-4">
     <div class="art-card-header">
       <div class="title">
@@ -46,6 +48,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/dashboard/analysis/modules/top-products.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { hexToRgb } from '@/utils/ui'
 
   interface Product {
@@ -71,6 +75,7 @@
    * 热门产品列表数据
    * 包含产品名称、热度和销量信息
    */
+  // Logic Note: Computed value 'products' derives UI state from reactive sources and updates automatically.
   const products = computed<Product[]>(() => [
     { name: '智能手机', popularity: 10, sales: '100' },
     { name: '笔记本电脑', popularity: 29, sales: '100' },
@@ -85,6 +90,7 @@
    * @param percentage 热度百分比 (0-100)
    * @returns 对应的颜色值
    */
+  // Logic Note: Handler 'getColor' encapsulates a single interaction or data-processing flow.
   const getColor = (percentage: number): string => {
     if (percentage < COLOR_THRESHOLDS.LOW) return POPULARITY_COLORS.LOW
     if (percentage < COLOR_THRESHOLDS.MEDIUM) return POPULARITY_COLORS.MEDIUM

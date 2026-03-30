@@ -1,5 +1,7 @@
 <!-- 卡片横幅组件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/banners/art-card-banner/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card-sm flex-c flex-col pb-6" :style="{ height: height }">
     <div class="flex-c flex-col gap-4 text-center">
       <div class="w-45">
@@ -35,6 +37,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/banners/art-card-banner/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   // 导入默认图标
   import defaultIcon from '@imgs/3d/icon1.webp'
 

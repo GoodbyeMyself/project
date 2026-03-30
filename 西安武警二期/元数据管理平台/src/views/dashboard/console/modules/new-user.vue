@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/dashboard/console/modules/new-user.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card p-5 h-128 overflow-hidden mb-5 max-sm:mb-4">
     <div class="art-card-header">
       <div class="title">
@@ -53,6 +55,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/dashboard/console/modules/new-user.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import avatar1 from '@/assets/images/avatar/avatar1.webp'
   import avatar2 from '@/assets/images/avatar/avatar2.webp'
   import avatar3 from '@/assets/images/avatar/avatar3.webp'
@@ -73,12 +77,14 @@
 
   const ANIMATION_DELAY = 100
 
+  // Logic Note: Reactive state 'radio2' stores mutable runtime data used by this component.
   const radio2 = ref('本月')
 
   /**
    * 新用户表格数据
    * 包含用户基本信息和完成进度
    */
+  // Logic Note: Reactive state 'tableData' stores mutable runtime data used by this component.
   const tableData = reactive<UserTableItem[]>([
     {
       username: '中小鱼',
@@ -146,6 +152,7 @@
    * 添加进度条动画效果
    * 延迟后将进度值从 0 更新到目标百分比，触发动画
    */
+  // Logic Note: Handler 'addAnimation' encapsulates a single interaction or data-processing flow.
   const addAnimation = (): void => {
     setTimeout(() => {
       tableData.forEach((item) => {
@@ -160,6 +167,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/views/dashboard/console/modules/new-user.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .art-card {
     :deep(.el-radio-button__original-radio:checked + .el-radio-button__inner) {
       color: var(--el-color-primary) !important;

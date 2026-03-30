@@ -1,5 +1,7 @@
 <!-- k线图表 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/components/core/charts/art-k-line-chart/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     ref="chartRef"
     class="relative w-full"
@@ -9,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/components/core/charts/art-k-line-chart/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { EChartsOption } from '@/plugins/echarts'
   import { useChartOps, useChartComponent } from '@/hooks/core/useChart'
   import type { KLineChartProps } from '@/types/component/chart'

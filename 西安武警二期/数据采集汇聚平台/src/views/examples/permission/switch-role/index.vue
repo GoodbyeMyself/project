@@ -1,5 +1,7 @@
 <!-- 切换权限页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据采集汇聚平台/src/views/examples/permission/switch-role/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="py-2">
     <!-- 页面头部 -->
     <div class="mb-6">
@@ -89,6 +91,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据采集汇聚平台/src/views/examples/permission/switch-role/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, ref } from 'vue'
   import { useUserStore } from '@/store/modules/user'
   import { useI18n } from 'vue-i18n'
@@ -173,6 +177,7 @@
    * 切换角色
    * @param account 账号信息
    */
+  // Logic Note: Handler 'switchRole' encapsulates a single interaction or data-processing flow.
   const switchRole = async (account: AccountInfo) => {
     try {
       switching.value = true

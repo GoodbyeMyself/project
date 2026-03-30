@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/external-platform/overview/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="overview-page">
     <section class="hero art-card">
       <div class="hero-left">
@@ -99,6 +101,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/external-platform/overview/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { modulePageList } from '../shared/module-data'
@@ -116,10 +120,12 @@
     ExternalShareManagement: '/external-access-platform/share-management'
   }
 
+  // Logic Note: Computed value 'totalPanels' derives UI state from reactive sources and updates automatically.
   const totalPanels = computed(() =>
     modulePageList.reduce((sum, item) => sum + item.panels.length, 0)
   )
 
+  // Logic Note: Computed value 'totalCapabilities' derives UI state from reactive sources and updates automatically.
   const totalCapabilities = computed(() =>
     modulePageList.reduce(
       (sum, item) => sum + item.sections.reduce((inner, section) => inner + section.items.length, 0),
@@ -127,6 +133,7 @@
     )
   )
 
+  // Logic Note: Computed value 'matrixRows' derives UI state from reactive sources and updates automatically.
   const matrixRows = computed(() =>
     modulePageList.map((item) => ({
       category: item.category,
@@ -145,12 +152,15 @@
     { label: '数据共享管理', path: '/external-access-platform/share-management' }
   ]
 
+  // Logic Note: Handler 'openPage' encapsulates a single interaction or data-processing flow.
   const openPage = (path: string) => {
     router.push(path)
   }
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/views/external-platform/overview/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .overview-page {
     display: flex;
     flex-direction: column;

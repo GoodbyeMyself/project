@@ -1,5 +1,7 @@
 <!-- 基础横幅组件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/components/core/banners/art-basic-banner/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     class="art-card basic-banner"
     :class="[{ 'has-decoration': decoration }, boxStyle]"
@@ -67,6 +69,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/components/core/banners/art-basic-banner/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { onMounted, ref, computed } from 'vue'
   import { useSettingStore } from '@/store/modules/setting'
   const settingStore = useSettingStore()
@@ -168,7 +172,9 @@
 
   // 计算按钮样式属性
   const buttonColor = computed(() => props.buttonConfig?.color ?? '#fff')
+  // Logic Note: Computed value 'buttonTextColor' derives UI state from reactive sources and updates automatically.
   const buttonTextColor = computed(() => props.buttonConfig?.textColor ?? '#333')
+  // Logic Note: Computed value 'buttonRadius' derives UI state from reactive sources and updates automatically.
   const buttonRadius = computed(() => props.buttonConfig?.radius ?? '6px')
 
   // 流星数据初始化
@@ -184,6 +190,7 @@
    * @param count 流星数量
    * @returns 流星数据数组
    */
+  // Logic Note: Function 'generateMeteors' executes reusable logic for this view.
   function generateMeteors(count: number): Meteor[] {
     // 计算每个流星的区域宽度
     const segmentWidth = 100 / count
@@ -204,6 +211,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/components/core/banners/art-basic-banner/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .basic-banner {
     position: relative;
     display: flex;

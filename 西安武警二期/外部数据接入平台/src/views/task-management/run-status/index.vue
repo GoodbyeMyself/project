@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/task-management/run-status/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-5 pb-5">
     <ElCard>
       <template #header>
@@ -31,14 +33,18 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/task-management/run-status/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'TaskRunStatus' })
 
+  // Logic Note: Reactive state 'statCards' stores mutable runtime data used by this component.
   const statCards = ref([
     { title: '运行中任务', value: 18, desc: '较昨日 +2', className: 'text-success' },
     { title: '异常实例', value: 2, desc: '需人工复核', className: 'text-danger' },
     { title: '已完成实例', value: 136, desc: '今日累计', className: 'text-theme' }
   ])
 
+  // Logic Note: Reactive state 'instanceList' stores mutable runtime data used by this component.
   const instanceList = ref([
     {
       task: '卡口数据实时接入',

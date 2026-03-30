@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/concept/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -49,6 +51,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/concept/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { ElMessage, ElMessageBox } from 'element-plus'
 
@@ -75,6 +79,7 @@
     '模型概念变更通知'
   ]
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<ConceptRow[]>([
     {
       id: 1,
@@ -98,6 +103,7 @@
     }
   ])
 
+  // Logic Note: Handler 'addModel' encapsulates a single interaction or data-processing flow.
   const addModel = () => {
     rows.value.unshift({
       id: Date.now(),
@@ -112,15 +118,18 @@
     ElMessage.success('已新增概念模型并自动签出')
   }
 
+  // Logic Note: Handler 'toggleCheckState' encapsulates a single interaction or data-processing flow.
   const toggleCheckState = (row: ConceptRow) => {
     row.checkedOut = !row.checkedOut
     ElMessage.success(`${row.name} 已${row.checkedOut ? '签出' : '签入'}`)
   }
 
+  // Logic Note: Handler 'viewVersion' encapsulates a single interaction or data-processing flow.
   const viewVersion = (row: ConceptRow) => {
     ElMessage.info(`已打开 ${row.name} 的版本历史：${row.version}`)
   }
 
+  // Logic Note: Handler 'deleteModel' encapsulates a single interaction or data-processing flow.
   const deleteModel = async (id: number) => {
     try {
       await ElMessageBox.confirm('删除后将保留历史版本记录，是否继续？', '删除确认', {
@@ -133,6 +142,7 @@
     }
   }
 
+  // Logic Note: Handler 'notifyChange' encapsulates a single interaction or data-processing flow.
   const notifyChange = () => {
     ElMessage.success('模型概念变更通知已发送至相关角色')
   }

@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/template-config/template-distribution/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-5 pb-5">
     <ElCard>
       <template #header>
@@ -48,14 +50,18 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/template-config/template-distribution/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'TemplateDistribution' })
 
+  // Logic Note: Reactive state 'distributionCards' stores mutable runtime data used by this component.
   const distributionCards = ref([
     { title: '今日下放批次', value: 12, tag: '稳定', type: 'success' },
     { title: '待确认反馈', value: 3, tag: '处理中', type: 'warning' },
     { title: '失败批次', value: 1, tag: '需关注', type: 'danger' }
   ])
 
+  // Logic Note: Reactive state 'distributionList' stores mutable runtime data used by this component.
   const distributionList = ref([
     {
       template: '边防卡口结构化模板',

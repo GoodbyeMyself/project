@@ -1,5 +1,7 @@
 <!-- 基础表格 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/examples/tables/basic.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="user-page art-full-height">
     <ElCard class="art-table-card" style="margin-top: 0">
       <!-- 表格 -->
@@ -19,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/examples/tables/basic.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useTable } from '@/hooks/core/useTable'
   import { fetchGetUserList } from '@/api/system-manage'
 

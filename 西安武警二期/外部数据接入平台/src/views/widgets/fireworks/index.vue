@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/widgets/fireworks/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content">
     <div class="mb-5">
       <ElSpace wrap>
@@ -45,13 +47,17 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/widgets/fireworks/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { mittBus } from '@/utils/sys'
   import bp from '@imgs/ceremony/hb.png'
   import sd from '@imgs/ceremony/sd.png'
 
   defineOptions({ name: 'WidgetsFireworks' })
 
+  // Logic Note: Reactive state 'timerRef' stores mutable runtime data used by this component.
   const timerRef = ref<ReturnType<typeof setInterval> | null>(null)
+  // Logic Note: Reactive state 'isLaunching' stores mutable runtime data used by this component.
   const isLaunching = ref(false)
 
   /**
@@ -59,6 +65,7 @@
    * @param count 发射次数
    * @param src 图片资源路径
    */
+  // Logic Note: Handler 'triggerFireworks' encapsulates a single interaction or data-processing flow.
   const triggerFireworks = (count: number, src: string) => {
     // 清除之前的定时器
     if (timerRef.value) {
@@ -84,6 +91,7 @@
   /**
    * 发射单个礼花
    */
+  // Logic Note: Handler 'handleSingleLaunch' encapsulates a single interaction or data-processing flow.
   const handleSingleLaunch = () => {
     mittBus.emit('triggerFireworks')
   }
@@ -92,6 +100,7 @@
    * 发射多个礼花
    * @param src 图片资源路径
    */
+  // Logic Note: Handler 'handleMultipleLaunch' encapsulates a single interaction or data-processing flow.
   const handleMultipleLaunch = (src: string) => {
     triggerFireworks(10, src)
   }
@@ -100,6 +109,7 @@
    * 发射带图片的礼花
    * @param src 图片资源路径
    */
+  // Logic Note: Handler 'handleImageLaunch' encapsulates a single interaction or data-processing flow.
   const handleImageLaunch = (src: string) => {
     mittBus.emit('triggerFireworks', src)
   }

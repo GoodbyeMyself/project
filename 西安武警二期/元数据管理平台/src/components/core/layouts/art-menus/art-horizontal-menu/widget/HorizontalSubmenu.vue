@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/components/core/layouts/art-menus/art-horizontal-menu/widget/HorizontalSubmenu.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElSubMenu v-if="hasChildren" :index="item.path || item.meta.title" class="!p-0">
     <template #title>
       <ArtSvgIcon :icon="item.meta.icon" :color="theme?.iconColor" class="mr-1 text-lg" />
@@ -45,6 +47,8 @@
 </template>
 
 <script lang="ts" setup>
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/components/core/layouts/art-menus/art-horizontal-menu/widget/HorizontalSubmenu.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, type PropType } from 'vue'
   import { AppRouteRecord } from '@/types/router'
   import { handleMenuJump } from '@/utils/navigation'
@@ -89,17 +93,21 @@
     return filteredChildren.value.length > 0
   })
 
+  // Logic Note: Handler 'goPage' encapsulates a single interaction or data-processing flow.
   const goPage = (item: AppRouteRecord) => {
     closeMenu()
     handleMenuJump(item)
   }
 
+  // Logic Note: Handler 'closeMenu' encapsulates a single interaction or data-processing flow.
   const closeMenu = () => {
     emit('close')
   }
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/components/core/layouts/art-menus/art-horizontal-menu/widget/HorizontalSubmenu.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   :deep(.el-sub-menu__title .el-sub-menu__icon-arrow) {
     right: 10px !important;
   }

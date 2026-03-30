@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/standard/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -91,6 +93,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/standard/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, reactive, ref } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -124,6 +128,7 @@
     '数据标准送审'
   ]
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<StandardRow[]>([
     {
       id: 1,
@@ -157,13 +162,17 @@
     }
   ])
 
+  // Logic Note: Reactive state 'queryForm' stores mutable runtime data used by this component.
   const queryForm = reactive({
     keyword: '',
     status: ''
   })
 
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'dialogTitle' stores mutable runtime data used by this component.
   const dialogTitle = ref('新增数据标准')
+  // Logic Note: Reactive state 'editForm' stores mutable runtime data used by this component.
   const editForm = reactive<EditForm>({
     code: '',
     name: '',
@@ -171,6 +180,7 @@
     changeNote: ''
   })
 
+  // Logic Note: Computed value 'filteredRows' derives UI state from reactive sources and updates automatically.
   const filteredRows = computed(() => {
     return rows.value.filter((item) => {
       const matchKeyword =
@@ -182,15 +192,18 @@
     })
   })
 
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = () => {
     ElMessage.success('已按条件筛选标准列表')
   }
 
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = () => {
     queryForm.keyword = ''
     queryForm.status = ''
   }
 
+  // Logic Note: Handler 'openCreateDialog' encapsulates a single interaction or data-processing flow.
   const openCreateDialog = () => {
     dialogTitle.value = '新增数据标准'
     editForm.id = undefined
@@ -201,6 +214,7 @@
     dialogVisible.value = true
   }
 
+  // Logic Note: Handler 'editRow' encapsulates a single interaction or data-processing flow.
   const editRow = (row: StandardRow) => {
     dialogTitle.value = '编辑数据标准'
     editForm.id = row.id
@@ -211,6 +225,7 @@
     dialogVisible.value = true
   }
 
+  // Logic Note: Handler 'saveRow' encapsulates a single interaction or data-processing flow.
   const saveRow = () => {
     if (!editForm.code || !editForm.name) {
       ElMessage.warning('请填写完整标准信息')
@@ -238,14 +253,17 @@
     dialogVisible.value = false
   }
 
+  // Logic Note: Handler 'trackDependency' encapsulates a single interaction or data-processing flow.
   const trackDependency = (row: StandardRow) => {
     ElMessage.info(`已触发 ${row.code} 的模型依赖分析`)
   }
 
+  // Logic Note: Handler 'repairImpact' encapsulates a single interaction or data-processing flow.
   const repairImpact = (row: StandardRow) => {
     ElMessage.success(`已启动 ${row.name} 的影响模型修复任务`)
   }
 
+  // Logic Note: Handler 'submitReview' encapsulates a single interaction or data-processing flow.
   const submitReview = () => {
     ElMessage.success('已提交当前筛选范围标准进入送审流程')
   }

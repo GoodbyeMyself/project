@@ -1,5 +1,7 @@
 <!-- 表格头部，包含表格大小、刷新、全屏、列设置、其他设置 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/tables/art-table-header/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex-cb max-md:!block" id="art-table-header">
     <div class="flex-wrap">
       <slot name="left"></slot>
@@ -123,6 +125,8 @@
 </template>
 
 <script lang="ts" setup>
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/tables/art-table-header/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, ref, onMounted, onUnmounted } from 'vue'
   import { storeToRefs } from 'pinia'
   import { TableSizeEnum } from '@/enums/formEnum'
@@ -177,6 +181,7 @@
    * 获取列的显示状态
    * 优先使用 visible 字段，如果不存在则使用 checked 字段
    */
+  // Logic Note: Handler 'getColumnVisibility' encapsulates a single interaction or data-processing flow.
   const getColumnVisibility = (col: ColumnOption): boolean => {
     if (col.visible !== undefined) {
       return col.visible
@@ -188,6 +193,7 @@
    * 更新列的显示状态
    * 同时更新 checked 和 visible 字段以保持兼容性
    */
+  // Logic Note: Handler 'updateColumnVisibility' encapsulates a single interaction or data-processing flow.
   const updateColumnVisibility = (col: ColumnOption, value: boolean | string | number): void => {
     const boolValue = !!value
     col.checked = boolValue
@@ -214,6 +220,7 @@
    * @param componentName 组件名称
    * @returns 是否显示
    */
+  // Logic Note: Handler 'shouldShow' encapsulates a single interaction or data-processing flow.
   const shouldShow = (componentName: string) => {
     return layoutItems.value.includes(componentName)
   }
@@ -223,6 +230,7 @@
    * @param evt move事件对象
    * @returns 是否允许移动
    */
+  // Logic Note: Handler 'checkColumnMove' encapsulates a single interaction or data-processing flow.
   const checkColumnMove = (event: any) => {
     // 拖拽进入的目标 DOM 元素
     const toElement = event.related as HTMLElement
@@ -250,6 +258,7 @@
    * 表格大小变化处理
    * @param command 表格大小枚举值
    */
+  // Logic Note: Handler 'handleTableSizeChange' encapsulates a single interaction or data-processing flow.
   const handleTableSizeChange = (command: TableSizeEnum) => {
     useTableStore().setTableSize(command)
   }
@@ -267,6 +276,7 @@
    * 切换全屏状态
    * 进入全屏时会隐藏页面滚动条，退出时恢复原状态
    */
+  // Logic Note: Handler 'toggleFullScreen' encapsulates a single interaction or data-processing flow.
   const toggleFullScreen = () => {
     const el = document.querySelector(`.${props.fullClass}`)
     if (!el) return
@@ -291,6 +301,7 @@
    * ESC键退出全屏的事件处理器
    * 需要保存引用以便在组件卸载时正确移除监听器
    */
+  // Logic Note: Handler 'handleEscapeKey' encapsulates a single interaction or data-processing flow.
   const handleEscapeKey = (e: KeyboardEvent) => {
     if (e.key === 'Escape' && isFullScreen.value) {
       toggleFullScreen()
@@ -319,6 +330,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/components/core/tables/art-table-header/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .button {

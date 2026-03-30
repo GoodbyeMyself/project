@@ -1,5 +1,7 @@
 <!-- 折线图，支持多组数据，支持阶梯式动画效果 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/components/core/charts/art-line-chart/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     ref="chartRef"
     class="relative w-[calc(100%+10px)]"
@@ -10,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/components/core/charts/art-line-chart/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { graphic, type EChartsOption } from '@/plugins/echarts'
   import { getCssVar, hexToRgba } from '@/utils/ui'
   import { useChartOps, useChartComponent } from '@/hooks/core/useChart'
@@ -47,7 +51,9 @@
 
   // 动画状态管理
   const isAnimating = ref(false)
+  // Logic Note: Reactive state 'animationTimers' stores mutable runtime data used by this component.
   const animationTimers = ref<number[]>([])
+  // Logic Note: Reactive state 'animatedData' stores mutable runtime data used by this component.
   const animatedData = ref<number[] | LineDataItem[]>([])
 
   // 清理所有定时器
@@ -107,6 +113,7 @@
   // 获取颜色配置（优化：缓存主题色）
   const primaryColor = computed(() => getCssVar('--el-color-primary'))
 
+  // Logic Note: Handler 'getColor' encapsulates a single interaction or data-processing flow.
   const getColor = (customColor?: string, index?: number): string => {
     if (customColor) return customColor
     if (index !== undefined) return props.colors![index % props.colors!.length]

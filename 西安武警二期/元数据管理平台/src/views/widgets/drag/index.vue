@@ -1,5 +1,7 @@
 <!-- https://vue-draggable-plus.pages.dev/ -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/widgets/drag/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <ElRow>
       <ElCard class="w-75 mr-5 mb-7.5">
@@ -73,6 +75,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/widgets/drag/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { VueDraggable } from 'vue-draggable-plus'
 
   defineOptions({ name: 'TemplateDrag' })
@@ -81,6 +85,7 @@
    * 用户列表数据
    * 用于演示拖拽排序功能
    */
+  // Logic Note: Reactive state 'userList' stores mutable runtime data used by this component.
   const userList = ref([
     { name: '孙悟空', role: '斗战胜佛' },
     { name: '猪八戒', role: '净坛使者' },
@@ -90,6 +95,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/views/widgets/drag/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .fade-move,
   .fade-enter-active,
   .fade-leave-active {

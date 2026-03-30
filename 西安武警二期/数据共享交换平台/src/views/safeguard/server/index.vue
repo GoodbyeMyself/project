@@ -1,5 +1,7 @@
 <!-- 服务器管理页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/views/safeguard/server/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <div class="w-full">
       <div class="flex flex-wrap w-[calc(100%+20px)]">
@@ -70,6 +72,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/views/safeguard/server/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'SafeguardServer' })
 
   interface ServerInfo {
@@ -87,6 +91,7 @@
    * 服务器列表数据
    * 包含各服务器的基本信息和资源使用情况
    */
+  // Logic Note: Reactive state 'serverList' stores mutable runtime data used by this component.
   const serverList = reactive<ServerInfo[]>([
     {
       name: '开发服务器',
@@ -128,6 +133,7 @@
    * @param max 最大值（默认 100）
    * @returns 随机整数
    */
+  // Logic Note: Handler 'generateRandomValue' encapsulates a single interaction or data-processing flow.
   const generateRandomValue = (min = 0, max = 100): number => {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
@@ -136,6 +142,7 @@
    * 更新所有服务器的资源使用数据
    * 模拟服务器资源使用情况的实时变化
    */
+  // Logic Note: Handler 'updateServerData' encapsulates a single interaction or data-processing flow.
   const updateServerData = (): void => {
     serverList.forEach((server) => {
       server.cup = generateRandomValue()

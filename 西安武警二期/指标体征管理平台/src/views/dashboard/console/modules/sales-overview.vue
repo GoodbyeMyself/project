@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/dashboard/console/modules/sales-overview.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card h-105 p-5 mb-5 max-sm:mb-4">
     <div class="art-card-header">
       <div class="title">
@@ -17,6 +19,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/dashboard/console/modules/sales-overview.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   /**
    * 全年访问量数据
    * 记录每月的访问量统计

@@ -1,5 +1,7 @@
 <!-- WangEditor 富文本编辑器 插件地址：https://www.wangeditor.com/ -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/components/core/forms/art-wang-editor/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="editor-wrapper">
     <Toolbar
       class="editor-toolbar"
@@ -18,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/components/core/forms/art-wang-editor/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import '@wangeditor/editor/dist/css/style.css'
   import { onBeforeUnmount, onMounted, shallowRef, computed } from 'vue'
   import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
@@ -185,6 +189,7 @@
     const maxRetries = 10
     const retryDelay = 100
 
+    // Logic Note: Handler 'tryApplyIcons' encapsulates a single interaction or data-processing flow.
     const tryApplyIcons = () => {
       const editor = editorRef.value
       if (!editor) {
@@ -253,5 +258,7 @@
 </script>
 
 <style lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/components/core/forms/art-wang-editor/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @use './style';
 </style>

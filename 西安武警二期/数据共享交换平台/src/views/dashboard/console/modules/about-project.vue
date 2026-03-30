@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/views/dashboard/console/modules/about-project.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card p-5 flex-b mb-5 max-sm:mb-4">
     <div>
       <h2 class="text-2xl font-medium">关于项目</h2>
@@ -22,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/views/dashboard/console/modules/about-project.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import AppConfig from '@/config'
   import { WEB_LINKS } from '@/utils/constants'
 
@@ -38,6 +42,7 @@
    * 在新标签页中打开指定 URL
    * @param url 要打开的网页地址
    */
+  // Logic Note: Handler 'goPage' encapsulates a single interaction or data-processing flow.
   const goPage = (url: string): void => {
     window.open(url, '_blank', 'noopener,noreferrer')
   }

@@ -1,5 +1,7 @@
 <!-- 右键菜单 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/others/art-menu-right/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="menu-right">
     <Transition name="context-menu" @before-enter="onBeforeEnter" @after-leave="onAfterLeave">
       <div
@@ -81,6 +83,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/others/art-menu-right/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { CSSProperties } from 'vue'
 
   defineOptions({ name: 'ArtMenuRight' })
@@ -138,7 +142,9 @@
     (e: 'hide'): void
   }>()
 
+  // Logic Note: Reactive state 'visible' stores mutable runtime data used by this component.
   const visible = ref(false)
+  // Logic Note: Reactive state 'position' stores mutable runtime data used by this component.
   const position = ref({ x: 0, y: 0 })
 
   // 用于清理定时器和事件监听器
@@ -270,6 +276,7 @@
     }
   }
 
+  // Logic Note: Handler 'show' encapsulates a single interaction or data-processing flow.
   const show = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -295,6 +302,7 @@
     }, 50) // 减少延迟时间，提升响应性
   }
 
+  // Logic Note: Handler 'hide' encapsulates a single interaction or data-processing flow.
   const hide = () => {
     if (!visible.value) return
 
@@ -311,6 +319,7 @@
     removeEventListeners()
   }
 
+  // Logic Note: Handler 'handleMenuClick' encapsulates a single interaction or data-processing flow.
   const handleMenuClick = (item: MenuItemType) => {
     if (item.disabled) return
     emit('select', item)
@@ -323,6 +332,7 @@
     element.style.transformOrigin = 'top left'
   }
 
+  // Logic Note: Handler 'onAfterLeave' encapsulates a single interaction or data-processing flow.
   const onAfterLeave = () => {
     // 确保清理所有资源
     removeEventListeners()
@@ -350,6 +360,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/components/core/others/art-menu-right/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .menu-right {
     --menu-width: v-bind('props.menuWidth + "px"');
     --border-radius: v-bind('props.borderRadius + "px"');

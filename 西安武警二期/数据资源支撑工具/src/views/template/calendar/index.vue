@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/template/calendar/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content mb-5">
     <!-- 日历主体 -->
     <ElCalendar v-model="currentDate">
@@ -78,6 +80,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/template/calendar/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'TemplateCalendar' })
 
   /**
@@ -102,14 +106,19 @@
     { label: '危险', value: 'danger' }
   ] as const
 
+  // Logic Note: Reactive state 'currentDate' stores mutable runtime data used by this component.
   const currentDate = ref(new Date('2025-02-07'))
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'dialogTitle' stores mutable runtime data used by this component.
   const dialogTitle = ref('添加事件')
+  // Logic Note: Reactive state 'editingEventIndex' stores mutable runtime data used by this component.
   const editingEventIndex = ref<number>(-1)
 
   /**
    * 事件列表数据
    */
+  // Logic Note: Reactive state 'events' stores mutable runtime data used by this component.
   const events = ref<CalendarEvent[]>([
     { date: '2025-02-01', content: '产品需求评审', type: 'primary' },
     {
@@ -130,6 +139,7 @@
   /**
    * 事件表单数据
    */
+  // Logic Note: Reactive state 'eventForm' stores mutable runtime data used by this component.
   const eventForm = ref<CalendarEvent>({
     date: '',
     endDate: '',
@@ -140,6 +150,7 @@
   /**
    * 是否处于编辑模式
    */
+  // Logic Note: Computed value 'isEditing' derives UI state from reactive sources and updates automatically.
   const isEditing = computed(() => editingEventIndex.value >= 0)
 
   /**
@@ -147,6 +158,7 @@
    * @param date 完整日期字符串
    * @returns 日期中的日部分
    */
+  // Logic Note: Handler 'formatDate' encapsulates a single interaction or data-processing flow.
   const formatDate = (date: string) => date.split('-')[2]
 
   /**
@@ -154,6 +166,7 @@
    * @param type 事件类型
    * @returns 包含背景和文字颜色的类名对象
    */
+  // Logic Note: Handler 'getEventClasses' encapsulates a single interaction or data-processing flow.
   const getEventClasses = (type: CalendarEvent['type'] = 'primary') => {
     const classMap = {
       primary: { bgClass: 'bg-theme/12', textClass: 'text-theme' },
@@ -170,6 +183,7 @@
    * @param day 日期字符串
    * @returns 该日期的事件列表
    */
+  // Logic Note: Handler 'getEvents' encapsulates a single interaction or data-processing flow.
   const getEvents = (day: string) => {
     return events.value
       .filter((event) => {
@@ -188,6 +202,7 @@
   /**
    * 重置表单数据
    */
+  // Logic Note: Handler 'resetForm' encapsulates a single interaction or data-processing flow.
   const resetForm = () => {
     eventForm.value = {
       date: '',
@@ -203,6 +218,7 @@
    * 打开添加事件弹窗
    * @param day 点击的日期
    */
+  // Logic Note: Handler 'handleCellClick' encapsulates a single interaction or data-processing flow.
   const handleCellClick = (day: string) => {
     dialogTitle.value = '添加事件'
     eventForm.value = {
@@ -219,6 +235,7 @@
    * 打开编辑事件弹窗
    * @param event 点击的事件对象
    */
+  // Logic Note: Handler 'handleEventClick' encapsulates a single interaction or data-processing flow.
   const handleEventClick = (event: CalendarEvent) => {
     dialogTitle.value = '编辑事件'
     eventForm.value = { ...event }
@@ -232,6 +249,7 @@
    * 保存事件
    * 根据编辑模式决定是新增还是更新
    */
+  // Logic Note: Handler 'handleSaveEvent' encapsulates a single interaction or data-processing flow.
   const handleSaveEvent = () => {
     if (!eventForm.value.content || !eventForm.value.date) return
 
@@ -248,6 +266,7 @@
   /**
    * 删除事件
    */
+  // Logic Note: Handler 'handleDeleteEvent' encapsulates a single interaction or data-processing flow.
   const handleDeleteEvent = () => {
     if (isEditing.value) {
       events.value.splice(editingEventIndex.value, 1)
@@ -258,6 +277,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/views/template/calendar/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   :deep(.el-calendar) {
     height: 100%;
   }

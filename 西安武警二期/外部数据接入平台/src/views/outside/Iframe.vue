@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/outside/Iframe.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="box-border w-full h-full" v-loading="isLoading">
     <iframe
       ref="iframeRef"
@@ -11,13 +13,18 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/outside/Iframe.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { IframeRouteManager } from '@/router/core'
 
   defineOptions({ name: 'IframeView' })
 
   const route = useRoute()
+  // Logic Note: Reactive state 'isLoading' stores mutable runtime data used by this component.
   const isLoading = ref(true)
+  // Logic Note: Reactive state 'iframeUrl' stores mutable runtime data used by this component.
   const iframeUrl = ref('')
+  // Logic Note: Reactive state 'iframeRef' stores mutable runtime data used by this component.
   const iframeRef = ref<HTMLIFrameElement | null>(null)
 
   /**
@@ -36,6 +43,7 @@
    * 处理 iframe 加载完成事件
    * 隐藏加载状态
    */
+  // Logic Note: Handler 'handleIframeLoad' encapsulates a single interaction or data-processing flow.
   const handleIframeLoad = (): void => {
     isLoading.value = false
   }

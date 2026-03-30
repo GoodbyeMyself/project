@@ -1,5 +1,7 @@
 <!-- 环形图 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/components/core/charts/art-ring-chart/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     ref="chartRef"
     class="relative w-full"
@@ -10,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/components/core/charts/art-ring-chart/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { EChartsOption } from '@/plugins/echarts'
   import { useChartOps, useChartComponent } from '@/hooks/core/useChart'
   import type { RingChartProps } from '@/types/component/chart'
@@ -49,6 +53,7 @@
         const getCenterPosition = (): [string, string] => {
           if (!props.showLegend) return ['50%', '50%']
 
+          // Logic Note: Branching logic maps action keys to explicit behavior paths.
           switch (props.legendPosition) {
             case 'left':
               return ['60%', '50%']

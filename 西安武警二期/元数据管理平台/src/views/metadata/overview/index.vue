@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/metadata/overview/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="metadata-overview">
     <ElRow :gutter="16" class="stat-row">
       <ElCol :xs="24" :md="8">
@@ -76,6 +78,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/metadata/overview/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { metadataCatalog, metadataStatistics } from '../catalog'
 
   defineOptions({ name: 'MetadataOverview' })
@@ -89,8 +93,10 @@
   }
 
   const router = useRouter()
+  // Logic Note: Reactive state 'keyword' stores mutable runtime data used by this component.
   const keyword = ref('')
 
+  // Logic Note: Computed value 'allRows' derives UI state from reactive sources and updates automatically.
   const allRows = computed<CapabilityRow[]>(() => {
     return metadataCatalog.flatMap((module) =>
       module.sections.flatMap((section) =>
@@ -105,6 +111,7 @@
     )
   })
 
+  // Logic Note: Computed value 'filteredRows' derives UI state from reactive sources and updates automatically.
   const filteredRows = computed(() => {
     if (!keyword.value.trim()) {
       return allRows.value
@@ -119,6 +126,7 @@
     })
   })
 
+  // Logic Note: Handler 'gotoSection' encapsulates a single interaction or data-processing flow.
   const gotoSection = (sectionKey: string) => {
     const routeName = `Section-${sectionKey}`
     router.push({ name: routeName })
@@ -126,6 +134,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/views/metadata/overview/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .metadata-overview {
     .stat-row {
       margin-bottom: 16px;

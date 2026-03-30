@@ -1,5 +1,7 @@
 <!-- 图片裁剪组件 github: https://github.com/acccccccb/vue-img-cutter/tree/master -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/media/art-cutter-img/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="cutter-container">
     <div class="cutter-component">
       <div class="title">{{ title }}</div>
@@ -45,6 +47,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/media/art-cutter-img/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import ImgCutter from 'vue-img-cutter'
 
   defineOptions({ name: 'ArtCutterImg' })
@@ -158,7 +162,9 @@
 
   const emit = defineEmits(['update:imgUrl', 'error', 'imageLoadComplete', 'imageLoadError'])
 
+  // Logic Note: Reactive state 'temImgPath' stores mutable runtime data used by this component.
   const temImgPath = ref('')
+  // Logic Note: Reactive state 'imgCutterModal' stores mutable runtime data used by this component.
   const imgCutterModal = ref()
 
   // 计算属性：整合所有ImgCutter的props
@@ -252,6 +258,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据共享交换平台/src/components/core/media/art-cutter-img/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .cutter-container {
     display: flex;
     flex-flow: row wrap;

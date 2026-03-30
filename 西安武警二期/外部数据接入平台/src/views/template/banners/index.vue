@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/template/banners/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="pt-5">
     <h1 class="page-title">基础 & 自定义按钮+背景色</h1>
     <ElRow :gutter="20">
@@ -144,6 +146,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/template/banners/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import icon2 from '@imgs/3d/icon2.webp'
   import icon3 from '@imgs/3d/icon3.webp'
   import icon4 from '@imgs/3d/icon4.webp'
@@ -154,6 +158,7 @@
   /**
    * 处理横幅点击事件
    */
+  // Logic Note: Handler 'handleBannerClick' encapsulates a single interaction or data-processing flow.
   const handleBannerClick = () => {
     console.log('banner clicked')
   }
@@ -161,6 +166,7 @@
   /**
    * 处理确认按钮点击事件
    */
+  // Logic Note: Handler 'handleConfirm' encapsulates a single interaction or data-processing flow.
   const handleConfirm = () => {
     console.log('confirm clicked')
   }
@@ -168,6 +174,7 @@
   /**
    * 处理取消按钮点击事件
    */
+  // Logic Note: Handler 'handleCancel' encapsulates a single interaction or data-processing flow.
   const handleCancel = () => {
     console.log('cancel clicked')
   }
@@ -209,6 +216,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '外部数据接入平台/src/views/template/banners/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .page-title {

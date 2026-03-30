@@ -2,6 +2,8 @@
 <!-- 支持常用表单组件、自定义组件、插槽、校验、隐藏表单项 -->
 <!-- 写法同 ElementPlus 官方文档组件，把属性写在 props 里面就可以了 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/components/core/forms/art-form/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <section class="px-4 pb-0 pt-4 md:px-4 md:pt-4">
     <ElForm
       ref="formRef"
@@ -97,6 +99,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/components/core/forms/art-form/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useWindowSize } from '@vueuse/core'
   import { useI18n } from 'vue-i18n'
   import { toRaw, type Component } from 'vue'
@@ -145,6 +149,7 @@
 
   const { width } = useWindowSize()
   const { t } = useI18n()
+  // Logic Note: Computed value 'isMobile' derives UI state from reactive sources and updates automatically.
   const isMobile = computed(() => width.value < 500)
 
   const formInstance = useTemplateRef<FormInstance>('formRef')
@@ -236,12 +241,14 @@
   const emit = defineEmits<FormEmits>()
 
   const modelValue = defineModel<Record<string, any>>({ default: {} })
+  // Logic Note: Reactive state 'initialModelValue' stores mutable runtime data used by this component.
   const initialModelValue = ref<Record<string, any>>({})
 
   // 保存组件初始化时的表单快照，用于 reset 时恢复默认值。
   const cloneModelValue = (value: Record<string, any> | undefined) => {
     if (!value) return {}
 
+    // Logic Note: Handler 'deepClone' encapsulates a single interaction or data-processing flow.
     const deepClone = (source: unknown): unknown => {
       if (Array.isArray(source)) {
         return source.map((item) => deepClone(item))
@@ -285,6 +292,7 @@
       .map((segment) => (PATH_NUMBER_RE.test(segment) ? Number(segment) : segment))
   }
 
+  // Logic Note: Handler 'getFieldValue' encapsulates a single interaction or data-processing flow.
   const getFieldValue = (path: string) => {
     return parsePath(path).reduce<any>((currentValue, segment) => {
       if (currentValue == null) return undefined
@@ -345,6 +353,7 @@
     })
   }
 
+  // Logic Note: Handler 'isRichTextEmpty' encapsulates a single interaction or data-processing flow.
   const isRichTextEmpty = (value: string) => {
     if (/<(img|video|audio|iframe|embed|object)\b/i.test(value)) {
       return false
@@ -409,10 +418,12 @@
     return value ?? undefined
   }
 
+  // Logic Note: Handler 'getSanitizedOutput' encapsulates a single interaction or data-processing flow.
   const getSanitizedOutput = () => {
     return (sanitizeOutputValue(cloneModelValue(modelValue.value)) || {}) as Record<string, any>
   }
 
+  // Logic Note: Handler 'getProps' encapsulates a single interaction or data-processing flow.
   const getProps = (item: FormItem) => {
     if (item.props) return item.props
     const props = { ...item }
@@ -447,6 +458,7 @@
    * 获取列宽 span 值
    * 根据屏幕尺寸智能降级，避免小屏幕上表单项被压缩过小
    */
+  // Logic Note: Handler 'getColSpan' encapsulates a single interaction or data-processing flow.
   const getColSpan = (itemSpan: number | undefined, breakpoint: ResponsiveBreakpoint): number => {
     return calculateResponsiveSpan(itemSpan, span.value, breakpoint)
   }
@@ -454,6 +466,7 @@
   /**
    * 可见的表单项
    */
+  // Logic Note: Computed value 'visibleFormItems' derives UI state from reactive sources and updates automatically.
   const visibleFormItems = computed(() => {
     return props.items.filter((item) => !item.hidden)
   })
@@ -461,6 +474,7 @@
   /**
    * 操作按钮样式
    */
+  // Logic Note: Computed value 'actionButtonsStyle' derives UI state from reactive sources and updates automatically.
   const actionButtonsStyle = computed(() => ({
     'justify-content': isMobile.value
       ? 'flex-end'
@@ -472,6 +486,7 @@
   /**
    * 处理重置事件
    */
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = () => {
     // 重置表单字段（UI 层）
     formInstance.value?.resetFields()
@@ -489,6 +504,7 @@
   /**
    * 处理提交事件
    */
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = () => {
     // 对外只抛出清洗后的结果，避免业务层重复过滤空值。
     emit('submit', getSanitizedOutput())

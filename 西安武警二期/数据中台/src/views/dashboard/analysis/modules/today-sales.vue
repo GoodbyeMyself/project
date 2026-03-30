@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/views/dashboard/analysis/modules/today-sales.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card h-82 p-5 mb-5 overflow-hidden max-lg:h-auto max-sm:mb-4">
     <div class="art-card-header pr-0">
       <div class="title">
@@ -41,6 +43,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/views/dashboard/analysis/modules/today-sales.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   interface SalesDataItem {
     label: string
     value: number
@@ -53,6 +57,7 @@
    * 今日销售数据统计
    * 包含销售额、订单量、产品销量和新客户数等关键指标
    */
+  // Logic Note: Reactive state 'salesData' stores mutable runtime data used by this component.
   const salesData = ref<SalesDataItem[]>([
     {
       label: '总销售额',

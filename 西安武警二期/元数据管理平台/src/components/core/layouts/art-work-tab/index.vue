@@ -1,5 +1,7 @@
 <!-- 标签页 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/components/core/layouts/art-work-tab/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     v-if="showWorkTab"
     class="box-border flex-b w-full px-5 mb-3 select-none max-sm:px-[15px]"
@@ -84,6 +86,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/components/core/layouts/art-work-tab/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { computed, onMounted, ref, watch, nextTick, onUnmounted } from 'vue'
   import { LocationQueryRaw, useRoute, useRouter } from 'vue-router'
   import { useI18n } from 'vue-i18n'
@@ -124,7 +128,9 @@
 
   // DOM 引用
   const scrollRef = ref<HTMLElement | null>(null)
+  // Logic Note: Reactive state 'tabsRef' stores mutable runtime data used by this component.
   const tabsRef = ref<HTMLElement | null>(null)
+  // Logic Note: Reactive state 'menuRef' stores mutable runtime data used by this component.
   const menuRef = ref()
 
   // 状态管理
@@ -133,20 +139,25 @@
     transition: ''
   })
 
+  // Logic Note: Reactive state 'touchState' stores mutable runtime data used by this component.
   const touchState = ref<TouchState>({
     startX: 0,
     currentX: 0
   })
 
+  // Logic Note: Reactive state 'clickedPath' stores mutable runtime data used by this component.
   const clickedPath = ref('')
 
   // 计算属性
   const list = computed(() => store.opened)
+  // Logic Note: Computed value 'activeTab' derives UI state from reactive sources and updates automatically.
   const activeTab = computed(() => currentRoute.value.path)
+  // Logic Note: Computed value 'activeTabIndex' derives UI state from reactive sources and updates automatically.
   const activeTabIndex = computed(() => list.value.findIndex((tab) => tab.path === activeTab.value))
 
   // 右键菜单逻辑
   const useContextMenu = () => {
+    // Logic Note: Handler 'getClickedTabInfo' encapsulates a single interaction or data-processing flow.
     const getClickedTabInfo = () => {
       const clickedIndex = list.value.findIndex((tab) => tab.path === clickedPath.value)
       const currentTab = list.value[clickedIndex]
@@ -225,6 +236,7 @@
 
   // 滚动逻辑
   const useScrolling = () => {
+    // Logic Note: Handler 'setTransition' encapsulates a single interaction or data-processing flow.
     const setTransition = () => {
       scrollState.value.transition = 'transform 0.5s cubic-bezier(0.15, 0, 0.15, 1)'
       setTimeout(() => {
@@ -232,10 +244,12 @@
       }, 250)
     }
 
+    // Logic Note: Handler 'getCurrentTabElement' encapsulates a single interaction or data-processing flow.
     const getCurrentTabElement = (): HTMLElement | null => {
       return document.getElementById(`scroll-li-${activeTabIndex.value}`)
     }
 
+    // Logic Note: Handler 'calculateScrollPosition' encapsulates a single interaction or data-processing flow.
     const calculateScrollPosition = () => {
       if (!scrollRef.value || !tabsRef.value) return
 
@@ -259,6 +273,7 @@
       }
     }
 
+    // Logic Note: Handler 'autoPositionTab' encapsulates a single interaction or data-processing flow.
     const autoPositionTab = () => {
       const positions = calculateScrollPosition()
       if (!positions) return
@@ -281,6 +296,7 @@
       })
     }
 
+    // Logic Note: Handler 'adjustPositionAfterClose' encapsulates a single interaction or data-processing flow.
     const adjustPositionAfterClose = () => {
       const positions = calculateScrollPosition()
       if (!positions) return
@@ -304,6 +320,7 @@
   const useEventHandlers = () => {
     const { setTransition, adjustPositionAfterClose } = useScrolling()
 
+    // Logic Note: Handler 'handleWheelScroll' encapsulates a single interaction or data-processing flow.
     const handleWheelScroll = (event: WheelEvent) => {
       if (!scrollRef.value || !tabsRef.value) return
 
@@ -321,10 +338,12 @@
       )
     }
 
+    // Logic Note: Handler 'handleTouchStart' encapsulates a single interaction or data-processing flow.
     const handleTouchStart = (event: TouchEvent) => {
       touchState.value.startX = event.touches[0].clientX
     }
 
+    // Logic Note: Handler 'handleTouchMove' encapsulates a single interaction or data-processing flow.
     const handleTouchMove = (event: TouchEvent) => {
       if (!scrollRef.value || !tabsRef.value) return
 
@@ -339,10 +358,12 @@
       touchState.value.startX = touchState.value.currentX
     }
 
+    // Logic Note: Handler 'handleTouchEnd' encapsulates a single interaction or data-processing flow.
     const handleTouchEnd = () => {
       setTransition()
     }
 
+    // Logic Note: Handler 'setupEventListeners' encapsulates a single interaction or data-processing flow.
     const setupEventListeners = () => {
       if (tabsRef.value) {
         tabsRef.value.addEventListener('wheel', handleWheelScroll, { passive: false })
@@ -352,6 +373,7 @@
       }
     }
 
+    // Logic Note: Handler 'cleanupEventListeners' encapsulates a single interaction or data-processing flow.
     const cleanupEventListeners = () => {
       if (tabsRef.value) {
         tabsRef.value.removeEventListener('wheel', handleWheelScroll)
@@ -370,6 +392,7 @@
 
   // 标签页操作逻辑
   const useTabOperations = (adjustPositionAfterClose: () => void) => {
+    // Logic Note: Handler 'clickTab' encapsulates a single interaction or data-processing flow.
     const clickTab = (item: WorkTab) => {
       router.push({
         path: item.path,
@@ -377,6 +400,7 @@
       })
     }
 
+    // Logic Note: Handler 'closeWorktab' encapsulates a single interaction or data-processing flow.
     const closeWorktab = (type: TabCloseType, tabPath: string) => {
       const path = typeof tabPath === 'string' ? tabPath : route.path
 
@@ -395,6 +419,7 @@
       }, 100)
     }
 
+    // Logic Note: Handler 'showMenu' encapsulates a single interaction or data-processing flow.
     const showMenu = (e: MouseEvent, path?: string) => {
       clickedPath.value = path || ''
       menuRef.value?.show(e)
@@ -402,6 +427,7 @@
       e.stopPropagation()
     }
 
+    // Logic Note: Handler 'handleSelect' encapsulates a single interaction or data-processing flow.
     const handleSelect = (item: MenuItemType) => {
       const { key } = item
 
@@ -468,6 +494,7 @@
     }
   )
 
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => userStore.language,
     () => {
@@ -480,6 +507,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/components/core/layouts/art-work-tab/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .google-tab.activ-tab {
     color: var(--theme-color) !important;
     background-color: var(--el-color-primary-light-9) !important;

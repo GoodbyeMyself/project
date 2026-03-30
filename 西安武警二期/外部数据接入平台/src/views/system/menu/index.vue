@@ -1,5 +1,7 @@
 <!-- 任务编排页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/system/menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-5 pb-5">
     <ElCard>
       <template #header>
@@ -61,8 +63,11 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '外部数据接入平台/src/views/system/menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   defineOptions({ name: 'Menus' })
 
+  // Logic Note: Reactive state 'treeData' stores mutable runtime data used by this component.
   const treeData = ref([
     {
       id: 1,
@@ -81,6 +86,7 @@
     }
   ])
 
+  // Logic Note: Reactive state 'orchestrationList' stores mutable runtime data used by this component.
   const orchestrationList = ref([
     {
       name: '边防卡口接入总编排',

@@ -2,6 +2,8 @@
 <!-- 支持常用表单组件、自定义组件、插槽、校验、隐藏表单项 -->
 <!-- 写法同 ElementPlus 官方文档组件，把属性写在 props 里面就可以了 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/forms/art-search-bar/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <section class="art-search-bar art-card-xs" :class="{ 'is-expanded': isExpanded }">
     <ElForm
       ref="formRef"
@@ -103,6 +105,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/forms/art-search-bar/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ArrowUpBold, ArrowDownBold } from '@element-plus/icons-vue'
   import { useWindowSize } from '@vueuse/core'
   import { useI18n } from 'vue-i18n'
@@ -152,6 +156,7 @@
 
   const { width } = useWindowSize()
   const { t } = useI18n()
+  // Logic Note: Computed value 'isMobile' derives UI state from reactive sources and updates automatically.
   const isMobile = computed(() => width.value < 500)
 
   const formInstance = useTemplateRef<FormInstance>('formRef')
@@ -252,12 +257,14 @@
   const emit = defineEmits<SearchBarEmits>()
 
   const modelValue = defineModel<Record<string, any>>({ default: {} })
+  // Logic Note: Reactive state 'initialModelValue' stores mutable runtime data used by this component.
   const initialModelValue = ref<Record<string, any>>({})
 
   // 保存组件初始化时的表单快照，用于 reset 时恢复默认筛选条件。
   const cloneModelValue = (value: Record<string, any> | undefined) => {
     if (!value) return {}
 
+    // Logic Note: Handler 'deepClone' encapsulates a single interaction or data-processing flow.
     const deepClone = (source: unknown): unknown => {
       if (Array.isArray(source)) {
         return source.map((item) => deepClone(item))
@@ -282,6 +289,7 @@
   /**
    * 是否展开状态
    */
+  // Logic Note: Reactive state 'isExpanded' stores mutable runtime data used by this component.
   const isExpanded = ref(props.defaultExpanded)
 
   const rootProps = ['label', 'labelWidth', 'key', 'type', 'hidden', 'span', 'slots']
@@ -296,6 +304,7 @@
     ...props.sanitizeOutput
   }))
 
+  // Logic Note: Handler 'getProps' encapsulates a single interaction or data-processing flow.
   const getProps = (item: SearchFormItem) => {
     if (item.props) return item.props
     const props = { ...item }
@@ -319,6 +328,7 @@
    * 获取列宽 span 值
    * 根据屏幕尺寸智能降级，避免小屏幕上表单项被压缩过小
    */
+  // Logic Note: Handler 'getColSpan' encapsulates a single interaction or data-processing flow.
   const getColSpan = (itemSpan: number | undefined, breakpoint: ResponsiveBreakpoint): number => {
     return calculateResponsiveSpan(itemSpan, span.value, breakpoint)
   }
@@ -328,8 +338,10 @@
     return value === '' ? undefined : value
   }
 
+  // Logic Note: Handler 'getFieldValue' encapsulates a single interaction or data-processing flow.
   const getFieldValue = (key: string) => modelValue.value[key]
 
+  // Logic Note: Handler 'setFieldValue' encapsulates a single interaction or data-processing flow.
   const setFieldValue = (key: string, value: unknown) => {
     const normalizedValue = normalizeFieldValue(value)
 
@@ -341,6 +353,7 @@
     modelValue.value[key] = normalizedValue
   }
 
+  // Logic Note: Handler 'isRichTextEmpty' encapsulates a single interaction or data-processing flow.
   const isRichTextEmpty = (value: string) => {
     if (/<(img|video|audio|iframe|embed|object)\b/i.test(value)) {
       return false
@@ -405,6 +418,7 @@
     return value ?? undefined
   }
 
+  // Logic Note: Handler 'getSanitizedOutput' encapsulates a single interaction or data-processing flow.
   const getSanitizedOutput = () => {
     return (sanitizeOutputValue(cloneModelValue(modelValue.value)) || {}) as Record<string, any>
   }
@@ -423,6 +437,7 @@
   /**
    * 可见的表单项
    */
+  // Logic Note: Computed value 'visibleFormItems' derives UI state from reactive sources and updates automatically.
   const visibleFormItems = computed(() => {
     const filteredItems = props.items.filter((item) => !item.hidden)
     const shouldShowLess = !props.isExpand && !isExpanded.value
@@ -436,6 +451,7 @@
   /**
    * 是否应该显示展开/收起按钮
    */
+  // Logic Note: Computed value 'shouldShowExpandToggle' derives UI state from reactive sources and updates automatically.
   const shouldShowExpandToggle = computed(() => {
     const filteredItems = props.items.filter((item) => !item.hidden)
     return (
@@ -446,6 +462,7 @@
   /**
    * 展开/收起按钮文本
    */
+  // Logic Note: Computed value 'expandToggleText' derives UI state from reactive sources and updates automatically.
   const expandToggleText = computed(() => {
     return isExpanded.value ? t('table.searchBar.collapse') : t('table.searchBar.expand')
   })
@@ -453,6 +470,7 @@
   /**
    * 操作按钮样式
    */
+  // Logic Note: Computed value 'actionButtonsStyle' derives UI state from reactive sources and updates automatically.
   const actionButtonsStyle = computed(() => ({
     'justify-content': isMobile.value
       ? 'flex-end'
@@ -464,6 +482,7 @@
   /**
    * 切换展开/收起状态
    */
+  // Logic Note: Handler 'toggleExpand' encapsulates a single interaction or data-processing flow.
   const toggleExpand = () => {
     isExpanded.value = !isExpanded.value
   }
@@ -471,6 +490,7 @@
   /**
    * 处理重置事件
    */
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = () => {
     // 重置表单字段（UI 层）
     formInstance.value?.resetFields()
@@ -488,6 +508,7 @@
   /**
    * 处理搜索事件
    */
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = () => {
     // 对外只抛出清洗后的查询参数，避免接口收到空数组/空字符串。
     emit('search', getSanitizedOutput())
@@ -506,6 +527,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/forms/art-search-bar/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .art-search-bar {
     padding: 15px 20px 0;
 

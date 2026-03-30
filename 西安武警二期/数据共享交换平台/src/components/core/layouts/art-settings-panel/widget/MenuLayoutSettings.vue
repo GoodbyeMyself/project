@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/components/core/layouts/art-settings-panel/widget/MenuLayoutSettings.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div v-if="width > 1000">
     <SectionTitle :title="$t('setting.menuType.title')" />
     <div class="setting-box-wrap">
@@ -18,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/components/core/layouts/art-settings-panel/widget/MenuLayoutSettings.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import SectionTitle from './SectionTitle.vue'
   import { useSettingStore } from '@/store/modules/setting'
   import { useSettingsConfig } from '../composables/useSettingsConfig'

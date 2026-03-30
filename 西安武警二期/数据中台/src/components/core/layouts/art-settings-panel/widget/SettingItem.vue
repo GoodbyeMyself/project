@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/layouts/art-settings-panel/widget/SettingItem.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex-cb mb-4 last:mb-2" :class="{ 'mobile-hide': config.mobileHide }">
     <span class="text-sm">{{ config.label }}</span>
 
@@ -35,6 +37,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/layouts/art-settings-panel/widget/SettingItem.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { ComputedRef } from 'vue'
 
   interface SettingItemConfig {
@@ -83,6 +87,7 @@
     }
   })
 
+  // Logic Note: Handler 'handleChange' encapsulates a single interaction or data-processing flow.
   const handleChange = (value: any) => {
     try {
       emit('change', value)
@@ -93,6 +98,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/layouts/art-settings-panel/widget/SettingItem.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @media screen and (width <= 768px) {
     .mobile-hide {
       display: none !important;

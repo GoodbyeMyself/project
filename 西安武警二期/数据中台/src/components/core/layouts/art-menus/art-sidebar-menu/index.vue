@@ -1,5 +1,7 @@
 <!-- 左侧菜单 或 双列菜单 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/layouts/art-menus/art-sidebar-menu/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div
     class="layout-sidebar"
     v-if="showLeftMenu || isDualMenu"
@@ -129,6 +131,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/layouts/art-menus/art-sidebar-menu/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import AppConfig from '@/config'
   import { useSettingStore } from '@/store/modules/setting'
   import { MenuTypeEnum, MenuWidth } from '@/enums/appEnum'
@@ -154,7 +158,9 @@
 
   // 组件内部状态
   const defaultOpenedMenus = ref<string[]>([])
+  // Logic Note: Reactive state 'isMobileMode' stores mutable runtime data used by this component.
   const isMobileMode = ref(false)
+  // Logic Note: Reactive state 'showMobileModal' stores mutable runtime data used by this component.
   const showMobileModal = ref(false)
 
   // 使用 VueUse 的窗口尺寸监听
@@ -162,13 +168,16 @@
 
   // 菜单宽度相关
   const menuopenwidth = computed(() => getMenuOpenWidth.value)
+  // Logic Note: Computed value 'menuclosewidth' derives UI state from reactive sources and updates automatically.
   const menuclosewidth = computed(() => MENU_CLOSE_WIDTH)
 
   // 菜单类型判断
   const isTopLeftMenu = computed(() => menuType.value === MenuTypeEnum.TOP_LEFT)
+  // Logic Note: Computed value 'showLeftMenu' derives UI state from reactive sources and updates automatically.
   const showLeftMenu = computed(
     () => menuType.value === MenuTypeEnum.LEFT || menuType.value === MenuTypeEnum.TOP_LEFT
   )
+  // Logic Note: Computed value 'isDualMenu' derives UI state from reactive sources and updates automatically.
   const isDualMenu = computed(() => menuType.value === MenuTypeEnum.DUAL_MENU)
 
   // 移动端屏幕判断（使用 computed 避免重复计算）
@@ -176,6 +185,7 @@
 
   // 路由相关
   const firstLevelMenuPath = computed(() => route.matched[0]?.path)
+  // Logic Note: Computed value 'routerPath' derives UI state from reactive sources and updates automatically.
   const routerPath = computed(() => String(route.meta.activePath || route.path))
 
   // 菜单数据
@@ -183,6 +193,7 @@
     return useMenuStore().menuList.filter((menu) => !menu.meta.isHide)
   })
 
+  // Logic Note: Computed value 'menuList' derives UI state from reactive sources and updates automatically.
   const menuList = computed(() => {
     const menuStore = useMenuStore()
     const allMenus = menuStore.menuList
@@ -232,6 +243,7 @@
   /**
    * 查找 iframe 对应的二级菜单列表
    */
+  // Logic Note: Handler 'findIframeMenuList' encapsulates a single interaction or data-processing flow.
   const findIframeMenuList = (currentPath: string, menuList: any[]) => {
     // 递归查找包含当前路径的菜单项
     const hasPath = (items: any[]): boolean => {
@@ -260,6 +272,7 @@
   /**
    * 导航到首页
    */
+  // Logic Note: Handler 'navigateToHome' encapsulates a single interaction or data-processing flow.
   const navigateToHome = (): void => {
     router.push(homePath.value)
   }
@@ -267,6 +280,7 @@
   /**
    * 切换菜单显示/隐藏
    */
+  // Logic Note: Handler 'toggleMenuVisibility' encapsulates a single interaction or data-processing flow.
   const toggleMenuVisibility = (): void => {
     settingStore.setMenuOpen(!menuOpen.value)
 
@@ -285,6 +299,7 @@
   /**
    * 处理菜单关闭（来自子组件）
    */
+  // Logic Note: Handler 'handleMenuClose' encapsulates a single interaction or data-processing flow.
   const handleMenuClose = (): void => {
     if (isMobileScreen.value) {
       settingStore.setMenuOpen(false)
@@ -295,6 +310,7 @@
   /**
    * 切换双列菜单模式
    */
+  // Logic Note: Handler 'toggleDualMenuMode' encapsulates a single interaction or data-processing flow.
   const toggleDualMenuMode = (): void => {
     settingStore.setDualMenuShowText(!dualMenuShowText.value)
   }
@@ -302,6 +318,7 @@
   /**
    * 监听窗口尺寸变化，自动处理移动端菜单
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(width, (newWidth) => {
     if (newWidth < MOBILE_BREAKPOINT) {
       settingStore.setMenuOpen(false)
@@ -316,6 +333,7 @@
   /**
    * 监听菜单开关状态变化
    */
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(menuOpen, (isMenuOpen: boolean) => {
     if (!isMobileScreen.value) {
       // 大屏幕设备上，模态框始终隐藏
@@ -334,10 +352,14 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/layouts/art-menus/art-sidebar-menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @use './style';
 </style>
 
 <style lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/layouts/art-menus/art-sidebar-menu/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @use './theme';
 
   .layout-sidebar {

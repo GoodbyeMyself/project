@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/resource-model/logical/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="flex flex-col gap-4 pb-5">
     <ElCard shadow="never">
       <template #header>
@@ -40,6 +42,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/resource-model/logical/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { ref } from 'vue'
   import { ElMessage, ElMessageBox } from 'element-plus'
 
@@ -64,6 +68,7 @@
     '模型共享权限配置'
   ]
 
+  // Logic Note: Reactive state 'rows' stores mutable runtime data used by this component.
   const rows = ref<LogicalRow[]>([
     {
       id: 1,
@@ -85,6 +90,7 @@
     }
   ])
 
+  // Logic Note: Handler 'addModel' encapsulates a single interaction or data-processing flow.
   const addModel = () => {
     rows.value.unshift({
       id: Date.now(),
@@ -98,16 +104,19 @@
     ElMessage.success('逻辑模型已新增')
   }
 
+  // Logic Note: Handler 'editModel' encapsulates a single interaction or data-processing flow.
   const editModel = (row: LogicalRow) => {
     row.version = `v${(Number(row.version.replace('v', '')) + 0.1).toFixed(1)}`
     row.updatedAt = new Date().toLocaleString()
     ElMessage.success(`${row.name} 已更新并生成新版本`)
   }
 
+  // Logic Note: Handler 'viewVersion' encapsulates a single interaction or data-processing flow.
   const viewVersion = (row: LogicalRow) => {
     ElMessage.info(`已展示 ${row.name} 的版本轨迹（当前 ${row.version}）`)
   }
 
+  // Logic Note: Handler 'removeModel' encapsulates a single interaction or data-processing flow.
   const removeModel = async (id: number) => {
     try {
       await ElMessageBox.confirm('确认删除该逻辑模型吗？', '删除确认', { type: 'warning' })
@@ -118,6 +127,7 @@
     }
   }
 
+  // Logic Note: Handler 'openShareConfig' encapsulates a single interaction or data-processing flow.
   const openShareConfig = () => {
     ElMessage.success('已进入模型共享权限配置流程')
   }

@@ -1,5 +1,7 @@
 <!-- 表单示例 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据共享交换平台/src/views/examples/forms/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="pb-5">
     <h2 class="mb-1 text-lg font-medium">表单组件示例</h2>
 
@@ -61,6 +63,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据共享交换平台/src/views/examples/forms/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import ArtWangEditor from '@/components/core/forms/art-wang-editor/index.vue'
   import { SearchFormItem } from '@/components/core/forms/art-search-bar/index.vue'
   import { ElMessage, ElUpload, ElButton, ElIcon, ElInput } from 'element-plus'
@@ -103,13 +107,17 @@
 
   const FETCH_DELAY = 500
 
+  // Logic Note: Reactive state 'formRef' stores mutable runtime data used by this component.
   const formRef = ref()
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'dialogImageUrl' stores mutable runtime data used by this component.
   const dialogImageUrl = ref('')
 
   /**
    * 表单数据
    */
+  // Logic Note: Reactive state 'formData' stores mutable runtime data used by this component.
   const formData = ref<FormData>({
     name: undefined,
     phone: undefined,
@@ -137,11 +145,16 @@
     name: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
   }
 
+  // Logic Note: Reactive state 'labelWidth' stores mutable runtime data used by this component.
   const labelWidth = ref(100)
+  // Logic Note: Reactive state 'labelPosition' stores mutable runtime data used by this component.
   const labelPosition = ref<'right' | 'left' | 'top'>('right')
+  // Logic Note: Reactive state 'span' stores mutable runtime data used by this component.
   const span = ref(6)
+  // Logic Note: Reactive state 'gutter' stores mutable runtime data used by this component.
   const gutter = ref(12)
 
+  // Logic Note: Reactive state 'levelOptions' stores mutable runtime data used by this component.
   const levelOptions = ref<OptionItem[]>([])
 
   /**
@@ -175,6 +188,7 @@
    * 模拟接口获取用户等级数据
    * @returns 用户等级选项列表
    */
+  // Logic Note: Handler 'fetchLevelOptions' encapsulates a single interaction or data-processing flow.
   const fetchLevelOptions = (): Promise<OptionItem[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -186,6 +200,7 @@
   /**
    * 获取用户等级数据
    */
+  // Logic Note: Handler 'getLevelOptions' encapsulates a single interaction or data-processing flow.
   const getLevelOptions = async (): Promise<void> => {
     levelOptions.value = await fetchLevelOptions()
     if (levelOptions.value.length) {
@@ -208,6 +223,7 @@
   /**
    * 创建表单项的工厂函数
    */
+  // Logic Note: Handler 'createFormItem' encapsulates a single interaction or data-processing flow.
   const createFormItem = (config: FormItemConfig) => config
 
   // 基础表单项配置
@@ -262,6 +278,7 @@
     })
   }
 
+  // Logic Note: Reactive state 'userItem' stores mutable runtime data used by this component.
   const userItem = ref<SearchFormItem>({
     label: '用户名',
     key: 'name',
@@ -711,6 +728,7 @@
   /**
    * 处理表单重置事件
    */
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = (): void => {
     console.log('重置表单')
     emit('reset')
@@ -719,6 +737,7 @@
   /**
    * 处理表单提交事件
    */
+  // Logic Note: Handler 'handleSubmit' encapsulates a single interaction or data-processing flow.
   const handleSubmit = async (params: Record<string, any>): Promise<void> => {
     await formRef.value.validate()
     emit('search', params)
@@ -728,16 +747,19 @@
   /**
    * 校验表单
    */
+  // Logic Note: Handler 'validateForm' encapsulates a single interaction or data-processing flow.
   const validateForm = () => formRef.value.validate()
 
   /**
    * 重置表单
    */
+  // Logic Note: Handler 'resetForm' encapsulates a single interaction or data-processing flow.
   const resetForm = () => formRef.value.reset()
 
   /**
    * 更新用户名字段配置
    */
+  // Logic Note: Handler 'updateUserName' encapsulates a single interaction or data-processing flow.
   const updateUserName = (): void => {
     userItem.value = {
       ...userItem.value,
@@ -751,6 +773,7 @@
   /**
    * 删除用户名字段
    */
+  // Logic Note: Handler 'deleteUserName' encapsulates a single interaction or data-processing flow.
   const deleteUserName = (): void => {
     showUserName.value = false
     formData.value.name = undefined
@@ -759,6 +782,7 @@
   /**
    * 新增表单项
    */
+  // Logic Note: Handler 'addFormItem' encapsulates a single interaction or data-processing flow.
   const addFormItem = (): void => {
     dynamicItemCounter++
     const newItem: SearchFormItem = {
@@ -777,6 +801,7 @@
   /**
    * 修改表单项（修改最后一个动态表单项）
    */
+  // Logic Note: Handler 'updateFormItem' encapsulates a single interaction or data-processing flow.
   const updateFormItem = (): void => {
     if (dynamicFormItems.value.length === 0) {
       ElMessage.warning('没有可修改的动态表单项，请先新增')
@@ -807,6 +832,7 @@
   /**
    * 删除表单项（删除最后一个动态表单项）
    */
+  // Logic Note: Handler 'deleteFormItem' encapsulates a single interaction or data-processing flow.
   const deleteFormItem = (): void => {
     if (dynamicFormItems.value.length === 0) {
       ElMessage.warning('没有可删除的动态表单项')
@@ -824,6 +850,7 @@
   /**
    * 批量新增表单项
    */
+  // Logic Note: Handler 'batchAddFormItems' encapsulates a single interaction or data-processing flow.
   const batchAddFormItems = (): void => {
     const batchItems: SearchFormItem[] = [
       {
@@ -868,6 +895,7 @@
   /**
    * 重置动态表单项
    */
+  // Logic Note: Handler 'resetDynamicItems' encapsulates a single interaction or data-processing flow.
   const resetDynamicItems = (): void => {
     if (dynamicFormItems.value.length === 0) {
       ElMessage.info('当前没有动态表单项')

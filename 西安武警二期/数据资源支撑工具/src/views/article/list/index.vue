@@ -1,5 +1,7 @@
 <!-- 文章列表页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/article/list/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content !mb-5">
     <ElRow justify="space-between" :gutter="10">
       <ElCol :lg="6" :md="6" :sm="14" :xs="16">
@@ -89,6 +91,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/article/list/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { Search } from '@element-plus/icons-vue'
   import { router } from '@/router'
   import { useDateFormat } from '@vueuse/core'
@@ -114,16 +118,25 @@
   const YEAR_OPTIONS = ['All', '2024', '2023', '2022', '2021', '2020', '2019']
   const PAGE_SIZE = 40
 
+  // Logic Note: Reactive state 'yearVal' stores mutable runtime data used by this component.
   const yearVal = ref('All')
+  // Logic Note: Reactive state 'searchVal' stores mutable runtime data used by this component.
   const searchVal = ref('')
+  // Logic Note: Reactive state 'articleList' stores mutable runtime data used by this component.
   const articleList = ref<Article[]>([])
+  // Logic Note: Reactive state 'currentPage' stores mutable runtime data used by this component.
   const currentPage = ref(1)
+  // Logic Note: Reactive state 'pageSize' stores mutable runtime data used by this component.
   const pageSize = ref(PAGE_SIZE)
+  // Logic Note: Reactive state 'total' stores mutable runtime data used by this component.
   const total = ref(0)
+  // Logic Note: Reactive state 'isLoading' stores mutable runtime data used by this component.
   const isLoading = ref(true)
 
+  // Logic Note: Computed value 'showEmpty' derives UI state from reactive sources and updates automatically.
   const showEmpty = computed(() => articleList.value.length === 0 && !isLoading.value)
 
+  // Logic Note: Handler 'getArticleList' encapsulates a single interaction or data-processing flow.
   const getArticleList = async ({ backTop = false }: GetArticleListOptions = {}) => {
     isLoading.value = true
 
@@ -153,29 +166,35 @@
     }
   }
 
+  // Logic Note: Handler 'searchArticle' encapsulates a single interaction or data-processing flow.
   const searchArticle = () => {
     currentPage.value = 1
     getArticleList({ backTop: true })
   }
 
+  // Logic Note: Handler 'searchArticleByYear' encapsulates a single interaction or data-processing flow.
   const searchArticleByYear = () => {
     currentPage.value = 1
     getArticleList({ backTop: true })
   }
 
+  // Logic Note: Handler 'handleCurrentChange' encapsulates a single interaction or data-processing flow.
   const handleCurrentChange = (val: number) => {
     currentPage.value = val
     getArticleList({ backTop: true })
   }
 
+  // Logic Note: Handler 'toDetail' encapsulates a single interaction or data-processing flow.
   const toDetail = (item: Article) => {
     router.push({ name: 'ArticleDetail', params: { id: item.id } })
   }
 
+  // Logic Note: Handler 'toEdit' encapsulates a single interaction or data-processing flow.
   const toEdit = (item: Article) => {
     router.push({ name: 'ArticlePublish', query: { id: item.id } })
   }
 
+  // Logic Note: Handler 'toAddArticle' encapsulates a single interaction or data-processing flow.
   const toAddArticle = () => {
     router.push({ name: 'ArticlePublish' })
   }
@@ -186,6 +205,8 @@
 </script>
 
 <style lang="scss">
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/views/article/list/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .custom-segmented .el-segmented {
     height: 40px;
     padding: 6px;

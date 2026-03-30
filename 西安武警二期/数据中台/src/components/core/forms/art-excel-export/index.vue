@@ -1,5 +1,7 @@
 <!-- 导出 Excel 文件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/forms/art-excel-export/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ElButton
     :type="type"
     :size="size"
@@ -19,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/forms/art-excel-export/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import * as XLSX from 'xlsx'
   import FileSaver from 'file-saver'
   import { ref, computed, nextTick } from 'vue'
@@ -127,6 +131,7 @@
     }
   }
 
+  // Logic Note: Reactive state 'isExporting' stores mutable runtime data used by this component.
   const isExporting = ref(false)
 
   /** 是否有数据可导出 */
@@ -373,6 +378,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/forms/art-excel-export/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .is-loading {
     animation: rotating 2s linear infinite;
   }

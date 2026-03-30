@@ -1,5 +1,7 @@
 <!-- 聊天页 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '指标体征管理平台/src/views/template/chat/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="page-content flex !p-0 max-md:flex-col" :style="{ height: containerMinHeight }">
     <ElRow>
       <ElCol :span="12">
@@ -155,6 +157,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '指标体征管理平台/src/views/template/chat/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { Picture, Paperclip, ArrowDown } from '@element-plus/icons-vue'
   import { mittBus } from '@/utils/sys'
   import meAvatar from '@/assets/images/avatar/avatar5.webp'
@@ -187,18 +191,27 @@
     unread?: number
   }
 
+  // Logic Note: Reactive state 'searchQuery' stores mutable runtime data used by this component.
   const searchQuery = ref('')
+  // Logic Note: Reactive state 'isDrawerVisible' stores mutable runtime data used by this component.
   const isDrawerVisible = ref(false)
+  // Logic Note: Reactive state 'isOnline' stores mutable runtime data used by this component.
   const isOnline = ref(true)
+  // Logic Note: Reactive state 'selectedPerson' stores mutable runtime data used by this component.
   const selectedPerson = ref<Person | null>(null)
+  // Logic Note: Reactive state 'messageText' stores mutable runtime data used by this component.
   const messageText = ref('')
+  // Logic Note: Reactive state 'messageId' stores mutable runtime data used by this component.
   const messageId = ref(10)
+  // Logic Note: Reactive state 'userAvatar' stores mutable runtime data used by this component.
   const userAvatar = ref(meAvatar)
+  // Logic Note: Reactive state 'messageContainer' stores mutable runtime data used by this component.
   const messageContainer = ref<HTMLElement | null>(null)
 
   /**
    * 联系人列表数据
    */
+  // Logic Note: Reactive state 'personList' stores mutable runtime data used by this component.
   const personList = ref<Person[]>([
     {
       id: 1,
@@ -323,6 +336,7 @@
    * 选择联系人
    * @param person 联系人对象
    */
+  // Logic Note: Handler 'selectPerson' encapsulates a single interaction or data-processing flow.
   const selectPerson = (person: Person) => {
     selectedPerson.value = person
   }
@@ -330,6 +344,7 @@
   /**
    * 消息列表数据
    */
+  // Logic Note: Reactive state 'messages' stores mutable runtime data used by this component.
   const messages = ref([
     {
       id: 1,
@@ -409,6 +424,7 @@
    * 发送消息
    * 添加新消息到消息列表并滚动到底部
    */
+  // Logic Note: Handler 'sendMessage' encapsulates a single interaction or data-processing flow.
   const sendMessage = () => {
     const text = messageText.value.trim()
     if (!text) return
@@ -429,6 +445,7 @@
   /**
    * 滚动到消息列表底部
    */
+  // Logic Note: Handler 'scrollToBottom' encapsulates a single interaction or data-processing flow.
   const scrollToBottom = () => {
     setTimeout(() => {
       if (messageContainer.value) {
@@ -440,6 +457,7 @@
   /**
    * 打开聊天窗口
    */
+  // Logic Note: Handler 'openChat' encapsulates a single interaction or data-processing flow.
   const openChat = () => {
     isDrawerVisible.value = true
   }

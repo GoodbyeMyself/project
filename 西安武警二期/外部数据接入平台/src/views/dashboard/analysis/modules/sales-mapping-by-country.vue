@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '外部数据接入平台/src/views/dashboard/analysis/modules/sales-mapping-by-country.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-card h-82 p-5 mb-5 max-sm:mb-4">
     <div class="art-card-header">
       <div class="title">

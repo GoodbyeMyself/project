@@ -1,5 +1,7 @@
 <!-- 左树右表示例页面 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/examples/tables/tree.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="art-full-height">
     <div class="box-border flex gap-4 h-full max-md:block max-md:gap-0 max-md:h-auto">
       <div class="flex-shrink-0 w-58 h-full max-md:w-full max-md:h-auto max-md:mb-5">
@@ -54,12 +56,15 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/examples/tables/tree.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useTable } from '@/hooks/core/useTable'
   import { fetchGetUserList } from '@/api/system-manage'
   import UserSearch from '@/views/system/user/modules/user-search.vue'
 
   defineOptions({ name: 'TreeTable' })
 
+  // Logic Note: Reactive state 'showButtons' stores mutable runtime data used by this component.
   const showButtons = ref(false)
 
   // 树形数据 - 组织架构示例
@@ -171,6 +176,7 @@
     label: 'label'
   }
 
+  // Logic Note: Handler 'handleNodeClick' encapsulates a single interaction or data-processing flow.
   const handleNodeClick = (data: any) => {
     console.log('选中节点:', data)
     // 可以根据选中的节点更新右侧表格数据
@@ -233,6 +239,8 @@
 </script>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据资源支撑工具/src/views/examples/tables/tree.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .tree-card :deep(.el-card__body) {
     flex: 1;
     min-height: 0;

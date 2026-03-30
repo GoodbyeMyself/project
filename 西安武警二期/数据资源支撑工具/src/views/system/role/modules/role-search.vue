@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据资源支撑工具/src/views/system/role/modules/role-search.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <ArtSearchBar
     ref="searchBarRef"
     v-model="formData"
@@ -11,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据资源支撑工具/src/views/system/role/modules/role-search.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   type RoleSearchFormParams = Api.SystemManage.RoleSearchParams & {
     daterange?: string[]
   }
@@ -28,11 +32,13 @@
   const props = defineProps<Props>()
   const emit = defineEmits<Emits>()
 
+  // Logic Note: Reactive state 'searchBarRef' stores mutable runtime data used by this component.
   const searchBarRef = ref()
 
   /**
    * 表单数据双向绑定
    */
+  // Logic Note: Computed value 'formData' derives UI state from reactive sources and updates automatically.
   const formData = computed({
     get: () => props.modelValue,
     set: (val) => emit('update:modelValue', val)
@@ -46,6 +52,7 @@
   /**
    * 角色状态选项
    */
+  // Logic Note: Reactive state 'statusOptions' stores mutable runtime data used by this component.
   const statusOptions = ref([
     { label: '启用', value: true },
     { label: '禁用', value: false }
@@ -54,6 +61,7 @@
   /**
    * 搜索表单配置项
    */
+  // Logic Note: Computed value 'formItems' derives UI state from reactive sources and updates automatically.
   const formItems = computed(() => [
     {
       label: '角色名称',
@@ -110,6 +118,7 @@
   /**
    * 处理重置事件
    */
+  // Logic Note: Handler 'handleReset' encapsulates a single interaction or data-processing flow.
   const handleReset = () => {
     emit('reset')
   }
@@ -118,6 +127,7 @@
    * 处理搜索事件
    * 验证表单后触发搜索
    */
+  // Logic Note: Handler 'handleSearch' encapsulates a single interaction or data-processing flow.
   const handleSearch = async (params: RoleSearchFormParams) => {
     await searchBarRef.value.validate()
     emit('search', params)

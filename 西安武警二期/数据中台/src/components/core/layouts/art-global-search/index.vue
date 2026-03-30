@@ -1,5 +1,7 @@
 <!-- 全局搜索组件 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '数据中台/src/components/core/layouts/art-global-search/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="layout-search">
     <ElDialog
       v-model="showSearchDialog"
@@ -94,6 +96,8 @@
 </template>
 
 <script lang="ts" setup>
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '数据中台/src/components/core/layouts/art-global-search/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import { useUserStore } from '@/store/modules/user'
   import { AppRouteRecord } from '@/types/router'
   import { Search } from '@element-plus/icons-vue'
@@ -108,17 +112,25 @@
   const userStore = useUserStore()
   const { menuList } = storeToRefs(useMenuStore())
 
+  // Logic Note: Reactive state 'showSearchDialog' stores mutable runtime data used by this component.
   const showSearchDialog = ref(false)
+  // Logic Note: Reactive state 'searchVal' stores mutable runtime data used by this component.
   const searchVal = ref('')
+  // Logic Note: Reactive state 'searchResult' stores mutable runtime data used by this component.
   const searchResult = ref<AppRouteRecord[]>([])
   const historyMaxLength = 10
 
   const { searchHistory: historyResult } = storeToRefs(userStore)
 
+  // Logic Note: Reactive state 'searchInput' stores mutable runtime data used by this component.
   const searchInput = ref<HTMLInputElement | null>(null)
+  // Logic Note: Reactive state 'highlightedIndex' stores mutable runtime data used by this component.
   const highlightedIndex = ref(0)
+  // Logic Note: Reactive state 'historyHIndex' stores mutable runtime data used by this component.
   const historyHIndex = ref(0)
+  // Logic Note: Reactive state 'searchResultScrollbar' stores mutable runtime data used by this component.
   const searchResultScrollbar = ref<ScrollbarInstance>()
+  // Logic Note: Reactive state 'isKeyboardNavigating' stores mutable runtime data used by this component.
   const isKeyboardNavigating = ref(false) // 新增状态：是否正在使用键盘导航
 
   // 生命周期钩子
@@ -160,6 +172,7 @@
     }
   }
 
+  // Logic Note: Handler 'focusInput' encapsulates a single interaction or data-processing flow.
   const focusInput = () => {
     setTimeout(() => {
       searchInput.value?.focus()
@@ -175,10 +188,12 @@
     }
   }
 
+  // Logic Note: Handler 'flattenAndFilterMenuItems' encapsulates a single interaction or data-processing flow.
   const flattenAndFilterMenuItems = (items: AppRouteRecord[], val: string): AppRouteRecord[] => {
     const lowerVal = val.toLowerCase()
     const result: AppRouteRecord[] = []
 
+    // Logic Note: Handler 'flattenAndMatch' encapsulates a single interaction or data-processing flow.
     const flattenAndMatch = (item: AppRouteRecord) => {
       if (item.meta?.isHide) return
 
@@ -219,6 +234,7 @@
     }, 100)
   }
 
+  // Logic Note: Handler 'highlightNext' encapsulates a single interaction or data-processing flow.
   const highlightNext = () => {
     isKeyboardNavigating.value = true
     if (searchVal.value) {
@@ -233,6 +249,7 @@
     }, 100)
   }
 
+  // Logic Note: Handler 'scrollToHighlightedItem' encapsulates a single interaction or data-processing flow.
   const scrollToHighlightedItem = () => {
     nextTick(() => {
       if (!searchResultScrollbar.value || !searchResult.value.length) return
@@ -258,6 +275,7 @@
     })
   }
 
+  // Logic Note: Handler 'scrollToHighlightedHistoryItem' encapsulates a single interaction or data-processing flow.
   const scrollToHighlightedHistoryItem = () => {
     nextTick(() => {
       if (!searchResultScrollbar.value || !historyResult.value.length) return
@@ -283,6 +301,7 @@
     })
   }
 
+  // Logic Note: Handler 'selectHighlighted' encapsulates a single interaction or data-processing flow.
   const selectHighlighted = () => {
     if (searchVal.value && searchResult.value.length) {
       searchGoPage(searchResult.value[highlightedIndex.value])
@@ -291,14 +310,17 @@
     }
   }
 
+  // Logic Note: Handler 'isHighlighted' encapsulates a single interaction or data-processing flow.
   const isHighlighted = (index: number) => {
     return highlightedIndex.value === index
   }
 
+  // Logic Note: Handler 'searchBlur' encapsulates a single interaction or data-processing flow.
   const searchBlur = () => {
     highlightedIndex.value = 0
   }
 
+  // Logic Note: Handler 'searchGoPage' encapsulates a single interaction or data-processing flow.
   const searchGoPage = (item: AppRouteRecord) => {
     showSearchDialog.value = false
     addHistory(item)
@@ -314,6 +336,7 @@
     }
   }
 
+  // Logic Note: Handler 'addHistory' encapsulates a single interaction or data-processing flow.
   const addHistory = (item: AppRouteRecord) => {
     const itemKey = item.path || String(item.meta.link || '')
     const hasItemIndex = historyResult.value.findIndex(
@@ -334,6 +357,7 @@
     updateHistory()
   }
 
+  // Logic Note: Handler 'deleteHistory' encapsulates a single interaction or data-processing flow.
   const deleteHistory = (index: number) => {
     historyResult.value.splice(index, 1)
     updateHistory()
@@ -345,6 +369,7 @@
     focusInput()
   }
 
+  // Logic Note: Handler 'closeSearchDialog' encapsulates a single interaction or data-processing flow.
   const closeSearchDialog = () => {
     searchVal.value = ''
     searchResult.value = []
@@ -359,6 +384,7 @@
     }
   }
 
+  // Logic Note: Handler 'highlightOnHoverHistory' encapsulates a single interaction or data-processing flow.
   const highlightOnHoverHistory = (index: number) => {
     if (!isKeyboardNavigating.value && !searchVal.value) {
       historyHIndex.value = index
@@ -366,6 +392,8 @@
   }
 </script>
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/layouts/art-global-search/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .layout-search {
     :deep(.search-modal) {
       background-color: rgb(0 0 0 / 20%);
@@ -413,6 +441,8 @@
 </style>
 
 <style scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '数据中台/src/components/core/layouts/art-global-search/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   @reference '@styles/core/tailwind.css';
 
   .keyboard {

@@ -1,5 +1,7 @@
 <!-- 布局内容 -->
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/components/core/layouts/art-page-content/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="layout-content" :class="{ 'overflow-auto': isFullPage }" :style="containerStyle">
     <div id="app-content-header">
       <!-- 节日滚动 -->
@@ -48,6 +50,8 @@
   </div>
 </template>
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/components/core/layouts/art-page-content/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { CSSProperties } from 'vue'
   import { useRoute } from 'vue-router'
   import { useAutoLayoutHeight } from '@/hooks/core/useLayoutHeight'
@@ -61,8 +65,10 @@
   const { pageTransition, containerWidth, refresh } = storeToRefs(useSettingStore())
   const { keepAliveExclude } = storeToRefs(useWorktabStore())
 
+  // Logic Note: Reactive state 'isRefresh' stores mutable runtime data used by this component.
   const isRefresh = shallowRef(true)
   const isOpenRouteInfo = import.meta.env.VITE_OPEN_ROUTE_INFO
+  // Logic Note: Reactive state 'showTransitionMask' stores mutable runtime data used by this component.
   const showTransitionMask = ref(false)
 
   // 标记是否是首次加载（浏览器刷新）
@@ -70,6 +76,7 @@
 
   // 检查当前路由是否需要使用无基础布局模式
   const isFullPage = computed(() => route.matched.some((r) => r.meta?.isFullPage))
+  // Logic Note: Reactive state 'prevIsFullPage' stores mutable runtime data used by this component.
   const prevIsFullPage = ref(isFullPage.value)
 
   // 切换动画名称：首次加载、从全屏返回时不使用动画
@@ -94,6 +101,7 @@
     })
   })
 
+  // Logic Note: Computed value 'containerStyle' derives UI state from reactive sources and updates automatically.
   const containerStyle = computed(
     (): CSSProperties =>
       isFullPage.value
@@ -111,12 +119,14 @@
           }
   )
 
+  // Logic Note: Computed value 'contentStyle' derives UI state from reactive sources and updates automatically.
   const contentStyle = computed(
     (): CSSProperties => ({
       minHeight: containerMinHeight.value
     })
   )
 
+  // Logic Note: Handler 'reload' encapsulates a single interaction or data-processing flow.
   const reload = () => {
     isRefresh.value = false
     nextTick(() => {
@@ -124,6 +134,7 @@
     })
   }
 
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(refresh, reload, { flush: 'post' })
 
   // 组件挂载后标记首次加载完成

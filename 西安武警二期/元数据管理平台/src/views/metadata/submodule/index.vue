@@ -1,4 +1,6 @@
 <template>
+  <!-- Auto Comment: Component Summary: This component renders UI for '元数据管理平台/src/views/metadata/submodule/index.vue'. -->
+  <!-- Auto Comment: Component Responsibility: It provides the view structure, interaction entry points, and display containers for this feature. -->
   <div class="metadata-submodule">
     <template v-if="context">
       <ElCard shadow="never" class="info-card">
@@ -132,6 +134,8 @@
 </template>
 
 <script setup lang="ts">
+  // Auto Comment: Component Script Notes: This script block manages state, events, and data flow for '元数据管理平台/src/views/metadata/submodule/index.vue'.
+  // Auto Comment: Maintenance Hint: Keep business rules explicit and avoid implicit side effects between handlers.
   import type { SuggestedAction } from '../catalog'
   import { getSectionContext, getSuggestedActions } from '../catalog'
   import { ElMessage, ElMessageBox } from 'element-plus'
@@ -148,10 +152,15 @@
   defineOptions({ name: 'MetadataSubmodule' })
 
   const route = useRoute()
+  // Logic Note: Reactive state 'keyword' stores mutable runtime data used by this component.
   const keyword = ref('')
+  // Logic Note: Reactive state 'dialogVisible' stores mutable runtime data used by this component.
   const dialogVisible = ref(false)
+  // Logic Note: Reactive state 'uploadInputRef' stores mutable runtime data used by this component.
   const uploadInputRef = ref<HTMLInputElement | null>(null)
+  // Logic Note: Reactive state 'recordsBySection' stores mutable runtime data used by this component.
   const recordsBySection = ref<Record<string, OperationRecord[]>>({})
+  // Logic Note: Reactive state 'dialogForm' stores mutable runtime data used by this component.
   const dialogForm = reactive({
     action: '',
     capability: '',
@@ -159,9 +168,12 @@
     remark: ''
   })
 
+  // Logic Note: Computed value 'sectionKey' derives UI state from reactive sources and updates automatically.
   const sectionKey = computed(() => String(route.meta.sectionKey || ''))
+  // Logic Note: Computed value 'context' derives UI state from reactive sources and updates automatically.
   const context = computed(() => getSectionContext(sectionKey.value))
 
+  // Logic Note: Computed value 'filteredCapabilities' derives UI state from reactive sources and updates automatically.
   const filteredCapabilities = computed(() => {
     if (!context.value) {
       return []
@@ -176,10 +188,12 @@
     )
   })
 
+  // Logic Note: Computed value 'suggestedActions' derives UI state from reactive sources and updates automatically.
   const suggestedActions = computed<SuggestedAction[]>(() =>
     getSuggestedActions(context.value?.section.capabilities || [])
   )
 
+  // Logic Note: Computed value 'capabilityRows' derives UI state from reactive sources and updates automatically.
   const capabilityRows = computed(() =>
     filteredCapabilities.value.map((name) => ({
       name,
@@ -187,10 +201,12 @@
     }))
   )
 
+  // Logic Note: Computed value 'currentRecords' derives UI state from reactive sources and updates automatically.
   const currentRecords = computed(() => {
     return recordsBySection.value[sectionKey.value] || []
   })
 
+  // Logic Note: Watcher keeps dependent state synchronized when observed sources change.
   watch(
     () => sectionKey.value,
     () => {
@@ -198,6 +214,7 @@
     }
   )
 
+  // Logic Note: Handler 'openActionDialog' encapsulates a single interaction or data-processing flow.
   const openActionDialog = (action: string, capability = '') => {
     dialogForm.action = action
     dialogForm.capability = capability
@@ -205,6 +222,7 @@
     dialogVisible.value = true
   }
 
+  // Logic Note: Handler 'submitAction' encapsulates a single interaction or data-processing flow.
   const submitAction = () => {
     if (!dialogForm.action.trim()) {
       ElMessage.warning('请填写动作名称')
@@ -229,6 +247,7 @@
     ElMessage.success('动作已记录')
   }
 
+  // Logic Note: Handler 'removeRecord' encapsulates a single interaction or data-processing flow.
   const removeRecord = (id: string) => {
     recordsBySection.value = {
       ...recordsBySection.value,
@@ -236,6 +255,7 @@
     }
   }
 
+  // Logic Note: Handler 'clearRecords' encapsulates a single interaction or data-processing flow.
   const clearRecords = async () => {
     if (!currentRecords.value.length) {
       return
@@ -256,6 +276,7 @@
     }
   }
 
+  // Logic Note: Handler 'exportRecords' encapsulates a single interaction or data-processing flow.
   const exportRecords = () => {
     const payload = {
       sectionKey: sectionKey.value,
@@ -274,10 +295,12 @@
     ElMessage.success('导出成功')
   }
 
+  // Logic Note: Handler 'triggerImport' encapsulates a single interaction or data-processing flow.
   const triggerImport = () => {
     uploadInputRef.value?.click()
   }
 
+  // Logic Note: Handler 'handleImportFile' encapsulates a single interaction or data-processing flow.
   const handleImportFile = async (event: Event) => {
     const input = event.target as HTMLInputElement
     const file = input.files?.[0]
@@ -315,6 +338,8 @@
 </script>
 
 <style lang="scss" scoped>
+  /* Auto Comment: Component Style Notes: Styles in this block define visual layout and interaction feedback for '元数据管理平台/src/views/metadata/submodule/index.vue'. */
+  /* Auto Comment: Consistency Rule: Preserve spacing rhythm, typography hierarchy, and state visibility across breakpoints. */
   .metadata-submodule {
     .info-card,
     .block-card {
