@@ -1,27 +1,19 @@
 import { AppRouteRecord } from '@/types/router'
-import { dashboardRoutes } from './dashboard'
-import { templateRoutes } from './template'
-import { widgetsRoutes } from './widgets'
-import { examplesRoutes } from './examples'
-import { systemRoutes } from './system'
-import { articleRoutes } from './article'
-import { resultRoutes } from './result'
-import { exceptionRoutes } from './exception'
-import { safeguardRoutes } from './safeguard'
-import { helpRoutes } from './help'
+import { sourceManagementRoutes } from './source-management'
+import { templateConfigRoutes } from './template-config'
+import { accessDataRoutes } from './access-data'
+import { taskManagementRoutes } from './task-management'
+import { scheduleManagementRoutes } from './schedule-management'
+import { shareManagementRoutes } from './share-management'
 
 /**
  * 导出所有模块化路由
  */
 export const routeModules: AppRouteRecord[] = [
-  dashboardRoutes,
-  templateRoutes,
-  widgetsRoutes,
-  examplesRoutes,
-  systemRoutes,
-  articleRoutes,
-  resultRoutes,
-  exceptionRoutes,
-  safeguardRoutes,
-  ...helpRoutes
+  sourceManagementRoutes,
+  templateConfigRoutes,
+  accessDataRoutes,
+  taskManagementRoutes,
+  scheduleManagementRoutes,
+  shareManagementRoutes
 ]
