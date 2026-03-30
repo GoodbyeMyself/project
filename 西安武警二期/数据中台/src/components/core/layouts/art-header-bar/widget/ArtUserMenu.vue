@@ -33,9 +33,9 @@
           </div>
         </div>
         <ul class="py-4 mt-3 border-t border-g-300/80">
-          <li class="btn-item" @click="goPage('/system/user-center')">
-            <ArtSvgIcon icon="ri:user-3-line" />
-            <span>{{ $t('topBar.user.userCenter') }}</span>
+          <li class="btn-item" @click="goPage('/data-warehouse/catalog-management')">
+            <ArtSvgIcon icon="ri:database-2-line" />
+            <span>进入数据仓体系</span>
           </li>
           <li class="btn-item" @click="toDocs()">
             <ArtSvgIcon icon="ri:book-2-line" />

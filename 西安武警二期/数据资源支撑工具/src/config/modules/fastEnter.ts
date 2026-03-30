@@ -1,125 +1,100 @@
-/**
- * 快速入口配置
- * 包含：应用列表、快速链接等配置
- */
 import { WEB_LINKS } from '@/utils/constants'
 import type { FastEnterConfig } from '@/types/config'
 
 const fastEnterConfig: FastEnterConfig = {
-  // 显示条件（屏幕宽度）
   minWidth: 1200,
-  // 应用列表
   applications: [
     {
-      name: '工作台',
-      description: '系统概览与数据统计',
-      icon: 'ri:pie-chart-line',
-      iconColor: '#377dff',
+      name: '数据标准管理',
+      description: '标准变更、依赖分析与送审',
+      icon: 'ri:file-list-3-line',
+      iconColor: '#377DFF',
       enabled: true,
       order: 1,
-      routeName: 'Console'
+      routeName: 'ResourceStandard'
     },
     {
-      name: '分析页',
-      description: '数据分析与可视化',
-      icon: 'ri:game-line',
-      iconColor: '#ff3b30',
+      name: '逻辑模型管理',
+      description: '多用户协作与共享权限',
+      icon: 'ri:git-branch-line',
+      iconColor: '#16A34A',
       enabled: true,
       order: 2,
-      routeName: 'Analysis'
+      routeName: 'LogicalModel'
     },
     {
-      name: '礼花效果',
-      description: '动画特效展示',
-      icon: 'ri:loader-line',
-      iconColor: '#7A7FFF',
+      name: '模型下发',
+      description: '版本控制与兼容性检查',
+      icon: 'ri:send-plane-2-line',
+      iconColor: '#F97316',
       enabled: true,
       order: 3,
-      routeName: 'Fireworks'
+      routeName: 'ModelDistribution'
     },
     {
-      name: '聊天',
-      description: '即时通讯功能',
-      icon: 'ri:user-line',
-      iconColor: '#13DEB9',
+      name: '报告下钻',
+      description: '指标下钻与对比分析',
+      icon: 'ri:line-chart-line',
+      iconColor: '#7C3AED',
       enabled: true,
       order: 4,
-      routeName: 'Chat'
+      routeName: 'ReportDrilldown'
+    },
+    {
+      name: '数据资产管理',
+      description: '资产台账与元数据同步',
+      icon: 'ri:database-line',
+      iconColor: '#0891B2',
+      enabled: true,
+      order: 5,
+      routeName: 'DataAssetManagement'
+    },
+    {
+      name: '数据溯源分析',
+      description: '来源追踪与血缘展示',
+      icon: 'ri:route-line',
+      iconColor: '#DC2626',
+      enabled: true,
+      order: 6,
+      routeName: 'DataLineageAnalysis'
+    }
+  ],
+  quickLinks: [
+    {
+      name: '模型检查',
+      enabled: true,
+      order: 1,
+      routeName: 'ModelCheck'
+    },
+    {
+      name: '模型同步',
+      enabled: true,
+      order: 2,
+      routeName: 'ModelSync'
+    },
+    {
+      name: '一键下载报告',
+      enabled: true,
+      order: 3,
+      routeName: 'ReportDownload'
+    },
+    {
+      name: '个人中心',
+      enabled: true,
+      order: 4,
+      routeName: 'UserCenter'
     },
     {
       name: '官方文档',
-      description: '使用指南与开发文档',
-      icon: 'ri:bill-line',
-      iconColor: '#ffb100',
       enabled: true,
       order: 5,
       link: WEB_LINKS.DOCS
     },
     {
-      name: '技术支持',
-      description: '技术支持与问题反馈',
-      icon: 'ri:user-location-line',
-      iconColor: '#ff6b6b',
+      name: '技术社区',
       enabled: true,
       order: 6,
       link: WEB_LINKS.COMMUNITY
-    },
-    {
-      name: '更新日志',
-      description: '版本更新与变更记录',
-      icon: 'ri:gamepad-line',
-      iconColor: '#38C0FC',
-      enabled: true,
-      order: 7,
-      routeName: 'ChangeLog'
-    },
-    {
-      name: '哔哩哔哩',
-      description: '技术分享与交流',
-      icon: 'ri:bilibili-line',
-      iconColor: '#FB7299',
-      enabled: true,
-      order: 8,
-      link: WEB_LINKS.BILIBILI
-    }
-  ],
-  // 快速链接
-  quickLinks: [
-    {
-      name: '登录',
-      enabled: true,
-      order: 1,
-      routeName: 'Login'
-    },
-    {
-      name: '注册',
-      enabled: true,
-      order: 2,
-      routeName: 'Register'
-    },
-    {
-      name: '忘记密码',
-      enabled: true,
-      order: 3,
-      routeName: 'ForgetPassword'
-    },
-    {
-      name: '定价',
-      enabled: true,
-      order: 4,
-      routeName: 'Pricing'
-    },
-    {
-      name: '个人中心',
-      enabled: true,
-      order: 5,
-      routeName: 'UserCenter'
-    },
-    {
-      name: '留言管理',
-      enabled: true,
-      order: 6,
-      routeName: 'ArticleComment'
     }
   ]
 }

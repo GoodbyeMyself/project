@@ -1,168 +1,188 @@
-<!-- 服务器管理页面 -->
 <template>
-  <div class="page-content mb-5">
-    <div class="w-full">
-      <div class="flex flex-wrap w-[calc(100%+20px)]">
-        <div
-          class="box-border w-[calc(50%-20px)] mr-5 mb-5 border border-g-300 rounded max-lg:w-full max-md:w-full"
-          v-for="item in serverList"
-          :key="item.name"
-        >
-          <div
-            class="flex-cb p-5 border-b border-g-300/80 max-lg:p-2.5 max-lg:px-5 max-md:p-2.5 max-md:px-5"
-          >
-            <span class="text-sm font-medium">{{ item.name }}</span>
-            <span class="text-sm text-g-600">{{ item.ip }}</span>
-          </div>
-          <div class="flex-c p-9 scale-[0.8] max-lg:p-5 max-md:block max-md:p-5 max-sm:!block">
-            <div class="mx-10 max-lg:m-0 max-lg:mr-5 max-md:m-0">
-              <img
-                src="@imgs/safeguard/server.png"
-                alt="服务器"
-                class="block w-47 max-md:w-37 max-md:mx-auto"
-              />
-              <div class="flex justify-center -mt-2.5 max-md:mt-2.5">
-                <ElButtonGroup>
-                  <ElButton type="primary" size="default">开机</ElButton>
-                  <ElButton type="danger" size="default">关机</ElButton>
-                  <ElButton type="warning" size="default">重启</ElButton>
-                </ElButtonGroup>
-              </div>
+  <div class="page-content protection-page">
+    <ElAlert
+      title="数据保护模块已整合权限管理、数据加密、数据脱敏、数据流量管理、数字水印防护五类子功能。"
+      type="warning"
+      :closable="false"
+      class="mb-4"
+    />
+
+    <ElRow :gutter="16" class="mb-4">
+      <ElCol :xs="24" :lg="12">
+        <ElCard class="module-card" header="权限管理">
+          <ElDescriptions :column="1" border>
+            <ElDescriptionsItem label="角色权限关联配置">
+              已预留角色、资源、权限项关联配置区块。
+            </ElDescriptionsItem>
+            <ElDescriptionsItem label="权限日志查询">
+              支持按操作人、模块、时间范围进行查询。
+            </ElDescriptionsItem>
+            <ElDescriptionsItem label="权限申请审批流程">
+              已预留申请、审批、驳回、追踪状态入口。
+            </ElDescriptionsItem>
+          </ElDescriptions>
+          <ElSpace class="mt-4" wrap>
+            <ElButton type="primary">关联配置</ElButton>
+            <ElButton>日志查询</ElButton>
+            <ElButton>审批流程</ElButton>
+          </ElSpace>
+        </ElCard>
+      </ElCol>
+
+      <ElCol :xs="24" :lg="12">
+        <ElCard class="module-card" header="数据流量管理">
+          <ElTable :data="flowList" border>
+            <ElTableColumn prop="channel" label="通道名称" min-width="140" />
+            <ElTableColumn prop="strategy" label="流量策略" min-width="140" />
+            <ElTableColumn prop="limit" label="阈值" min-width="100" />
+            <ElTableColumn prop="status" label="状态" min-width="100">
+              <template #default="scope">
+                <ElTag :type="scope.row.status === '运行中' ? 'success' : 'info'">
+                  {{ scope.row.status }}
+                </ElTag>
+              </template>
+            </ElTableColumn>
+            <ElTableColumn label="操作" width="180">
+              <template #default>
+                <ElSpace>
+                  <ElButton link type="primary">配置</ElButton>
+                  <ElButton link>查看</ElButton>
+                </ElSpace>
+              </template>
+            </ElTableColumn>
+          </ElTable>
+        </ElCard>
+      </ElCol>
+    </ElRow>
+
+    <ElRow :gutter="16" class="mb-4">
+      <ElCol :xs="24" :lg="12">
+        <ElCard class="module-card">
+          <template #header>
+            <div class="card-header">
+              <span>数据加密配置</span>
+              <ElButton type="primary">新增数据加密配置</ElButton>
             </div>
-            <div class="flex-1 mt-1 max-lg:mt-0 max-md:mt-7.5">
-              <div class="my-3.5">
-                <p class="mb-1 text-sm">CPU</p>
-                <ElProgress :percentage="item.cup" :text-inside="true" :stroke-width="17" />
-              </div>
-              <div class="my-3.5">
-                <p class="mb-1 text-sm">RAM</p>
-                <ElProgress
-                  :percentage="item.memory"
-                  status="success"
-                  :text-inside="true"
-                  :stroke-width="17"
-                />
-              </div>
-              <div class="my-3.5">
-                <p class="mb-1 text-sm">SWAP</p>
-                <ElProgress
-                  :percentage="item.swap"
-                  status="warning"
-                  :text-inside="true"
-                  :stroke-width="17"
-                />
-              </div>
-              <div class="my-3.5">
-                <p class="mb-1 text-sm">DISK</p>
-                <ElProgress
-                  :percentage="item.disk"
-                  status="success"
-                  :text-inside="true"
-                  :stroke-width="17"
-                />
-              </div>
+          </template>
+          <ElTable :data="encryptionList" border>
+            <ElTableColumn prop="name" label="配置名称" min-width="160" />
+            <ElTableColumn prop="algorithm" label="加密算法" min-width="120" />
+            <ElTableColumn prop="scope" label="适用范围" min-width="140" />
+            <ElTableColumn label="操作" width="200">
+              <template #default>
+                <ElSpace>
+                  <ElButton link type="primary">修改</ElButton>
+                  <ElButton link type="danger">删除</ElButton>
+                  <ElButton link>查询</ElButton>
+                </ElSpace>
+              </template>
+            </ElTableColumn>
+          </ElTable>
+        </ElCard>
+      </ElCol>
+
+      <ElCol :xs="24" :lg="12">
+        <ElCard class="module-card">
+          <template #header>
+            <div class="card-header">
+              <span>数据脱敏配置</span>
+              <ElButton type="primary">新增数据脱敏配置</ElButton>
             </div>
-          </div>
+          </template>
+          <ElTable :data="maskingList" border>
+            <ElTableColumn prop="name" label="配置名称" min-width="160" />
+            <ElTableColumn prop="rule" label="脱敏规则" min-width="140" />
+            <ElTableColumn prop="field" label="目标字段" min-width="140" />
+            <ElTableColumn label="操作" width="200">
+              <template #default>
+                <ElSpace>
+                  <ElButton link type="primary">修改</ElButton>
+                  <ElButton link type="danger">删除</ElButton>
+                  <ElButton link>查询</ElButton>
+                </ElSpace>
+              </template>
+            </ElTableColumn>
+          </ElTable>
+        </ElCard>
+      </ElCol>
+    </ElRow>
+
+    <ElCard class="module-card">
+      <template #header>
+        <div class="card-header">
+          <span>数字水印防护</span>
+          <ElSpace>
+            <ElButton type="primary">新增数字水印防护</ElButton>
+            <ElButton>查询数字水印防护</ElButton>
+          </ElSpace>
         </div>
-      </div>
-    </div>
+      </template>
+
+      <ElTable :data="watermarkList" border>
+        <ElTableColumn prop="name" label="防护名称" min-width="160" />
+        <ElTableColumn prop="target" label="防护对象" min-width="160" />
+        <ElTableColumn prop="creator" label="创建人" min-width="100" />
+        <ElTableColumn prop="createTime" label="创建时间" min-width="160" />
+        <ElTableColumn label="操作" width="240" fixed="right">
+          <template #default>
+            <ElSpace>
+              <ElButton link type="primary">下载</ElButton>
+              <ElButton link type="danger">删除</ElButton>
+              <ElButton link>查询</ElButton>
+            </ElSpace>
+          </template>
+        </ElTableColumn>
+      </ElTable>
+    </ElCard>
   </div>
 </template>
 
 <script setup lang="ts">
-  defineOptions({ name: 'SafeguardServer' })
+  defineOptions({ name: 'DataProtectionSecurityCenter' })
 
-  interface ServerInfo {
-    name: string
-    ip: string
-    cup: number
-    memory: number
-    swap: number
-    disk: number
-  }
+  const flowList = [
+    { channel: '共享交换通道', strategy: '峰值限流', limit: '2000 req/min', status: '运行中' },
+    { channel: '服务网关通道', strategy: '黑白名单控制', limit: 'IP 级', status: '运行中' },
+    { channel: '外部接入通道', strategy: '时段限流', limit: '500 req/min', status: '待生效' }
+  ]
 
-  const UPDATE_INTERVAL = 3000 // 更新间隔时间（毫秒）
+  const encryptionList = [
+    { name: '身份证号加密', algorithm: 'SM4', scope: '人员基础表' },
+    { name: '手机号加密', algorithm: 'AES', scope: '用户档案表' }
+  ]
 
-  /**
-   * 服务器列表数据
-   * 包含各服务器的基本信息和资源使用情况
-   */
-  const serverList = reactive<ServerInfo[]>([
+  const maskingList = [
+    { name: '姓名脱敏', rule: '保留姓氏', field: 'person_name' },
+    { name: '联系电话脱敏', rule: '中间四位掩码', field: 'phone_number' }
+  ]
+
+  const watermarkList = [
     {
-      name: '开发服务器',
-      ip: '192.168.1.100',
-      cup: 85,
-      memory: 65,
-      swap: 45,
-      disk: 92
+      name: '外发报表水印',
+      target: '统计报表PDF',
+      creator: '管理员',
+      createTime: '2026-03-29 10:20:00'
     },
     {
-      name: '测试服务器',
-      ip: '192.168.1.101',
-      cup: 32,
-      memory: 78,
-      swap: 90,
-      disk: 45
-    },
-    {
-      name: '预发布服务器',
-      ip: '192.168.1.102',
-      cup: 95,
-      memory: 42,
-      swap: 67,
-      disk: 88
-    },
-    {
-      name: '线上服务器',
-      ip: '192.168.1.103',
-      cup: 58,
-      memory: 93,
-      swap: 25,
-      disk: 73
+      name: '截图追踪水印',
+      target: '敏感查询页面',
+      creator: '审计员',
+      createTime: '2026-03-28 16:45:00'
     }
-  ])
-
-  /**
-   * 生成指定范围内的随机整数
-   * @param min 最小值（默认 0）
-   * @param max 最大值（默认 100）
-   * @returns 随机整数
-   */
-  const generateRandomValue = (min = 0, max = 100): number => {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-  }
-
-  /**
-   * 更新所有服务器的资源使用数据
-   * 模拟服务器资源使用情况的实时变化
-   */
-  const updateServerData = (): void => {
-    serverList.forEach((server) => {
-      server.cup = generateRandomValue()
-      server.memory = generateRandomValue()
-      server.swap = generateRandomValue()
-      server.disk = generateRandomValue()
-    })
-  }
-
-  let timer: number | null = null
-
-  /**
-   * 组件挂载时启动定时器
-   * 每隔指定时间自动更新服务器数据
-   */
-  onMounted(() => {
-    timer = window.setInterval(updateServerData, UPDATE_INTERVAL)
-  })
-
-  /**
-   * 组件卸载时清理定时器
-   * 防止内存泄漏
-   */
-  onUnmounted(() => {
-    if (timer !== null) {
-      window.clearInterval(timer)
-      timer = null
-    }
-  })
+  ]
 </script>
+
+<style scoped lang="scss">
+  .protection-page {
+    .module-card {
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+  }
+</style>

@@ -1,22 +1,22 @@
 import { AppRouteRecord } from '@/types/router'
 
 export const safeguardRoutes: AppRouteRecord = {
-  path: '/safeguard',
-  name: 'Safeguard',
+  path: '/data-protection',
+  name: 'DataProtection',
   component: '/index/index',
   meta: {
-    title: 'menus.safeguard.title',
-    icon: 'ri:shield-check-line',
+    title: '数据保护',
+    icon: 'ri:shield-keyhole-line',
     keepAlive: false
   },
   children: [
     {
-      path: 'server',
-      name: 'SafeguardServer',
+      path: 'security-center',
+      name: 'DataProtectionSecurityCenter',
       component: '/safeguard/server',
       meta: {
-        title: 'menus.safeguard.server',
-        icon: 'ri:hard-drive-3-line',
+        title: '权限与防护中心',
+        icon: 'ri:shield-star-line',
         keepAlive: true
       }
     }

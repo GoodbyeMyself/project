@@ -1,59 +1,28 @@
 import { AppRouteRecord } from '@/types/router'
 
 export const articleRoutes: AppRouteRecord = {
-  path: '/article',
-  name: 'Article',
+  path: '/data-governance',
+  name: 'DataGovernance',
   component: '/index/index',
   meta: {
-    title: 'menus.article.title',
-    icon: 'ri:book-2-line',
+    title: '数据治理',
+    icon: 'ri:file-list-3-line',
     roles: ['R_SUPER', 'R_ADMIN']
   },
   children: [
     {
-      path: 'article-list',
-      name: 'ArticleList',
+      path: 'standard-and-resource',
+      name: 'DataGovernanceStandardAndResource',
       component: '/article/list',
       meta: {
-        title: 'menus.article.articleList',
-        icon: 'ri:article-line',
+        title: '数据标准与资源目录',
+        icon: 'ri:book-shelf-line',
         keepAlive: true,
         authList: [
           { title: '新增', authMark: 'add' },
-          { title: '编辑', authMark: 'edit' }
+          { title: '编辑', authMark: 'edit' },
+          { title: '删除', authMark: 'delete' }
         ]
-      }
-    },
-    {
-      path: 'detail/:id',
-      name: 'ArticleDetail',
-      component: '/article/detail',
-      meta: {
-        title: 'menus.article.articleDetail',
-        isHide: true,
-        keepAlive: true,
-        activePath: '/article/article-list'
-      }
-    },
-    {
-      path: 'comment',
-      name: 'ArticleComment',
-      component: '/article/comment',
-      meta: {
-        title: 'menus.article.comment',
-        icon: 'ri:mail-line',
-        keepAlive: true
-      }
-    },
-    {
-      path: 'publish',
-      name: 'ArticlePublish',
-      component: '/article/publish',
-      meta: {
-        title: 'menus.article.articlePublish',
-        icon: 'ri:telegram-2-line',
-        keepAlive: true,
-        authList: [{ title: '发布', authMark: 'add' }]
       }
     }
   ]

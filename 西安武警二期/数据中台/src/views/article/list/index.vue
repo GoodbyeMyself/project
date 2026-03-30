@@ -1,195 +1,168 @@
-<!-- 文章列表页面 -->
 <template>
-  <div class="page-content !mb-5">
-    <ElRow justify="space-between" :gutter="10">
-      <ElCol :lg="6" :md="6" :sm="14" :xs="16">
-        <ElInput
-          v-model="searchVal"
-          :prefix-icon="Search"
-          clearable
-          placeholder="输入文章标题查询"
-          @keyup.enter="searchArticle"
-        />
+  <div class="page-content governance-page">
+    <ElAlert
+      title="数据治理模块聚焦数据标准完善与数据资源目录完善，页面已合并成统一治理工作台。"
+      type="info"
+      :closable="false"
+      class="mb-4"
+    />
+
+    <ElRow :gutter="16">
+      <ElCol :xs="24" :xl="12">
+        <ElCard class="module-card">
+          <template #header>
+            <div class="card-header">
+              <span>数据标准完善</span>
+              <ElSpace>
+                <ElButton type="primary">新增数据标准</ElButton>
+                <ElButton>查询数据标准</ElButton>
+              </ElSpace>
+            </div>
+          </template>
+
+          <ElTable :data="standardList" border>
+            <ElTableColumn prop="standardCode" label="标准编号" min-width="120" />
+            <ElTableColumn prop="standardName" label="标准名称" min-width="160" />
+            <ElTableColumn prop="category" label="标准分类" min-width="120" />
+            <ElTableColumn prop="version" label="版本" min-width="90" />
+            <ElTableColumn prop="status" label="状态" min-width="100">
+              <template #default="scope">
+                <ElTag :type="scope.row.status === '已发布' ? 'success' : 'warning'">
+                  {{ scope.row.status }}
+                </ElTag>
+              </template>
+            </ElTableColumn>
+            <ElTableColumn label="操作" width="200" fixed="right">
+              <template #default>
+                <ElSpace>
+                  <ElButton link type="primary">修改</ElButton>
+                  <ElButton link type="danger">删除</ElButton>
+                  <ElButton link>查询</ElButton>
+                </ElSpace>
+              </template>
+            </ElTableColumn>
+          </ElTable>
+        </ElCard>
       </ElCol>
-      <ElCol :lg="12" :md="12" :sm="0" :xs="0">
-        <div class="custom-segmented">
-          <ElSegmented v-model="yearVal" :options="YEAR_OPTIONS" @change="searchArticleByYear" />
-        </div>
-      </ElCol>
-      <ElCol :lg="6" :md="6" :sm="10" :xs="6" style="display: flex; justify-content: end">
-        <ElButton @click="toAddArticle" v-auth="'add'">新增文章</ElButton>
+
+      <ElCol :xs="24" :xl="12">
+        <ElCard class="module-card">
+          <template #header>
+            <div class="card-header">
+              <span>数据资源目录完善</span>
+              <ElSpace>
+                <ElButton type="primary">新增资源目录</ElButton>
+                <ElButton>查询资源目录</ElButton>
+              </ElSpace>
+            </div>
+          </template>
+
+          <ElTable :data="resourceCatalogList" border>
+            <ElTableColumn prop="resourceCode" label="资源编号" min-width="120" />
+            <ElTableColumn prop="resourceName" label="资源名称" min-width="160" />
+            <ElTableColumn prop="sourceSystem" label="来源系统" min-width="120" />
+            <ElTableColumn prop="shareLevel" label="共享级别" min-width="110" />
+            <ElTableColumn prop="status" label="状态" min-width="100">
+              <template #default="scope">
+                <ElTag :type="scope.row.status === '已启用' ? 'success' : 'info'">
+                  {{ scope.row.status }}
+                </ElTag>
+              </template>
+            </ElTableColumn>
+            <ElTableColumn label="操作" width="200" fixed="right">
+              <template #default>
+                <ElSpace>
+                  <ElButton link type="primary">修改</ElButton>
+                  <ElButton link type="danger">删除</ElButton>
+                  <ElButton link>查询</ElButton>
+                </ElSpace>
+              </template>
+            </ElTableColumn>
+          </ElTable>
+        </ElCard>
       </ElCol>
     </ElRow>
 
-    <div class="mt-5">
-      <div
-        class="grid grid-cols-5 gap-5 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1"
-      >
-        <div
-          class="group c-p overflow-hidden border border-g-300/60 rounded-custom-sm"
-          v-for="item in articleList"
-          :key="item.id"
-          @click="toDetail(item)"
-        >
-          <div class="relative aspect-[16/9.5]">
-            <ElImage
-              class="flex align-center justify-center w-full h-full object-cover bg-gray-200"
-              :src="item.home_img"
-              lazy
-              fit="cover"
-            >
-            </ElImage>
-
-            <span
-              class="absolute top-1 right-1 bg-black/50 rounded text-xs px-1 py-0.5 text-white"
-              >{{ item.type_name }}</span
-            >
-          </div>
-          <div class="px-2 py-1">
-            <h2 class="text-base text-g-800 font-medium">{{ item.title }}</h2>
-            <div class="flex-b w-full h-6 mt-1">
-              <div class="flex-c text-g-500">
-                <ArtSvgIcon icon="ri:time-line" class="mr-1 text-sm" />
-                <span class="text-sm">{{ useDateFormat(item.create_time, 'YYYY-MM-DD') }}</span>
-                <div class="w-px h-3 bg-g-400 mx-3.5"></div>
-                <ArtSvgIcon icon="ri:eye-line" class="mr-1 text-sm" />
-                <span class="text-sm">{{ item.count }}</span>
-              </div>
-              <ElButton
-                class="opacity-0 group-hover:opacity-100"
-                v-auth="'edit'"
-                size="small"
-                @click.stop="toEdit(item)"
-                >编辑</ElButton
-              >
-            </div>
-          </div>
+    <ElCard class="mt-4">
+      <template #header>
+        <div class="card-header">
+          <span>治理建设进度</span>
+          <ElTag type="success">需求已覆盖</ElTag>
         </div>
-      </div>
-    </div>
+      </template>
 
-    <div style="margin-top: 16vh" v-if="showEmpty">
-      <ElEmpty :description="`未找到相关数据 ${EmojiText[0]}`" />
-    </div>
-
-    <div style="display: flex; justify-content: center; margin-top: 20px">
-      <ElPagination
-        size="default"
-        background
-        v-model:current-page="currentPage"
-        :page-size="pageSize"
-        :pager-count="9"
-        layout="prev, pager, next, total,jumper"
-        :total="total"
-        :hide-on-single-page="true"
-        @current-change="handleCurrentChange"
-      />
-    </div>
+      <ElSteps :active="3" finish-status="success" align-center>
+        <ElStep title="标准梳理" description="新增、修改、删除、查询能力入口已预留" />
+        <ElStep title="资源建档" description="目录完善操作位与状态展示已建立" />
+        <ElStep title="治理执行" description="后续仅需接入接口与表单提交逻辑" />
+      </ElSteps>
+    </ElCard>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { Search } from '@element-plus/icons-vue'
-  import { router } from '@/router'
-  import { useDateFormat } from '@vueuse/core'
-  import EmojiText from '@/utils/ui/emojo'
-  import { ArticleList } from '@/mock/temp/articleList'
-  import { useCommon } from '@/hooks/core/useCommon'
+  defineOptions({ name: 'DataGovernanceStandardAndResource' })
 
-  defineOptions({ name: 'ArticleList' })
-
-  interface Article {
-    id: number
-    home_img: string
-    type_name: string
-    title: string
-    create_time: string
-    count: number
-  }
-
-  interface GetArticleListOptions {
-    backTop?: boolean
-  }
-
-  const YEAR_OPTIONS = ['All', '2024', '2023', '2022', '2021', '2020', '2019']
-  const PAGE_SIZE = 40
-
-  const yearVal = ref('All')
-  const searchVal = ref('')
-  const articleList = ref<Article[]>([])
-  const currentPage = ref(1)
-  const pageSize = ref(PAGE_SIZE)
-  const total = ref(0)
-  const isLoading = ref(true)
-
-  const showEmpty = computed(() => articleList.value.length === 0 && !isLoading.value)
-
-  const getArticleList = async ({ backTop = false }: GetArticleListOptions = {}) => {
-    isLoading.value = true
-
-    try {
-      if (searchVal.value) {
-        yearVal.value = 'All'
-      }
-
-      // TODO: 替换为真实 API 调用
-      // const params = {
-      //   page: currentPage.value,
-      //   size: pageSize.value,
-      //   searchVal: searchVal.value,
-      //   year: yearVal.value === 'All' ? '' : yearVal.value
-      // }
-      // const res = await ArticleService.getArticleList(params)
-
-      articleList.value = ArticleList as Article[]
-
-      if (backTop) {
-        useCommon().scrollToTop()
-      }
-    } catch (error) {
-      console.error('获取文章列表失败:', error)
-    } finally {
-      isLoading.value = false
+  const standardList = [
+    {
+      standardCode: 'STD-001',
+      standardName: '警员基础信息标准',
+      category: '主数据',
+      version: 'V1.2',
+      status: '已发布'
+    },
+    {
+      standardCode: 'STD-002',
+      standardName: '任务事件编码标准',
+      category: '编码标准',
+      version: 'V1.0',
+      status: '修订中'
+    },
+    {
+      standardCode: 'STD-003',
+      standardName: '执勤记录数据标准',
+      category: '业务数据',
+      version: 'V2.1',
+      status: '已发布'
     }
-  }
+  ]
 
-  const searchArticle = () => {
-    currentPage.value = 1
-    getArticleList({ backTop: true })
-  }
-
-  const searchArticleByYear = () => {
-    currentPage.value = 1
-    getArticleList({ backTop: true })
-  }
-
-  const handleCurrentChange = (val: number) => {
-    currentPage.value = val
-    getArticleList({ backTop: true })
-  }
-
-  const toDetail = (item: Article) => {
-    router.push({ name: 'ArticleDetail', params: { id: item.id } })
-  }
-
-  const toEdit = (item: Article) => {
-    router.push({ name: 'ArticlePublish', query: { id: item.id } })
-  }
-
-  const toAddArticle = () => {
-    router.push({ name: 'ArticlePublish' })
-  }
-
-  onMounted(() => {
-    getArticleList()
-  })
+  const resourceCatalogList = [
+    {
+      resourceCode: 'RES-101',
+      resourceName: '执勤台账资源目录',
+      sourceSystem: '执勤管理系统',
+      shareLevel: '内部共享',
+      status: '已启用'
+    },
+    {
+      resourceCode: 'RES-102',
+      resourceName: '警情处置资源目录',
+      sourceSystem: '警情平台',
+      shareLevel: '受控共享',
+      status: '待审核'
+    },
+    {
+      resourceCode: 'RES-103',
+      resourceName: '巡逻轨迹资源目录',
+      sourceSystem: '移动终端系统',
+      shareLevel: '内部共享',
+      status: '已启用'
+    }
+  ]
 </script>
 
-<style lang="scss">
-  .custom-segmented .el-segmented {
-    height: 40px;
-    padding: 6px;
+<style scoped lang="scss">
+  .governance-page {
+    .module-card {
+      margin-bottom: 16px;
+    }
 
-    --el-border-radius-base: 8px;
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
   }
 </style>

@@ -11,40 +11,40 @@ const fastEnterConfig: FastEnterConfig = {
   // 应用列表
   applications: [
     {
-      name: '工作台',
-      description: '系统概览与数据统计',
-      icon: 'ri:pie-chart-line',
+      name: '数据仓体系',
+      description: '数仓目录与表信息管理',
+      icon: 'ri:database-2-line',
       iconColor: '#377dff',
       enabled: true,
       order: 1,
-      routeName: 'Console'
+      routeName: 'DataWarehouseCatalogManagement'
     },
     {
-      name: '分析页',
-      description: '数据分析与可视化',
-      icon: 'ri:game-line',
-      iconColor: '#ff3b30',
+      name: '数据治理',
+      description: '数据标准与资源目录完善',
+      icon: 'ri:file-list-3-line',
+      iconColor: '#13c2c2',
       enabled: true,
       order: 2,
-      routeName: 'Analysis'
+      routeName: 'DataGovernanceStandardAndResource'
     },
     {
-      name: '礼花效果',
-      description: '动画特效展示',
-      icon: 'ri:loader-line',
-      iconColor: '#7A7FFF',
+      name: '数据保护',
+      description: '权限、防护与流量管理',
+      icon: 'ri:shield-keyhole-line',
+      iconColor: '#ff9f1a',
       enabled: true,
       order: 3,
-      routeName: 'Fireworks'
+      routeName: 'DataProtectionSecurityCenter'
     },
     {
-      name: '聊天',
-      description: '即时通讯功能',
-      icon: 'ri:user-line',
-      iconColor: '#13DEB9',
+      name: '数据服务',
+      description: '服务挂载、访问控制、共享发布',
+      icon: 'ri:service-line',
+      iconColor: '#7A7FFF',
       enabled: true,
       order: 4,
-      routeName: 'Chat'
+      routeName: 'DataServiceMountAccessShare'
     },
     {
       name: '官方文档',
@@ -63,24 +63,6 @@ const fastEnterConfig: FastEnterConfig = {
       enabled: true,
       order: 6,
       link: WEB_LINKS.COMMUNITY
-    },
-    {
-      name: '更新日志',
-      description: '版本更新与变更记录',
-      icon: 'ri:gamepad-line',
-      iconColor: '#38C0FC',
-      enabled: true,
-      order: 7,
-      routeName: 'ChangeLog'
-    },
-    {
-      name: '哔哩哔哩',
-      description: '技术分享与交流',
-      icon: 'ri:bilibili-line',
-      iconColor: '#FB7299',
-      enabled: true,
-      order: 8,
-      link: WEB_LINKS.BILIBILI
     }
   ],
   // 快速链接
@@ -104,22 +86,22 @@ const fastEnterConfig: FastEnterConfig = {
       routeName: 'ForgetPassword'
     },
     {
-      name: '定价',
+      name: '数据仓体系',
       enabled: true,
       order: 4,
-      routeName: 'Pricing'
+      routeName: 'DataWarehouseCatalogManagement'
     },
     {
-      name: '个人中心',
+      name: '数据治理',
       enabled: true,
       order: 5,
-      routeName: 'UserCenter'
+      routeName: 'DataGovernanceStandardAndResource'
     },
     {
-      name: '留言管理',
+      name: '数据服务',
       enabled: true,
       order: 6,
-      routeName: 'ArticleComment'
+      routeName: 'DataServiceMountAccessShare'
     }
   ]
 }
